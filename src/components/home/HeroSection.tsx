@@ -9,13 +9,10 @@ import { Button } from "@/components/ui/button"
 export function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden bg-linear-to-b from-[#759EFD]/35 via-[#759EFD]/15 to-[#759EFD]/35"
+      className="relative overflow-hidden"
+      style={{ background: "linear-gradient(135deg, #EEF6FD 0%, #E9F2F9 40%, #E3F0FA 75%, #DCEBFA 100%)" }}
       aria-labelledby="hero-heading"
     >
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(219,234,254,0.85),transparent_55%)]"
-      />
       <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-14 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-10 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:pb-20 lg:pt-8">
         <div className="flex-1 lg:max-w-xl xl:max-w-2xl">
           <Badge
@@ -25,14 +22,13 @@ export function HeroSection() {
             {HERO.badge}
           </Badge>
 
-          <h1
-            id="hero-heading"
-            className="mt-6 text-balance text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[3.35rem]"
-          >
-            {HERO.title}
+          <h1 id="hero-heading" className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[2.28rem]">
+            <span className="whitespace-nowrap">{HERO.titleLine1}</span>{" "}
+            <br />
+            <span className="whitespace-nowrap text-blue-500">{HERO.titleLine2}</span>
           </h1>
 
-          <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-lg">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-base">
             {HERO.subtitle}
           </p>
 
@@ -60,7 +56,7 @@ export function HeroSection() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-xl flex-1 items-center justify-center lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-5/6 w-full max-w-[800px] sm:aspect-square lg:aspect-11/12 xl:max-w-[1000px]">
+          <div className="relative aspect-5/6 w-full max-w-[800px] scale-125 sm:aspect-square lg:aspect-11/12 xl:max-w-[1000px]">
             <Image
               src="/images/laundry-mascot.png"
               alt={HERO.imageAlt}

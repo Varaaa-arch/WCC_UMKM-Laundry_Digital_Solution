@@ -7,7 +7,7 @@ import { Separator } from "@/components/ui/separator"
 export function Footer() {
   return (
     <footer className="border-t border-slate-100 bg-white">
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+      <div className="mx-auto max-w-7xl px-4 pt-16 pb-5 sm:px-6 lg:px-8 lg:pt-20 lg:pb-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">
             <p className="text-lg font-bold text-blue-600">{FOOTER.logo}</p>
@@ -35,7 +35,7 @@ export function Footer() {
           ))}
         </div>
 
-        <Separator className="my-12 bg-slate-200 lg:my-14" />
+        <Separator className="my-6 bg-slate-200 lg:my-8" />
 
         <div className="flex flex-col-reverse items-start justify-between gap-6 md:flex-row md:items-center">
           <p className="text-sm text-slate-500">{FOOTER.copyright}</p>

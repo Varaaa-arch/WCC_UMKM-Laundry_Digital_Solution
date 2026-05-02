@@ -21,7 +21,8 @@ export function AdvantagesSection() {
 
   return (
     <section
-      className="bg-[#759EFD]/15 py-16 sm:py-20 lg:py-24"
+      className="py-16 sm:py-20 lg:py-24"
+      style={{ background: "linear-gradient(135deg, #EEF6FD 0%, #E9F2F9 40%, #E3F0FA 75%, #DCEBFA 100%)" }}
       aria-labelledby="advantages-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">

@@ -23,7 +23,8 @@ export const NAV = {
 
 export const HERO = {
   badge: "#1 Modern Laundry Service",
-  title: "Kesegaran Sempurna, Tanpa Repot",
+  titleLine1: "Kesegaran Sempurna,",  
+  titleLine2: "Tanpa Repot",
   subtitle: "Nikmati waktu luang Anda lebih banyak sementara kami menangani cucian Anda dengan standar kebersihan tertinggi dan efisiensi teknologi.",
   primaryBtn: "Pesan Sekarang",
   primaryHref: "#hero-primary-placeholder",
