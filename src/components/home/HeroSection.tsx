@@ -25,7 +25,7 @@ export function HeroSection() {
           <h1 id="hero-heading" className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[2.88rem]">
             <span className="whitespace-nowrap">{HERO.titleLine1}</span>{" "}
             <br />
-            <span className="whitespace-nowrap" style={{ color: "#0061A4" }}>{HERO.titleLine2}</span>
+            <span className="whitespace-nowrap text-[#005AE0]">{HERO.titleLine2}</span>          
           </h1>
 
           <p className="mt-5 max-w-xl text-base leading-relaxed text-slate-600 sm:text-base">

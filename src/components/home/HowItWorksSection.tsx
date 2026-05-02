@@ -25,49 +25,29 @@ export function HowItWorksSection() {
           </p>
         </div>
 
-        <div className="relative mx-auto mt-14 max-w-6xl">
-          <div
-            aria-hidden
-            className="pointer-events-none absolute left-10% right-10% top-3.875rem z-0 hidden h-px border-t border-dashed border-blue-300 md:block lg:left-[13%] lg:right-[13%]"
-          />
-
-          <ol className="relative z-10 flex flex-col gap-14 md:flex-row md:flex-nowrap md:justify-between md:gap-8 lg:gap-10 xl:gap-12">
-            {steps.map((step, index) => {
-              const Icon = STEP_ICONS[index] ?? ClipboardList
-
-              return (
-                <li
-                  key={`${step.n}-${step.title}`}
-                  className="relative flex flex-1 md:block"
-                >
-                  {index > 0 ? (
-                    <div
-                      aria-hidden
-                      className="pointer-events-none absolute left-calc(1.75rem_-_1px) top-2.875rem h-2.875rem w-px border-l border-dashed border-blue-300 md:hidden"
-                    />
-                  ) : null}
-
-                  <div className="relative flex gap-6 md:flex-col md:items-center md:text-center md:leading-snug">
-                    <div className="flex shrink-0 flex-col items-center">
-                      <Icon
-                        className="relative z-10 size-9 shrink-0 text-blue-500 sm:size-10"
-                        strokeWidth={1.85}
-                        aria-hidden
-                      />
-                    </div>
-
-                    <div className="pt-1 md:w-full md:pt-6">
-                      <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
-                      <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-600 md:mx-auto">
-                        {step.description}
-                      </p>
-                    </div>
-                  </div>
-                </li>
-              )
-            })}
-          </ol>
-        </div>
+        <ol className="relative z-10 mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((step, index) => {
+            const Icon = STEP_ICONS[index] ?? ClipboardList
+            return (
+              <li
+                key={`${step.n}-${step.title}`}
+                className="flex flex-col items-center text-center p-8"
+                style={{
+                  background: "linear-gradient(135deg, #EEF6FD 0%, #E9F2F9 40%, #E3F0FA 75%, #DCEBFA 100%)",
+                  borderRadius: "32px",
+                }}
+              >
+                <div className="flex size-12 items-center justify-center rounded-full mb-4" style={{ background: "linear-gradient(135deg, #EEF6FD 0%, #E9F2F9 40%, #E3F0FA 75%, #DCEBFA 100%)" }}>
+                  <Icon className="size-7 text-blue-500" strokeWidth={1.85} aria-hidden />
+                </div>
+                <h3 className="text-base font-bold text-slate-900">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-600">
+                  {step.description}
+                </p>
+              </li>
+            )
+          })}
+        </ol>
       </div>
     </section>
   )
