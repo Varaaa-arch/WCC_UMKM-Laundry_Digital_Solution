@@ -9,14 +9,14 @@ import { Button } from "@/components/ui/button"
 export function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden bg-linear-to-b from-sky-50 via-white to-white"
+      className="relative overflow-hidden bg-linear-to-b from-[#759EFD]/35 via-[#759EFD]/15 to-[#759EFD]/35"
       aria-labelledby="hero-heading"
     >
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_50%_-10%,rgba(219,234,254,0.85),transparent_55%)]"
       />
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-12 px-4 py-16 sm:gap-14 sm:px-6 sm:py-20 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:py-24">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-14 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-10 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:pb-20 lg:pt-8">
         <div className="flex-1 lg:max-w-xl xl:max-w-2xl">
           <Badge
             variant="outline"
@@ -59,15 +59,15 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative mx-auto flex w-full max-w-md flex-1 items-center justify-center lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-5/6 w-full max-w-[420px] sm:aspect-square lg:aspect-11/12 xl:max-w-[480px]">
+        <div className="relative mx-auto flex w-full max-w-xl flex-1 items-center justify-center lg:mx-0 lg:max-w-none">
+          <div className="relative aspect-5/6 w-full max-w-[800px] sm:aspect-square lg:aspect-11/12 xl:max-w-[1000px]">
             <Image
               src="/images/laundry-mascot.png"
               alt={HERO.imageAlt}
               fill
               priority
               className="pointer-events-none object-contain drop-shadow-xl"
-              sizes="(max-width: 1024px) 90vw, 480px"
+              sizes="(max-width: 640px) 95vw, (max-width: 1024px) 85vw, 680px"
             />
           </div>
         </div>

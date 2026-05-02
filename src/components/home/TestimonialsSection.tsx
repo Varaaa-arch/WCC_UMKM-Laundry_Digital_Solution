@@ -14,7 +14,7 @@ export function TestimonialsSection() {
 
   return (
     <section
-      className="bg-linear-to-b from-sky-50/60 via-white to-white py-16 sm:py-20 lg:py-24"
+      className="bg-linear-to-b from-[#759EFD]/35 via-[#759EFD]/15 to-[#759EFD]/35 py-16 sm:py-20 lg:py-24"
       aria-labelledby="testimonials-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
