@@ -1,165 +1,160 @@
 /** URL/href placeholders use paths or hashes — do not wrap in [...] or Next `<Link>` will error. Replace these string values when wiring real routes. */
 
 export const SITE = {
-  name: "[SITE_NAME]",
+  name: "Laundry",
   tagline: "[SITE_TAGLINE]",
 } as const
 
 export const NAV = {
-  logo: "[NAV_LOGO]",
+  logo: "Laundry",
   links: [
-    { label: "[NAV_1]", href: "#nav-placeholder-1" },
-    { label: "[NAV_2]", href: "#nav-placeholder-2" },
-    { label: "[NAV_3]", href: "#nav-placeholder-3" },
-    { label: "[NAV_4]", href: "#nav-placeholder-4" },
+    { label: "Beranda", href: "#nav-placeholder-1" },
+    { label: "Layanan", href: "#nav-placeholder-2" },
+    { label: "Tentang Kami", href: "#nav-placeholder-3" },
+    { label: "Riwayat", href: "#nav-placeholder-4" },
   ] as const,
-  loginLabel: "[LOGIN_LINK]",
+  loginLabel: "Masuk",
   loginHref: "#login-url-placeholder",
-  cta: "[CTA_BUTTON]",
+  cta: "Daftar",
   ctaHref: "#cta-url-placeholder",
   mobileMenuLabel: "[MOBILE_MENU_LABEL]",
   mobileSheetTitle: "[MOBILE_MENU_TITLE]",
 } as const
 
 export const HERO = {
-  badge: "[HERO_BADGE]",
-  title: "[HERO_TITLE]",
-  subtitle: "[HERO_SUBTITLE]",
-  primaryBtn: "[PRIMARY_BTN]",
+  badge: "#1 Modern Laundry Service",
+  title: "Kesegaran Sempurna, Tanpa Repot",
+  subtitle: "Nikmati waktu luang Anda lebih banyak sementara kami menangani cucian Anda dengan standar kebersihan tertinggi dan efisiensi teknologi.",
+  primaryBtn: "Pesan Sekarang",
   primaryHref: "#hero-primary-placeholder",
-  secondaryBtn: "[SECONDARY_BTN]",
+  secondaryBtn: "Lihat Detail",
   secondaryHref: "#hero-secondary-placeholder",
   imageAlt: "[HERO_IMAGE_ALT]",
 } as const
 
 export const HOW_TO_ORDER = {
-  title: "[HOW_TO_ORDER_TITLE]",
-  subtitle: "[HOW_TO_ORDER_SUBTITLE]",
+  title: "Pilih Cara Anda",
+  subtitle: "Kami memberikan fleksibilitas penuh untuk kebutuhan gaya hidup modern anda",
   cards: [
     {
-      title: "[OPTION_1_TITLE]",
-      description: "[OPTION_1_DESC]",
-      linkLabel: "[OPTION_1_LINK]",
+      title: "Pickup & Delivery",
+      description: "Cocok untuk Anda yang sibuk. Kami jemput ke rumah dan antar kembali dalam keadaan rapi dan harum.",
+      linkLabel: "Pesan Pickup",
       href: "#option-1-link-placeholder",
-      linkAria: "[OPTION_1_LINK_ARIA]",
+      linkAria: "Pesan Pickup",
     },
     {
-      title: "[OPTION_2_TITLE]",
-      description: "[OPTION_2_DESC]",
-      linkLabel: "[OPTION_2_LINK]",
+      title: "Self Drop-Off",
+      description: "Ingin mampir sebentar? Drop cucian Anda di outlet terdekat kami kapan saja Anda mau.",
+      linkLabel: "Cari Outlet",
       href: "#option-2-link-placeholder",
-      linkAria: "[OPTION_2_LINK_ARIA]",
+      linkAria: "Cari Outlet",
     },
   ] as const,
 } as const
 
 export const ADVANTAGES = {
-  mainTitle: "[ADV_MAIN_TITLE]",
-  mainDescription: "[ADV_MAIN_DESC]",
+  mainTitle: "Keunggulan Laundry Kami",
+  mainDescription: "Mengapa ribuan keluarga mempercayakan pakaian mereka kepada kami setiap harinya.",
   features: [
     {
-      title: "[ADV_1_TITLE]",
-      description: "[ADV_1_DESC]",
+      title: "Cepat",
+      description: "Layanan kilat 6 jam selesai untuk kebutuhan mendesak Anda.",
     },
     {
-      title: "[ADV_2_TITLE]",
-      description: "[ADV_2_DESC]",
+      title: "Terjangkau",
+      description: "Harga kompetitif dengan paket langganan yang hemat kantong.",
     },
     {
-      title: "[ADV_3_TITLE]",
-      description: "[ADV_3_DESC]",
-    },
-    {
-      title: "[ADV_4_TITLE]",
-      description: "[ADV_4_DESC]",
+      title: "Fleksibel",
+      description: "Atur jadwal pengambilan dan pengiriman sesuai keinginan Anda. Tidak perlu lagi menunggu seharian di rumah.",
     },
   ] as const,
 } as const
 
 export const HOW_IT_WORKS = {
-  title: "[HOW_IT_WORKS_TITLE]",
-  subtitle: "[HOW_IT_WORKS_SUBTITLE]",
+  title: "Bagaimana Kami Bekerja",
+  subtitle: "Alur sederhana dan efisien untuk mempermudah Anda.",
   steps: [
     {
       n: 1,
-      title: "[STEP_1_TITLE]",
-      description: "[STEP_1_DESC]",
+      title: "Pesan",
+      description: "Pesan layanan laundry Anda melalui website atau aplikasi kami.",
     },
     {
       n: 2,
-      title: "[STEP_2_TITLE]",
-      description: "[STEP_2_DESC]",
+      title: "Pengambilan",
+      description: "Kurir kami akan datang ke tempat Anda untuk mengambil cucian Anda.",
     },
     {
       n: 3,
-      title: "[STEP_3_TITLE]",
-      description: "[STEP_3_DESC]",
+      title: "Proses",
+      description: "Cucian Anda akan diproses dengan standar kebersihan tertinggi dan efisiensi teknologi.",
     },
     {
       n: 4,
-      title: "[STEP_4_TITLE]",
-      description: "[STEP_4_DESC]",
+      title: "Selesai",
+      description: "Cucian Anda akan diantar kembali ke tempat Anda dalam keadaan rapi dan harum.",
     },
   ] as const,
 } as const
 
 export const TESTIMONIALS = {
-  title: "[TESTIMONIALS_TITLE]",
+  title: "Apa Kata Pelanggan Kami",
   items: [
     {
-      text: "[TESTIMONIAL_1_TEXT]",
-      name: "[CUSTOMER_1_NAME]",
-      role: "[CUSTOMER_1_ROLE]",
-      avatarAlt: "[CUSTOMER_1_AVATAR_ALT]",
+      text: "Sangat puas dengan layanannya! Wanginya enak banget dan rapi sekali setrikanya. Menghemat waktu saya banget.",
+      name: "Siska Pratama",
+      role: "Mahasiswi",
+      avatarAlt: "/images/siska-pratama.png",
     },
     {
-      text: "[TESTIMONIAL_2_TEXT]",
-      name: "[CUSTOMER_2_NAME]",
-      role: "[CUSTOMER_2_ROLE]",
-      avatarAlt: "[CUSTOMER_2_AVATAR_ALT]",
+      text: "Fitur pickup & delivery-nya juara. Kurirnya ramah dan selalu tepat waktu sesuai jadwal yang saya pilih di app.",
+      name: "Andi Wijaya",
+      role: "Freelancer",
+      avatarAlt: "/images/andi-wijaya.png",
     },
     {
-      text: "[TESTIMONIAL_3_TEXT]",
-      name: "[CUSTOMER_3_NAME]",
-      role: "[CUSTOMER_3_ROLE]",
-      avatarAlt: "[CUSTOMER_3_AVATAR_ALT]",
+      text: "Harganya sangat masuk akal dibanding kompetitor. Hasil cuci keringnya tidak merusak bahan pakaian mahal saya.",
+      name: "Budi Hartono",
+      role: "Pengusaha",
+      avatarAlt: "/images/budi-hartono.png",
     },
   ] as const,
 } as const
 
 export const FOOTER = {
-  tagline: "[FOOTER_TAGLINE]",
-  logo: "[FOOTER_LOGO]",
+  tagline: "Solusi laundry modern dan terpercaya di Indonesia. Kami memberikan layanan kebersihan terbaik untuk kenyamanan Anda.",
+  logo: "Laundry",
   columns: [
     {
-      heading: "[FOOTER_COL_2_HEADING]",
+      heading: "Layanan Kami",
       links: [
-        { label: "[FOOTER_COL_2_LINK_1]", href: "#footer-col2-link-placeholder-1" },
-        { label: "[FOOTER_COL_2_LINK_2]", href: "#footer-col2-link-placeholder-2" },
-        { label: "[FOOTER_COL_2_LINK_3]", href: "#footer-col2-link-placeholder-3" },
-        { label: "[FOOTER_COL_2_LINK_4]", href: "#footer-col2-link-placeholder-4" },
+        { label: "Cuci Kering", href: "#footer-col2-link-placeholder-1" },
+        { label: "Setrika Premium", href: "#footer-col2-link-placeholder-2" },
+        { label: "Laundry Sepatu", href: "#footer-col2-link-placeholder-3" },
+        { label: "Express Service", href: "#footer-col2-link-placeholder-4" },
       ],
     },
     {
-      heading: "[FOOTER_COL_3_HEADING]",
+      heading: "Navigasi",
       links: [
-        { label: "[FOOTER_COL_3_LINK_1]", href: "#footer-col3-link-placeholder-1" },
-        { label: "[FOOTER_COL_3_LINK_2]", href: "#footer-col3-link-placeholder-2" },
-        { label: "[FOOTER_COL_3_LINK_3]", href: "#footer-col3-link-placeholder-3" },
-        { label: "[FOOTER_COL_3_LINK_4]", href: "#footer-col3-link-placeholder-4" },
+        { label: "Beranda", href: "#footer-col3-link-placeholder-1" },
+        { label: "Tentang Kami", href: "#footer-col3-link-placeholder-2" },
+        { label: "Riwayat", href: "#footer-col3-link-placeholder-3" },
+        { label: "Kontak", href: "#footer-col3-link-placeholder-4" },
       ],
     },
     {
-      heading: "[FOOTER_COL_4_HEADING]",
+      heading: "Bantuan",
       links: [
-        { label: "[FOOTER_COL_4_LINK_1]", href: "#footer-col4-link-placeholder-1" },
-        { label: "[FOOTER_COL_4_LINK_2]", href: "#footer-col4-link-placeholder-2" },
-        { label: "[FOOTER_COL_4_LINK_3]", href: "#footer-col4-link-placeholder-3" },
-        { label: "[FOOTER_COL_4_LINK_4]", href: "#footer-col4-link-placeholder-4" },
+        { label: "Syarat & Ketentuan", href: "#footer-col4-link-placeholder-1" },
+        { label: "Kebijakan Privasi", href: "#footer-col4-link-placeholder-2" },
+        { label: "FAQ", href: "#footer-col4-link-placeholder-3" },
       ],
     },
   ] as const,
-  copyright: "[COPYRIGHT]",
+  copyright: "© 2024 Laundry. Solusi laundry modern dan terpercaya di Indonesia.",
   socialInstagramHref: "#social-instagram-placeholder",
   socialFacebookHref: "#social-facebook-placeholder",
   socialTwitterHref: "#social-twitter-placeholder",

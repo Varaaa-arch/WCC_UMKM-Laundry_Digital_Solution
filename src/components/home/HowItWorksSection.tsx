@@ -28,7 +28,7 @@ export function HowItWorksSection() {
         <div className="relative mx-auto mt-14 max-w-6xl">
           <div
             aria-hidden
-            className="pointer-events-none absolute left-[10%] right-[10%] top-[3.875rem] z-0 hidden h-px border-t border-dashed border-blue-300 md:block lg:left-[13%] lg:right-[13%]"
+            className="pointer-events-none absolute left-10% right-10% top-3.875rem z-0 hidden h-px border-t border-dashed border-blue-300 md:block lg:left-[13%] lg:right-[13%]"
           />
 
           <ol className="relative z-10 flex flex-col gap-14 md:flex-row md:flex-nowrap md:justify-between md:gap-8 lg:gap-10 xl:gap-12">
@@ -43,23 +43,20 @@ export function HowItWorksSection() {
                   {index > 0 ? (
                     <div
                       aria-hidden
-                      className="pointer-events-none absolute left-[calc(1.75rem_-_1px)] top-[-2.875rem] h-[2.875rem] w-px border-l border-dashed border-blue-300 md:hidden"
+                      className="pointer-events-none absolute left-calc(1.75rem_-_1px) top-2.875rem h-2.875rem w-px border-l border-dashed border-blue-300 md:hidden"
                     />
                   ) : null}
 
                   <div className="relative flex gap-6 md:flex-col md:items-center md:text-center md:leading-snug">
-                    <div className="flex shrink-0 flex-col items-center gap-2 md:gap-3">
+                    <div className="flex shrink-0 flex-col items-center">
                       <Icon
                         className="relative z-10 size-9 shrink-0 text-blue-500 sm:size-10"
                         strokeWidth={1.85}
                         aria-hidden
                       />
-                      <span className="relative z-10 flex size-11 items-center justify-center rounded-full bg-blue-500 text-sm font-semibold tabular-nums text-white shadow-sm ring-6 ring-white">
-                        {step.n}
-                      </span>
                     </div>
 
-                    <div className="pt-10 md:w-full md:pt-24">
+                    <div className="pt-1 md:w-full md:pt-6">
                       <h3 className="text-lg font-bold text-slate-900">{step.title}</h3>
                       <p className="mt-2 max-w-xs text-sm leading-relaxed text-slate-600 md:mx-auto">
                         {step.description}

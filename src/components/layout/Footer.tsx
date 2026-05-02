@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Bird, Camera, Users } from "lucide-react"
+import { X } from "lucide-react"
 
 import { FOOTER } from "@/lib/constants"
 import { Separator } from "@/components/ui/separator"
@@ -46,7 +46,20 @@ export function Footer() {
               aria-label={FOOTER.socialInstagramAria}
               title={FOOTER.socialInstagramAria}
             >
-              <Camera className="size-5" aria-hidden />
+              <svg
+                viewBox="0 0 24 24"
+                className="size-5"
+                aria-hidden
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                <path d="M16 11.37a4 4 0 1 1-2.74-3.83 4 4 0 0 1 2.74 3.83z" />
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+              </svg>
             </Link>
             <Link
               href={FOOTER.socialFacebookHref}
@@ -54,7 +67,9 @@ export function Footer() {
               aria-label={FOOTER.socialFacebookAria}
               title={FOOTER.socialFacebookAria}
             >
-              <Users className="size-5" aria-hidden />
+              <svg viewBox="0 0 24 24" className="size-5" aria-hidden fill="currentColor">
+                <path d="M22 12a10 10 0 1 0-11.56 9.88v-6.99H7.9V12h2.54V9.8c0-2.5 1.5-3.88 3.8-3.88 1.1 0 2.25.2 2.25.2v2.46h-1.27c-1.25 0-1.64.77-1.64 1.57V12h2.79l-.45 2.89h-2.34v6.99A10 10 0 0 0 22 12z" />
+              </svg>
             </Link>
             <Link
               href={FOOTER.socialTwitterHref}
@@ -62,7 +77,7 @@ export function Footer() {
               aria-label={FOOTER.socialTwitterAria}
               title={FOOTER.socialTwitterAria}
             >
-              <Bird className="size-5" aria-hidden />
+              <X className="size-5" aria-hidden />
             </Link>
           </div>
         </div>

@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 export function HeroSection() {
   return (
     <section
-      className="relative overflow-hidden bg-gradient-to-b from-sky-50 via-white to-white"
+      className="relative overflow-hidden bg-linear-to-b from-sky-50 via-white to-white"
       aria-labelledby="hero-heading"
     >
       <div
@@ -60,9 +60,9 @@ export function HeroSection() {
         </div>
 
         <div className="relative mx-auto flex w-full max-w-md flex-1 items-center justify-center lg:mx-0 lg:max-w-none">
-          <div className="relative aspect-[5/6] w-full max-w-[420px] sm:aspect-square lg:aspect-[11/12] xl:max-w-[480px]">
+          <div className="relative aspect-5/6 w-full max-w-[420px] sm:aspect-square lg:aspect-11/12 xl:max-w-[480px]">
             <Image
-              src="/placeholder.svg"
+              src="/images/laundry-mascot.png"
               alt={HERO.imageAlt}
               fill
               priority
