@@ -20,14 +20,18 @@ export function Footer() {
             <div key={column.heading}>
               <p className="text-sm font-semibold text-slate-900">{column.heading}</p>
               <ul className="mt-6 space-y-3">
-                {column.links.map((link) => (
-                  <li key={link.href + link.label}>
-                    <Link
-                      href={link.href}
-                      className="text-sm text-slate-600 transition-colors hover:text-blue-600"
-                    >
-                      {link.label}
-                    </Link>
+                {(column.links as unknown as { label: string; href?: string }[]).map((link) => (
+                  <li key={(link.href ?? link.label) + link.label}>
+                    {link.href ? (
+                      <Link
+                        href={link.href}
+                        className="text-sm text-slate-600 transition-colors hover:text-blue-600"
+                      >
+                        {link.label}
+                      </Link>
+                    ) : (
+                      <span className="text-sm text-slate-600">{link.label}</span>
+                    )}
                   </li>
                 ))}
               </ul>

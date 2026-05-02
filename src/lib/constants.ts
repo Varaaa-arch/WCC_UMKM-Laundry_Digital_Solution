@@ -8,10 +8,11 @@ export const SITE = {
 export const NAV = {
   logo: "Laundry",
   links: [
-    { label: "Beranda", href: "#nav-placeholder-1" },
-    { label: "Layanan", href: "#nav-placeholder-2" },
-    { label: "Tentang Kami", href: "#nav-placeholder-3" },
-    { label: "Riwayat", href: "#nav-placeholder-4" },
+    { label: "Beranda", href: "/" },
+    { label: "Layanan", href: "/src/app/booking" },
+    { label: "Tentang Kami", href: "/src/app/about" },
+    { label: "Riwayat", href: "/src/app/history" },
+    { label: "Kontak", href: "/src/app/contact" },
   ] as const,
   loginLabel: "Masuk",
   loginHref: "#login-url-placeholder",
@@ -131,19 +132,20 @@ export const FOOTER = {
     {
       heading: "Layanan Kami",
       links: [
-        { label: "Cuci Kering", href: "#footer-col2-link-placeholder-1" },
-        { label: "Setrika Premium", href: "#footer-col2-link-placeholder-2" },
-        { label: "Laundry Sepatu", href: "#footer-col2-link-placeholder-3" },
-        { label: "Express Service", href: "#footer-col2-link-placeholder-4" },
+        { label: "Cuci Kering" },
+        { label: "Setrika Premium" },
+        { label: "Laundry Sepatu" },
+        { label: "Express Service" },
       ],
     },
     {
       heading: "Navigasi",
       links: [
-        { label: "Beranda", href: "#footer-col3-link-placeholder-1" },
-        { label: "Tentang Kami", href: "#footer-col3-link-placeholder-2" },
-        { label: "Riwayat", href: "#footer-col3-link-placeholder-3" },
-        { label: "Kontak", href: "#footer-col3-link-placeholder-4" },
+        { label: "Beranda", href: "/" },
+        { label: "Layanan", href: "/src/app/booking" },
+        { label: "Tentang Kami", href: "/src/app/about" },
+        { label: "Riwayat", href: "/src/app/history" },
+        { label: "Kontak", href: "/src/app/contact" },
       ],
     },
     {
