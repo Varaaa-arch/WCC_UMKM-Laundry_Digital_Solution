@@ -67,7 +67,7 @@ export function Navbar() {
           <Button
             asChild
             size="sm"
-            className="rounded-lg bg-blue-500 px-5 text-white shadow-none hover:bg-blue-600 focus-visible:ring-blue-600/40"
+            className="rounded-md bg-blue-500 px-6 py-2 h-10 text-white shadow-none hover:bg-blue-600 focus-visible:ring-blue-600/40"
           >
             <Link href={NAV.ctaHref}>{NAV.cta}</Link>
           </Button>

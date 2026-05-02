@@ -13,7 +13,7 @@ export function HeroSection() {
       style={{ background: "linear-gradient(135deg, #EEF6FD 0%, #E9F2F9 40%, #E3F0FA 75%, #DCEBFA 100%)" }}
       aria-labelledby="hero-heading"
     >
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-14 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-10 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:pb-20 lg:pt-8">
+      <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-14 pt-4 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-6 lg:flex-row lg:items-center lg:gap-16 lg:px-8 lg:pb-20 lg:pt-4">
         <div className="flex-1 lg:max-w-xl xl:max-w-2xl">
           <Badge
             variant="outline"
@@ -22,7 +22,7 @@ export function HeroSection() {
             {HERO.badge}
           </Badge>
 
-          <h1 id="hero-heading" className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[2.28rem]">
+          <h1 id="hero-heading" className="mt-6 text-4xl font-bold leading-[1.1] tracking-tight text-slate-900 sm:text-5xl lg:text-[2.88rem]">
             <span className="whitespace-nowrap">{HERO.titleLine1}</span>{" "}
             <br />
             <span className="whitespace-nowrap text-blue-500">{HERO.titleLine2}</span>
