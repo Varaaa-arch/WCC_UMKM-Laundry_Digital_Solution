@@ -23,6 +23,8 @@ export function HowItWorksSection() {
           <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
             {HOW_IT_WORKS.subtitle}
           </p>
+
+      
         </div>
 
         <ol className="relative z-10 mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
