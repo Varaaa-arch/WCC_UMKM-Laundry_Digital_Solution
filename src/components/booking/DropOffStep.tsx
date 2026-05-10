@@ -1,6 +1,6 @@
 "use client";
 
-import { MapPinIcon, ClockIcon, CreditCardIcon, PackageIcon } from "lucide-react";
+import { MapPinIcon, ClockIcon, CreditCardIcon, PackageIcon, InfoIcon } from "lucide-react";
 import { useOrderStore } from "@/store/useOrderStore";
 
 const PAYMENT_OPTIONS = [
@@ -16,7 +16,7 @@ const PAYMENT_OPTIONS = [
   },
 ];
 
-function MapPlaceholder() {
+function MapPlaceholder({ storeName }: { storeName: string }) {
   return (
     <div className="relative w-full h-40 rounded-xl overflow-hidden bg-linear-to-br from-slate-700 via-slate-800 to-slate-900">
       <svg className="absolute inset-0 w-full h-full opacity-20" xmlns="http://www.w3.org/2000/svg">
@@ -34,7 +34,7 @@ function MapPlaceholder() {
         </div>
       </div>
       <div className="absolute top-3 right-3 bg-blue-600 text-white text-xs font-semibold px-2.5 py-1 rounded-full shadow">
-        ResikLaundry – Sudirman
+        {storeName}
       </div>
     </div>
   );
@@ -58,10 +58,7 @@ export default function DropOffStep() {
         </div>
 
         <div className="mt-4 p-3 bg-blue-50 rounded-xl flex gap-2.5">
-          <svg viewBox="0 0 16 16" fill="none" aria-hidden="true" className="w-4 h-4 text-blue-500 shrink-0 mt-0.5">
-            <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M8 7v4M8 5.5v.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
+          <InfoIcon aria-hidden="true" className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
           <div>
             <p className="text-xs font-semibold text-blue-800">Instruksi Pengantaran</p>
             <p className="text-xs text-blue-700 mt-0.5 leading-relaxed">
@@ -79,7 +76,7 @@ export default function DropOffStep() {
               <span>1.2 km dari Anda</span>
             </div>
           </div>
-          <MapPlaceholder />
+          <MapPlaceholder storeName="ResikLaundry – Sudirman" />
         </div>
 
         <div className="mt-3 flex items-center gap-2.5 p-3 border border-gray-100 rounded-xl">
