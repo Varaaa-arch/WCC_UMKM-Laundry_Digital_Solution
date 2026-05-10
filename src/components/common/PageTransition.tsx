@@ -32,7 +32,7 @@ export default function PageTransition({ children }: PropsWithChildren) {
         {/* Curtain overlay */}
         <motion.div
           className="fixed inset-0 z-50 origin-bottom"
-          style={{ backgroundColor: "#0a0a0a" }}
+          style={{ backgroundColor: "#3b82f6" }}
           initial={reduced ? { y: "100%" } : { y: "100%" }}
           animate={
             reduced
