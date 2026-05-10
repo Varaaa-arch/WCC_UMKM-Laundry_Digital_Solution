@@ -14,41 +14,25 @@ export type BookingResult =
   | { sukses: true; orderId: string }
   | { sukses: false; error: string };
 
-export async function confirmBooking(
-  payload: BookingPayload
-): Promise<BookingResult> {
-  try {
-    const supabase = await createClient();
+export async function confirmBooking(payload: BookingPayload): Promise<BookingResult> {
+  const supabase = await createClient();
 
-    const { data, error } = await supabase
-      .from("orders")
-      .insert([
-        {
-          servis: payload.servis,
-          estimasi_berat: payload.estimasiBerat,
-          total_harga: payload.totalHarga,
-          metode_pembayaran: payload.metodePembayaran,
-        },
-      ])
-      .select()
-      .single();
+  const { data, error } = await supabase
+    .from("orders")
+    .insert({
+      servis: payload.servis,
+      estimasi_berat: payload.estimasiBerat,
+      total_harga: payload.totalHarga,
+      metode_pembayaran: payload.metodePembayaran,
+    })
+    .select()
+    .single();
 
-    if (error) {
-      throw error;
-    }
-
-    revalidatePath("/booking");
-
-    return {
-      sukses: true,
-      orderId: data.id,
-    };
-  } catch (error) {
+  if (error) {
     console.error("Booking error:", error);
-
-    return {
-      sukses: false,
-      error: "Gagal membuat pesanan, coba lagi.",
-    };
+    return { sukses: false, error: "Gagal membuat pesanan, coba lagi." };
   }
+
+  revalidatePath("/booking");
+  return { sukses: true, orderId: data.id };
 }
