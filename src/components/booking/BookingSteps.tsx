@@ -25,8 +25,8 @@ function labelClass(isActive: boolean, isCompleted: boolean) {
 }
 
 export default function BookingSteps() {
-  const { stepSekarang } = useOrderStore();
-  const currentIndex = STEPS.findIndex((s) => s.id === stepSekarang);
+  const { currentStep } = useOrderStore();
+  const currentIndex = STEPS.findIndex((s) => s.id === currentStep);
 
   return (
     <div className="flex items-center justify-center py-8">

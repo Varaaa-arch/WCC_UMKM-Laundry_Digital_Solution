@@ -4,15 +4,15 @@ import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 
 export type BookingPayload = {
-  servis: string;
-  estimasiBerat: number;
-  totalHarga: number;
-  metodePembayaran: string;
+  service: string;
+  estimatedWeight: number;
+  totalPrice: number;
+  paymentMethod: string;
 };
 
 export type BookingResult =
-  | { sukses: true; orderId: string }
-  | { sukses: false; error: string };
+  | { success: true; orderId: string }
+  | { success: false; error: string };
 
 export async function confirmBooking(payload: BookingPayload): Promise<BookingResult> {
   const supabase = await createClient();
@@ -20,19 +20,19 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
   const { data, error } = await supabase
     .from("orders")
     .insert({
-      servis: payload.servis,
-      estimasi_berat: payload.estimasiBerat,
-      total_harga: payload.totalHarga,
-      metode_pembayaran: payload.metodePembayaran,
+      servis: payload.service,
+      estimasi_berat: payload.estimatedWeight,
+      total_harga: payload.totalPrice,
+      metode_pembayaran: payload.paymentMethod,
     })
     .select()
     .single();
 
   if (error) {
     console.error("Booking error:", error);
-    return { sukses: false, error: "Gagal membuat pesanan, coba lagi." };
+    return { success: false, error: "Gagal membuat pesanan, coba lagi." };
   }
 
   revalidatePath("/booking");
-  return { sukses: true, orderId: data.id };
+  return { success: true, orderId: data.id };
 }

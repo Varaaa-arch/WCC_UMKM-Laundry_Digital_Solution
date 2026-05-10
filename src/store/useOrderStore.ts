@@ -1,50 +1,50 @@
 import { create } from "zustand";
 
-export type TipeServis = "cuci-kering-setrika" | "setrika-ekspres" | "cuci-satuan";
+export type ServiceType = "cuci-kering-setrika" | "setrika-ekspres" | "cuci-satuan";
 export type Step = "layanan" | "dropoff" | "pembayaran";
-export type MetodePembayaran = "cod" | "transfer";
+export type PaymentMethod = "cod" | "transfer";
 
-const HARGA_SERVIS: Record<TipeServis, number> = {
+const SERVICE_PRICE: Record<ServiceType, number> = {
   "cuci-kering-setrika": 12000,
   "setrika-ekspres": 8000,
   "cuci-satuan": 20000,
 };
 
 interface OrderState {
-  stepSekarang: Step;
+  currentStep: Step;
   setStep: (step: Step) => void;
 
-  pilihanServis: TipeServis;
-  setService: (servis: TipeServis) => void;
+  selectedService: ServiceType;
+  setService: (service: ServiceType) => void;
 
-  estimasiBerat: number;
-  setWeight: (berat: number) => void;
+  estimatedWeight: number;
+  setWeight: (weight: number) => void;
 
-  metodePembayaran: MetodePembayaran;
-  setPaymentMethod: (metode: MetodePembayaran) => void;
+  paymentMethod: PaymentMethod;
+  setPaymentMethod: (method: PaymentMethod) => void;
 
-  totalHarga: () => number;
+  totalPrice: () => number;
   reset: () => void;
 }
 
 const initialState = {
-  stepSekarang: "layanan" as Step,
-  pilihanServis: "cuci-kering-setrika" as TipeServis,
-  estimasiBerat: 5,
-  metodePembayaran: "cod" as MetodePembayaran,
+  currentStep: "layanan" as Step,
+  selectedService: "cuci-kering-setrika" as ServiceType,
+  estimatedWeight: 5,
+  paymentMethod: "cod" as PaymentMethod,
 };
 
 export const useOrderStore = create<OrderState>((set, get) => ({
   ...initialState,
 
-  setStep: (step) => set({ stepSekarang: step }),
-  setService: (servis) => set({ pilihanServis: servis }),
-  setWeight: (berat) => set({ estimasiBerat: berat }),
-  setPaymentMethod: (metode) => set({ metodePembayaran: metode }),
+  setStep: (step) => set({ currentStep: step }),
+  setService: (service) => set({ selectedService: service }),
+  setWeight: (weight) => set({ estimatedWeight: weight }),
+  setPaymentMethod: (method) => set({ paymentMethod: method }),
 
-  totalHarga: () => {
-    const { pilihanServis, estimasiBerat } = get();
-    return HARGA_SERVIS[pilihanServis] * estimasiBerat;
+  totalPrice: () => {
+    const { selectedService, estimatedWeight } = get();
+    return SERVICE_PRICE[selectedService] * estimatedWeight;
   },
 
   reset: () => set(initialState),
