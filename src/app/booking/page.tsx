@@ -1,7 +1,27 @@
-export default function Page() {
+import BookingSteps from "@/components/booking/BookingSteps";
+import DropOffStep from "@/components/booking/DropOffStep";
+import OrderSummary from "@/components/booking/OrderSummary";
+
+export default function BookingPage() {
   return (
-    <main className="mx-auto flex min-h-[40vh] max-w-3xl flex-col gap-4 p-10 text-center text-sm text-slate-600">
-      <p>[PAGE_PLACEHOLDER]</p>
-    </main>
-  )
+    <div className="min-h-screen bg-gray-50">
+      <div className="max-w-5xl mx-auto px-4 pb-16">
+        {/* Stepper */}
+        <BookingSteps />
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+          {/* Kiri: konten step */}
+          <div className="lg:col-span-3">
+            <DropOffStep />
+          </div>
+
+          {/* Kanan: order summary */}
+          <div className="lg:col-span-2">
+            <OrderSummary />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
