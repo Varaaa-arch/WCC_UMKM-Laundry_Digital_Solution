@@ -66,10 +66,9 @@ export default function LayananPage() {
           </p>
         </section>
 
-        {/* Service Cards + Quality Banner — same container */}
-        <div className="max-w-7xl mx-auto px-4 pb-16">
-          {/* Service Cards */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 -mt-2 mb-5">
+        {/* Service Cards */}
+        <section className="max-w-7xl mx-auto px-4 pb-16 -mt-2">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
             {SERVICES.map((svc) => {
               const isPopular = svc.popular === true;
               return (
@@ -127,8 +126,10 @@ export default function LayananPage() {
               );
             })}
           </div>
+        </section>
 
-          {/* Quality Banner */}
+        {/* Quality Banner */}
+        <section className="max-w-7xl mx-auto px-4 pb-16">
           <div className="rounded-2xl overflow-hidden">
             <Image
               src="/images/photo-layanan.png"
@@ -138,7 +139,7 @@ export default function LayananPage() {
               className="w-full object-cover"
             />
           </div>
-        </div>
+        </section>
       </main>
       <Footer />
     </>
