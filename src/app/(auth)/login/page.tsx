@@ -34,7 +34,7 @@ export default function LoginPage() {
       <div className="w-full max-w-4xl flex rounded-3xl overflow-hidden shadow-2xl">
 
         {/* LEFT — blue panel with mascot */}
-        <div className="hidden md:flex w-1/2 bg-gradient-to-br from-blue-500 to-blue-700 flex-col items-center justify-center relative overflow-hidden p-10">
+        <div className="hidden md:flex w-1/2 bg-linear-to-br from-blue-500 to-blue-700 flex-col items-center justify-center relative overflow-hidden p-10">
           {/* bg circles decoration */}
           <div className="absolute top-[-60px] left-[-60px] w-64 h-64 bg-white/10 rounded-full" />
           <div className="absolute bottom-[-40px] right-[-40px] w-48 h-48 bg-white/10 rounded-full" />
