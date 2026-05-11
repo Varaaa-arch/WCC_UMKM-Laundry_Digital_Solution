@@ -3,7 +3,7 @@
 import React, { useState, useMemo } from 'react'
 import { motion, useReducedMotion, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { Eye, EyeOff, Sparkles, Zap, Shield, ArrowRight, Loader2 } from 'lucide-react'
+import { Eye, EyeOff, Sparkles, ArrowRight, Loader2 } from 'lucide-react'
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { FaDiscord } from "react-icons/fa"
@@ -90,40 +90,7 @@ export default function LoginPage() {
     }
   }
 
-  const mascotVariants = shouldReduceMotion ? {
-    hidden: {},
-    visible: {},
-    float: {}
-  } : {
-    hidden: { 
-      y: 100, 
-      opacity: 0,
-      rotate: -10,
-      scale: 0.8
-    },
-    visible: { 
-      y: 0, 
-      opacity: 1,
-      rotate: 0,
-      scale: 1,
-      transition: {
-        duration: 1.5,
-        ease: [0.22, 1, 0.36, 1] as const,
-        type: "spring" as const,
-        stiffness: 100
-      }
-    },
-    float: {
-      y: [0, -15, 0],
-      rotate: [0, 2, 0],
-      transition: {
-        duration: 4,
-        repeat: Infinity,
-        ease: "easeInOut" as const
-      }
-    }
-  }
-
+  
   const buttonVariants = shouldReduceMotion ? {
     initial: {},
     hover: {},
@@ -196,7 +163,7 @@ export default function LoginPage() {
       variants={containerVariants}
       initial="hidden"
       animate="visible"
-      className="min-h-screen relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50"
+      className="min-h-screen relative overflow-hidden bg-linear-to-br from-blue-50 via-white to-purple-50"
     >
       {/* Animated Particles Background */}
       {!shouldReduceMotion && (
@@ -226,55 +193,14 @@ export default function LoginPage() {
       )}
 
       <div className="flex flex-col lg:flex-row min-h-screen relative z-10">
-        {/* Left Panel - Mascot with Enhanced Animations */}
-        <motion.div 
-          className="hidden lg:flex lg:w-[45%] bg-gradient-to-br from-blue-600 to-blue-800 relative items-center justify-center overflow-hidden"
-          variants={mascotVariants}
-          initial="hidden"
-          animate={["visible", "float"]}
-        >
-          {/* Animated Background Gradient */}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-purple-500/20"
-            animate={{
-              background: [
-                "linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))",
-                "linear-gradient(45deg, rgba(147, 51, 234, 0.1), rgba(59, 130, 246, 0.1))",
-                "linear-gradient(45deg, rgba(59, 130, 246, 0.1), rgba(147, 51, 234, 0.1))"
-              ]
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
+        {/* Left Panel - Mascot (Static) */}
+        <div className="hidden lg:flex lg:w-[40%] bg-linear-to-br from-blue-600 to-blue-800 relative items-center justify-center">
+          <div className="relative z-20 flex flex-col items-center">
+            {/* Glow Effect Behind Mascot (Static) */}
+            <div className="absolute -inset-4 bg-blue-400/20 rounded-full blur-3xl" />
 
-          <motion.div
-            variants={mascotVariants}
-            initial="hidden"
-            animate="visible"
-            className="relative z-20 flex flex-col items-center"
-          >
-            {/* Glow Effect Behind Mascot */}
-            <motion.div
-              className="absolute -inset-4 bg-blue-400/20 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.2, 1],
-                opacity: [0.3, 0.6, 0.3]
-              }}
-              transition={{
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
-
-            {/* Mascot Image */}
-            <motion.div
-              animate="float"
-              className="relative z-30"
-            >
+            {/* Mascot Image (Static) */}
+            <div className="relative z-30">
               <Image
                 src="/images/laundry-mascot.png"
                 alt="ResikLaundry Mascot"
@@ -283,81 +209,36 @@ export default function LoginPage() {
                 className="object-contain drop-shadow-2xl"
                 priority
               />
-            </motion.div>
+            </div>
 
-            {/* Animated Ground Shadow */}
-            <motion.div
-              className="w-40 h-6 bg-black/30 rounded-full blur-2xl mt-6"
-              animate={{
-                scale: [1, 0.8, 1],
-                opacity: [0.5, 0.2, 0.5]
-              }}
-              transition={{
-                duration: 4,
-                repeat: Infinity,
-                ease: "easeInOut"
-              }}
-            />
+            {/* Ground Shadow (Static) */}
+            <div className="w-40 h-6 bg-black/30 rounded-full blur-2xl mt-6" />
 
-            {/* Brand Name with Sparkles */}
-            <motion.div
-              variants={itemVariants}
-              className="mt-10 text-center"
-            >
-              <motion.div
-                className="flex items-center justify-center gap-2 mb-2"
-                whileHover={{ scale: 1.1 }}
-              >
+            {/* Brand Name (Static) */}
+            <div className="mt-10 text-center">
+              <div className="flex items-center justify-center gap-2 mb-2">
                 <h2 className="text-white text-3xl font-light tracking-wide">ResikLaundry</h2>
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-                >
-                  <Sparkles className="w-6 h-6 text-yellow-300" />
-                </motion.div>
-              </motion.div>
+                <Sparkles className="w-6 h-6 text-yellow-300" />
+              </div>
               <p className="text-blue-100 text-base">Laundry premium untuk kamu</p>
-            </motion.div>
-          </motion.div>
-        </motion.div>
+            </div>
+          </div>
+        </div>
 
-        {/* Right Panel - Enhanced Form */}
+        {/* Right Panel - Compact Form */}
         <motion.div 
-          className="lg:w-[55%] bg-white/95 backdrop-blur-sm min-h-screen flex items-center justify-center p-8 lg:p-12 relative"
+          className="lg:w-[60%] bg-white/95 backdrop-blur-sm min-h-screen flex items-center justify-center p-3 lg:p-4 relative"
           variants={itemVariants}
         >
-          {/* Floating Icons */}
-          <motion.div
-            className="absolute top-8 right-8 flex gap-4"
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 0.6 }}
-          >
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: 15 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 bg-blue-100 rounded-full"
-            >
-              <Shield className="w-5 h-5 text-blue-600" />
-            </motion.div>
-            <motion.div
-              whileHover={{ scale: 1.2, rotate: -15 }}
-              whileTap={{ scale: 0.9 }}
-              className="p-2 bg-purple-100 rounded-full"
-            >
-              <Zap className="w-5 h-5 text-purple-600" />
-            </motion.div>
-          </motion.div>
-
           <motion.div
             variants={itemVariants}
-            className="w-full max-w-md"
+            className="w-full max-w-xs"
           >
-            {/* Heading with Animated Underline */}
+            {/* Heading */}
             <motion.div variants={itemVariants} className="mb-2">
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">Welcome back!</h1>
+              <h1 className="text-xl font-bold text-gray-900 mb-1">Welcome back!</h1>
               <motion.div
-                className="h-1 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"
+                className="h-0.5 bg-linear-to-r from-blue-500 to-purple-600 rounded-full"
                 initial={{ width: 0 }}
                 animate={{ width: "100%" }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -367,29 +248,21 @@ export default function LoginPage() {
             {/* Subtext */}
             <motion.p
               variants={itemVariants}
-              className="text-gray-600 mb-8 text-lg"
+              className="text-gray-600 mb-4 text-xs"
             >
               Masuk ke akun ResikLaundry kamu
             </motion.p>
 
-            {/* Email Input with Enhanced Animation */}
+            {/* Email Input */}
             <motion.div
               variants={itemVariants}
-              className="mb-6"
+              className="mb-3"
             >
               <motion.label 
-                className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2"
-                animate={{ x: isFocused === 'email' ? 5 : 0 }}
+                className="block text-xs font-semibold text-gray-700 mb-1"
+                animate={{ x: isFocused === 'email' ? 3 : 0 }}
               >
                 Email
-                {isFocused === 'email' && (
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Sparkles className="w-4 h-4 text-blue-500" />
-                  </motion.div>
-                )}
               </motion.label>
               <motion.input
                 variants={inputVariants}
@@ -399,29 +272,21 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 onFocus={() => setIsFocused('email')}
                 onBlur={() => setIsFocused('')}
-                className="w-full px-4 py-4 border-2 border-gray-300 rounded-xl outline-none transition-all text-lg"
+                className="w-full px-2 py-2 border border-gray-300 rounded outline-none transition-all text-xs"
                 placeholder="email@example.com"
               />
             </motion.div>
 
-            {/* Password Input with Enhanced Animation */}
+            {/* Password Input */}
             <motion.div
               variants={itemVariants}
-              className="mb-8"
+              className="mb-4"
             >
               <motion.label 
-                className="block text-sm font-semibold text-gray-700 mb-3 flex items-center gap-2"
-                animate={{ x: isFocused === 'password' ? 5 : 0 }}
+                className="block text-xs font-semibold text-gray-700 mb-1"
+                animate={{ x: isFocused === 'password' ? 3 : 0 }}
               >
                 Password
-                {isFocused === 'password' && (
-                  <motion.div
-                    animate={{ scale: [1, 1.2, 1] }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    <Shield className="w-4 h-4 text-blue-500" />
-                  </motion.div>
-                )}
               </motion.label>
               <div className="relative">
                 <motion.input
@@ -432,15 +297,15 @@ export default function LoginPage() {
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setIsFocused('password')}
                   onBlur={() => setIsFocused('')}
-                  className="w-full px-4 py-4 pr-14 border-2 border-gray-300 rounded-xl outline-none transition-all text-lg"
-                  placeholder="••••••••"
+                  className="w-full px-2 py-2 pr-8 border border-gray-300 rounded outline-none transition-all text-xs"
+                  placeholder="•••••••"
                 />
                 <motion.button
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors p-1"
+                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
                 >
                   <AnimatePresence mode="wait">
                     {showPassword ? (
@@ -451,7 +316,7 @@ export default function LoginPage() {
                         exit={{ rotate: 90, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <EyeOff className="w-5 h-5" />
+                        <EyeOff className="w-3 h-3" />
                       </motion.div>
                     ) : (
                       <motion.div
@@ -461,7 +326,7 @@ export default function LoginPage() {
                         exit={{ rotate: -90, opacity: 0 }}
                         transition={{ duration: 0.2 }}
                       >
-                        <Eye className="w-5 h-5" />
+                        <Eye className="w-3 h-3" />
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -469,14 +334,14 @@ export default function LoginPage() {
               </div>
             </motion.div>
 
-            {/* Submit Button with Loading State */}
+            {/* Submit Button */}
             <motion.button
               variants={buttonVariants}
               whileHover="hover"
               whileTap="tap"
               onClick={handleLogin}
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 rounded-xl font-semibold text-lg flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed shadow-lg"
+              className="w-full bg-linear-to-r from-blue-600 to-blue-700 text-white py-2 rounded font-semibold text-xs flex items-center justify-center gap-1 disabled:opacity-70 disabled:cursor-not-allowed shadow mb-3"
             >
               <AnimatePresence mode="wait">
                 {isLoading ? (
@@ -487,7 +352,7 @@ export default function LoginPage() {
                     exit={{ opacity: 0, scale: 0.5 }}
                     transition={{ duration: 0.2 }}
                   >
-                    <Loader2 className="w-5 h-5 animate-spin" />
+                    <Loader2 className="w-3 h-3 animate-spin" />
                   </motion.div>
                 ) : (
                   <motion.div
@@ -496,19 +361,19 @@ export default function LoginPage() {
                     animate={{ opacity: 1, x: 0 }}
                     exit={{ opacity: 0, x: 20 }}
                     transition={{ duration: 0.3 }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-1"
                   >
                     <span>Masuk</span>
-                    <ArrowRight className="w-5 h-5" />
+                    <ArrowRight className="w-3 h-3" />
                   </motion.div>
                 )}
               </AnimatePresence>
             </motion.button>
 
-            {/* Enhanced Divider */}
+            {/* Divider */}
             <motion.div
               variants={itemVariants}
-              className="relative my-8"
+              className="relative my-3"
             >
               <motion.div
                 className="absolute inset-0 flex items-center"
@@ -516,7 +381,7 @@ export default function LoginPage() {
                 animate={{ scaleX: 1 }}
                 transition={{ delay: 0.8, duration: 0.6 }}
               >
-                <div className="w-full border-t-2 border-gray-200"></div>
+                <div className="w-full border-t border-gray-200"></div>
               </motion.div>
               <motion.div
                 className="relative flex justify-center"
@@ -524,26 +389,21 @@ export default function LoginPage() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1, duration: 0.4 }}
               >
-                <span className="px-6 bg-white text-gray-500 font-medium">atau</span>
+                <span className="px-3 bg-white text-gray-500 font-medium text-xs">atau</span>
               </motion.div>
             </motion.div>
 
-            {/* Enhanced Social Login Buttons */}
-            <motion.div variants={itemVariants} className="space-y-4 mb-8">
+            {/* Social Login Buttons */}
+            <motion.div variants={itemVariants} className="space-y-2 mb-3">
               {/* Google */}
               <motion.button
                 variants={socialButtonVariants}
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => handleSocialLogin('google')}
-                className="w-full flex items-center justify-center gap-4 px-6 py-4 border-2 border-gray-300 rounded-xl hover:border-blue-400 transition-all text-lg font-medium group"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 rounded hover:border-blue-400 transition-all text-xs font-medium"
               >
-                <motion.div
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.6 }}
-                >
-                  <FcGoogle className="w-6 h-6" />
-                </motion.div>
+                <FcGoogle className="w-4 h-4" />
                 <span>Google</span>
               </motion.button>
 
@@ -553,14 +413,9 @@ export default function LoginPage() {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => handleSocialLogin('discord')}
-                className="w-full flex items-center justify-center gap-4 px-6 py-4 border-2 border-gray-300 rounded-xl hover:border-[#5865F2] transition-all text-lg font-medium"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 rounded hover:border-[#5865F2] transition-all text-xs font-medium"
               >
-                <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  transition={{ duration: 0.3 }}
-                >
-                  <FaDiscord className="w-6 h-6 text-[#5865F2]" />
-                </motion.div>
+                <FaDiscord className="w-4 h-4 text-[#5865F2]" />
                 <span>Discord</span>
               </motion.button>
 
@@ -570,22 +425,17 @@ export default function LoginPage() {
                 whileHover="hover"
                 whileTap="tap"
                 onClick={() => handleSocialLogin('github')}
-                className="w-full flex items-center justify-center gap-4 px-6 py-4 border-2 border-gray-300 rounded-xl hover:border-gray-800 transition-all text-lg font-medium"
+                className="w-full flex items-center justify-center gap-2 px-3 py-2 border border-gray-300 rounded hover:border-gray-800 transition-all text-xs font-medium"
               >
-                <motion.div
-                  whileHover={{ rotate: [0, -10, 10, 0] }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <FaGithub className="w-6 h-6" />
-                </motion.div>
+                <FaGithub className="w-4 h-4" />
                 <span>GitHub</span>
               </motion.button>
             </motion.div>
 
-            {/* Enhanced Footer */}
+            {/* Footer */}
             <motion.p
               variants={itemVariants}
-              className="text-center text-gray-600 text-lg"
+              className="text-center text-gray-600 text-xs"
             >
               Belum punya akun?{" "}
               <motion.button
