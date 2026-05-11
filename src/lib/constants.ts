@@ -9,7 +9,7 @@ export const NAV = {
   logo: "Laundry",
   links: [
     { label: "Beranda", href: "/" },
-    { label: "Layanan", href: "/booking" },
+    { label: "Layanan", href: "/layanan" },
     { label: "Tentang Kami", href: "/about" },
     { label: "Riwayat", href: "/history" },
     { label: "Kontak", href: "/contact" },
@@ -142,7 +142,7 @@ export const FOOTER = {
       heading: "Navigasi",
       links: [
         { label: "Beranda", href: "/" },
-        { label: "Layanan", href: "/booking" },
+        { label: "Layanan", href: "/layanan" },
         { label: "Tentang Kami", href: "/about" },
         { label: "Riwayat", href: "/history" },
         { label: "Kontak", href: "/contact" },

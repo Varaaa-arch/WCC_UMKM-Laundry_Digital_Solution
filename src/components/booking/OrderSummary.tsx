@@ -42,7 +42,7 @@ export default function OrderSummary() {
 
         if (result.success) {
             // TODO: redirect ke halaman sukses / riwayat
-            router.push(`/booking/success?orderId=${result.orderId}`);
+            router.push(`/layanan/booking/success?orderId=${result.orderId}`);
         } else {
             alert(result.error);
         }

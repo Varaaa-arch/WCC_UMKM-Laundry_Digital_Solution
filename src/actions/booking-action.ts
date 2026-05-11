@@ -33,6 +33,6 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     return { success: false, error: "Gagal membuat pesanan, coba lagi." };
   }
 
-  revalidatePath("/booking");
+  revalidatePath("/layanan/booking");
   return { success: true, orderId: data.id };
 }
