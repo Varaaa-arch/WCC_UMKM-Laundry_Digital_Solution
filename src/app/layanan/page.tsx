@@ -1,8 +1,9 @@
-import { ShirtIcon, ZapIcon, SparklesIcon, ClockIcon, ShieldCheckIcon } from "lucide-react";
+import { ShirtIcon, ZapIcon, SparklesIcon, ClockIcon } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import PesanButton from "@/components/layanan/PesanButton";
 import type { ServiceType } from "@/store/useOrderStore";
+import Image from "next/image";
 
 type ServiceCard = {
   id: ServiceType;
@@ -65,9 +66,10 @@ export default function LayananPage() {
           </p>
         </section>
 
-        {/* Service Cards */}
-        <section className="max-w-5xl mx-auto px-4 pb-16 -mt-2">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+        {/* Service Cards + Quality Banner — same container */}
+        <div className="max-w-7xl mx-auto px-4 pb-16">
+          {/* Service Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 -mt-2 mb-5">
             {SERVICES.map((svc) => {
               const isPopular = svc.popular === true;
               return (
@@ -120,28 +122,23 @@ export default function LayananPage() {
                     </span>
                   </div>
 
-                  <PesanButton service={svc.id} />
+                  <PesanButton service={svc.id} variant={isPopular ? "white" : "default"} />
                 </div>
               );
             })}
           </div>
-        </section>
 
-        {/* Quality Banner */}
-        <section className="max-w-5xl mx-auto px-4 pb-16">
-          <div className="rounded-2xl overflow-hidden bg-slate-800 relative min-h-[160px] flex items-end p-6">
-            <div className="absolute inset-0 bg-linear-to-r from-slate-900/80 to-transparent" />
-            <div className="relative z-10">
-              <div className="flex items-center gap-2 mb-1">
-                <ShieldCheckIcon className="w-5 h-5 text-green-400" />
-                <h3 className="text-white font-bold text-lg">Kualitas Terjamin</h3>
-              </div>
-              <p className="text-slate-300 text-sm max-w-sm">
-                Setiap proses diawasi oleh tim profesional dengan standar kebersihan rumah sakit.
-              </p>
-            </div>
+          {/* Quality Banner */}
+          <div className="rounded-2xl overflow-hidden">
+            <Image
+              src="/images/photo-layanan.png"
+              alt="Kualitas layanan laundry profesional"
+              width={2200}
+              height={400}
+              className="w-full object-cover"
+            />
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
     </>
