@@ -48,7 +48,10 @@ export default function OrderSummary() {
         }
     };
 
-    const handleBack = () => setStep("dropoff");
+    const handleBack = () => {
+        setStep("layanan");
+        router.push("/layanan")
+    }
 
     return (
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-5 sticky top-4">
