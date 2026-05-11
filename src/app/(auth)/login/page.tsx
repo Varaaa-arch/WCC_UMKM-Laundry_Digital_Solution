@@ -3,7 +3,10 @@
 import React, { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
-import { Eye, EyeOff, MessageCircle } from 'lucide-react'
+import { Eye, EyeOff } from 'lucide-react'
+import { FcGoogle } from "react-icons/fc"
+import { FaGithub } from "react-icons/fa"
+import { FaDiscord } from "react-icons/fa"
 
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -112,7 +115,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col lg:flex-row">
       {/* Left Panel - Mascot */}
-      <div className="hidden lg:flex lg:w-[45%] bg-[#0a0a0a] relative items-center justify-center">
+      <div className="hidden lg:flex lg:w-[45%] bg-blue-600 relative items-center justify-center">
         <motion.div
           variants={mascotContainerVariants}
           initial="initial"
@@ -148,7 +151,7 @@ export default function LoginPage() {
             className="mt-8 text-center"
           >
             <h2 className="text-white text-2xl font-light tracking-wide">ResikLaundry</h2>
-            <p className="text-gray-400 text-sm mt-2">Laundry premium untuk kamu</p>
+            <p className="text-blue-100 text-sm mt-2">Laundry premium untuk kamu</p>
           </motion.div>
         </motion.div>
       </div>
@@ -232,7 +235,7 @@ export default function LoginPage() {
           <motion.button
             variants={itemVariants}
             onClick={handleLogin}
-            className="w-full bg-gray-900 text-white py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors mb-6"
+            className="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors mb-6"
           >
             Masuk
           </motion.button>
@@ -260,9 +263,7 @@ export default function LoginPage() {
               onClick={() => handleSocialLogin('google')}
               className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 transition-colors"
             >
-              <div className="w-5 h-5 bg-blue-500 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">G</span>
-              </div>
+              <FcGoogle className="w-5 h-5" />
               <span className="font-medium">Google</span>
             </motion.button>
 
@@ -274,7 +275,7 @@ export default function LoginPage() {
               onClick={() => handleSocialLogin('discord')}
               className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 transition-colors"
             >
-              <MessageCircle className="w-5 h-5" />
+              <FaDiscord className="w-5 h-5 text-[#5865F2]" />
               <span className="font-medium">Discord</span>
             </motion.button>
 
@@ -286,9 +287,7 @@ export default function LoginPage() {
               onClick={() => handleSocialLogin('github')}
               className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-300 rounded-lg hover:border-blue-500 transition-colors"
             >
-              <div className="w-5 h-5 bg-gray-800 rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">GH</span>
-              </div>
+              <FaGithub className="w-5 h-5" />
               <span className="font-medium">GitHub</span>
             </motion.button>
           </div>
