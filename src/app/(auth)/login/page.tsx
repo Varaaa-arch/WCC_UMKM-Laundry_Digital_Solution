@@ -1,9 +1,9 @@
 "use client"
 
-import React, { useState } from 'react'
-import { motion, useReducedMotion } from 'framer-motion'
+import React, { useState, useRef, useEffect } from 'react'
+import { motion, useReducedMotion, useAnimation, AnimatePresence } from 'framer-motion'
 import Image from 'next/image'
-import { Eye, EyeOff } from 'lucide-react'
+import { Eye, EyeOff, Sparkles, Zap, Shield } from 'lucide-react'
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub } from "react-icons/fa"
 import { FaDiscord } from "react-icons/fa"

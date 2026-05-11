@@ -69,7 +69,7 @@ export default function AuthForm({ onSubmit }: AuthFormProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-linear-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center p-4">
       <motion.div
         variants={containerVariants}
         initial="hidden"
@@ -82,14 +82,14 @@ export default function AuthForm({ onSubmit }: AuthFormProps) {
           className="bg-white/80 backdrop-blur-lg rounded-3xl shadow-2xl border border-white/20 overflow-hidden"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-blue-500 to-purple-600 p-8 text-center">
+          <div className="bg-linear-to-r from-blue-500 to-purple-600 p-8 text-center">
             <motion.div
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
               className="w-20 h-20 bg-white rounded-full mx-auto mb-4 flex items-center justify-center"
             >
-              <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full"></div>
+              <div className="w-12 h-12 bg-linear-to-r from-blue-500 to-purple-600 rounded-full"></div>
             </motion.div>
             <h1 className="text-2xl font-bold text-white mb-2">
               {isLogin ? 'Selamat Datang Kembali!' : 'Buat Akun Baru'}
@@ -173,7 +173,7 @@ export default function AuthForm({ onSubmit }: AuthFormProps) {
               whileTap="tap"
               type="submit"
               disabled={isLoading}
-              className="w-full bg-gradient-to-r from-blue-500 to-purple-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-linear-to-r from-blue-500 to-purple-600 text-white py-3 rounded-xl font-semibold flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {isLoading ? (
                 <motion.div
@@ -271,7 +271,7 @@ export default function AuthForm({ onSubmit }: AuthFormProps) {
             repeat: Infinity,
             ease: "easeInOut"
           }}
-          className="absolute -top-10 -left-10 w-20 h-20 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-xl"
+          className="absolute -top-10 -left-10 w-20 h-20 bg-linear-to-r from-blue-400 to-purple-400 rounded-full opacity-20 blur-xl"
         />
         <motion.div
           animate={{
@@ -284,7 +284,7 @@ export default function AuthForm({ onSubmit }: AuthFormProps) {
             ease: "easeInOut",
             delay: 2
           }}
-          className="absolute -bottom-10 -right-10 w-32 h-32 bg-gradient-to-r from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl"
+          className="absolute -bottom-10 -right-10 w-32 h-32 bg-linear-to-r from-purple-400 to-pink-400 rounded-full opacity-20 blur-xl"
         />
       </motion.div>
     </div>
