@@ -253,7 +253,7 @@ export function HeroSection() {
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1200px] flex-col px-4 pb-0 pt-21 sm:px-6 sm:pt-23 lg:max-w-[1280px] lg:px-8 lg:pt-24">
+      <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1200px] flex-col px-4 pb-0 pt-6 sm:px-6 sm:pt-8 lg:max-w-[1280px] lg:px-8 lg:pt-10">
         <motion.div
           className="mb-4 flex justify-center sm:mb-5"
           variants={containerVariants}
