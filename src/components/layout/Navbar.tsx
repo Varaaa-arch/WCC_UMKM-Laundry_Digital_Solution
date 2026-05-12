@@ -4,6 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
+import { motion } from "framer-motion"
 
 import { NAV } from "@/lib/constants"
 import { cn } from "@/lib/utils"
@@ -61,7 +62,11 @@ export function Navbar() {
                   {item.label}
                 </Link>
                 {isActive && (
-                  <span className="absolute -bottom-[22px] h-0.5 w-full rounded-full bg-blue-600" />
+                  <motion.span
+                    layoutId="nav-indicator"
+                    className="absolute -bottom-[22px] h-0.5 w-full rounded-full bg-blue-600"
+                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                  />
                 )}
               </li>
             )

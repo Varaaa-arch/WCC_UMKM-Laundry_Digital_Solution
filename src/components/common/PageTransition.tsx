@@ -16,53 +16,67 @@
 
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
-import type { PropsWithChildren } from "react";
+import { useEffect, useState, type PropsWithChildren } from "react";
+import { createPortal } from "react-dom";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 
 export default function PageTransition({ children }: PropsWithChildren) {
   const pathname = usePathname();
   const reduced = useReducedMotion();
+  const [transitioning, setTransitioning] = useState(false);
+  const [displayChildren, setDisplayChildren] = useState(children);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => { setMounted(true) }, [])
+
+  useEffect(() => {
+    if (reduced) { setDisplayChildren(children); return; }
+    setTransitioning(true);
+    const t = setTimeout(() => {
+      setDisplayChildren(children);
+      setTransitioning(false);
+    }, 800)
+    return () => clearTimeout(t)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname])
+
+  const curtain = (
+    <AnimatePresence>
+      {transitioning && (
+        <motion.div
+          key="curtain"
+          className="fixed inset-0 flex items-center justify-center"
+          style={{ backgroundColor: "#2563eb", zIndex: 9999 }}
+          initial={{ y: "100%" }}
+          animate={{ y: "0%" }}
+          exit={{ y: "-100%" }}
+          transition={{ duration: 0.7, ease: EASE }}
+        >
+          <span className="relative text-2xl font-bold tracking-tight select-none overflow-hidden inline-block">
+            {/* base — abu */}
+            <span className="text-blue-300">ResikLaundry</span>
+            {/* sweep putih kiri → kanan */}
+            <motion.span
+              className="absolute inset-0 text-white"
+              initial={{ clipPath: "inset(0 100% 0 0)" }}
+              animate={{ clipPath: "inset(0 0% 0 0)" }}
+              transition={{ duration: 0.7, delay: 0.2, ease: EASE }}
+            >
+              ResikLaundry
+            </motion.span>
+          </span>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
 
   return (
-    <AnimatePresence mode="wait">
-      <motion.div key={pathname}>
-        {/* Curtain overlay */}
-        <motion.div
-          className="fixed inset-0 z-50 origin-bottom"
-          style={{ backgroundColor: "#3b82f6" }}
-          initial={reduced ? { y: "100%" } : { y: "100%" }}
-          animate={
-            reduced
-              ? { y: "100%" }
-              : { y: ["100%", "0%", "0%", "-100%"] }
-          }
-          transition={
-            reduced
-              ? { duration: 0 }
-              : {
-                  duration: 1.1,
-                  times: [0, 0.45, 0.55, 1],
-                  ease: EASE,
-                }
-          }
-        />
-
-        {/* Page content */}
-        <motion.div
-          initial={reduced ? false : { opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={
-            reduced
-              ? { duration: 0 }
-              : { duration: 0.4, delay: 0.7, ease: EASE }
-          }
-        >
-          {children}
-        </motion.div>
-      </motion.div>
-    </AnimatePresence>
+    <>
+      {mounted && createPortal(curtain, document.body)}
+      {displayChildren}
+    </>
   );
 }
