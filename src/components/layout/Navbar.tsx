@@ -32,11 +32,8 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b transition-[background-color,box-shadow,border-color]",
-        pathname === "/" && !scrolled
-          ? "border-sky-200/40 bg-[#EEF6FD]/85 backdrop-blur-md"
-          : "border-transparent bg-white",
-        scrolled && "border-slate-100/80 bg-white/95 shadow-sm backdrop-blur-md"
+        "sticky top-0 z-50 w-full border-b border-transparent bg-white transition-shadow",
+        scrolled && "shadow-sm"
       )}
     >
       <nav
