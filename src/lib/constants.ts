@@ -15,9 +15,9 @@ export const NAV = {
     { label: "Kontak", href: "/contact" },
   ] as const,
   loginLabel: "Masuk",
-  loginHref: "#login-url-placeholder",
+  loginHref: "/login",
   cta: "Daftar",
-  ctaHref: "#cta-url-placeholder",
+  ctaHref: "/register",
   mobileMenuLabel: "[MOBILE_MENU_LABEL]",
   mobileSheetTitle: "[MOBILE_MENU_TITLE]",
 } as const

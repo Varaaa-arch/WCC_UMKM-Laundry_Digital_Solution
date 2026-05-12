@@ -53,8 +53,8 @@ export default function LoginPage() {
   })
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-blue-50 p-4">
-      <div className="w-full max-w-4xl flex rounded-3xl overflow-hidden shadow-2xl">
+    <div className="min-h-screen h-screen overflow-hidden flex items-center justify-center bg-blue-50 p-4">
+      <div className="w-full max-w-5xl flex rounded-3xl overflow-hidden shadow-2xl">
 
         {/* LEFT — blue panel with mascot */}
         <div className="hidden md:flex w-1/2 bg-linear-to-br from-blue-500 to-blue-700 flex-col items-center justify-center relative overflow-hidden p-10">
