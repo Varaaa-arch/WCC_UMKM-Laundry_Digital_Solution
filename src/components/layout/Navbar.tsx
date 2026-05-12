@@ -32,8 +32,11 @@ export function Navbar() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 w-full border-b border-transparent bg-white transition-shadow",
-        scrolled && "shadow-sm"
+        "sticky top-0 z-50 w-full border-b transition-[background-color,box-shadow,border-color]",
+        pathname === "/" && !scrolled
+          ? "border-sky-200/40 bg-[#EEF6FD]/85 backdrop-blur-md"
+          : "border-transparent bg-white",
+        scrolled && "border-slate-100/80 bg-white/95 shadow-sm backdrop-blur-md"
       )}
     >
       <nav
@@ -64,7 +67,7 @@ export function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute -bottom-[22px] h-0.5 w-full rounded-full bg-blue-600"
+                    className="absolute bottom-[22px] h-0.5 w-full rounded-full bg-blue-600"
                     transition={{ type: "spring", stiffness: 500, damping: 35 }}
                   />
                 )}

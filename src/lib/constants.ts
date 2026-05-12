@@ -24,14 +24,22 @@ export const NAV = {
 
 export const HERO = {
   badge: "#1 Modern Laundry Service",
-  titleLine1: "Kesegaran Sempurna,",  
-  titleLine2: "Tanpa Repot",
+  titleLine1: "Kesegaran Sempurna,",
+  titleLine2: "Tanpa Repot.",
   subtitle: "Nikmati waktu luang Anda lebih banyak sementara kami menangani cucian Anda dengan standar kebersihan tertinggi dan efisiensi teknologi.",
   primaryBtn: "Pesan Sekarang",
-  primaryHref: "#hero-primary-placeholder",
+  primaryHref: "/layanan",
   secondaryBtn: "Lihat Detail",
   secondaryHref: "#hero-secondary-placeholder",
-  imageAlt: "[HERO_IMAGE_ALT]",
+  imageAlt: "Maskot laundry mesin cuci dan kurir",
+  features: {
+    leftTop:
+      "Hemat waktu berharga Anda. Biarkan tim kami yang mengurus cucian dari awal hingga selesai.",
+    leftBottom:
+      "Teknologi cuci modern dengan perhatian pada setiap detail agar pakaian tetap awet dan nyaman dipakai.",
+    rightTop:
+      "Layanan laundry praktis dengan kualitas terbaik — cocok untuk rutinitas sibuk Anda sehari-hari.",
+  },
 } as const
 
 export const HOW_TO_ORDER = {
