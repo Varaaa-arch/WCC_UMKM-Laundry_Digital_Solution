@@ -34,7 +34,7 @@ export function Navbar() {
     <header
       className={cn(
         isHome
-          ? "pointer-events-none fixed inset-x-0 top-0 z-[60] border-0 bg-transparent"
+          ? "pointer-events-none fixed inset-x-0 top-0 z-60 border-0 bg-transparent"
           : "sticky top-0 z-50 w-full border-b border-transparent bg-white transition-shadow",
         !isHome && scrolled && "shadow-sm"
       )}
@@ -43,7 +43,7 @@ export function Navbar() {
         className={cn(
           "mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-17 sm:px-6 lg:px-8",
           isHome &&
-            "pointer-events-auto mt-4 h-14 max-w-5xl rounded-full border border-white/70 bg-white/78 px-3 shadow-[0_12px_44px_-18px_rgba(30,100,160,0.35)] backdrop-blur-xl sm:mt-5 sm:h-[3.625rem] sm:px-5",
+            "pointer-events-auto mt-4 h-14 max-w-5xl rounded-full border border-white/70 bg-white/78 px-3 shadow-[0_12px_44px_-18px_rgba(30,100,160,0.35)] backdrop-blur-xl sm:mt-5 sm:h-14.5 sm:px-5",
           isHome && scrolled && "border-sky-100/90 bg-white/88 shadow-[0_14px_48px_-14px_rgba(30,100,160,0.38)]"
         )}
         aria-label="Primary"

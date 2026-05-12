@@ -45,7 +45,7 @@ function SoftBlob({ className }: { className?: string }) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute rounded-full bg-gradient-to-br from-sky-200/50 via-blue-100/30 to-transparent blur-3xl",
+        "pointer-events-none absolute rounded-full bg-linear-to-br from-sky-200/50 via-blue-100/30 to-transparent blur-3xl",
         className
       )}
       aria-hidden
@@ -62,7 +62,7 @@ function HeroCloudStack({
 }) {
   return (
     <div
-      className="pointer-events-none relative z-[1] mt-[-4.5rem] w-full sm:mt-[-5.5rem] lg:mt-[-6.5rem]"
+      className="pointer-events-none relative z-1 mt-18 w-full sm:mt-22 lg:mt-26"
       aria-hidden
     >
       <div
@@ -105,7 +105,7 @@ function HeroCloudStack({
             d="M0,105 C240,55 480,115 720,70 C960,25 1200,95 1440,60 L1440,120 L0,120 Z"
           />
         </svg>
-        <div className="absolute inset-x-0 bottom-0 top-14 bg-gradient-to-b from-transparent via-sky-300/20 to-sky-400/25" />
+        <div className="absolute inset-x-0 bottom-0 top-14 bg-linear-to-b from-transparent via-sky-300/20 to-sky-400/25" />
         <Image
           src={cloudWaveSrc}
           alt=""
@@ -134,7 +134,7 @@ function FeatureCard({
     <motion.div
       variants={fadeUp}
       className={cn(
-        "relative max-w-[17.5rem] rounded-3xl border border-white/75 bg-white/70 p-3.5 shadow-[0_20px_50px_rgba(15,55,120,0.07)] backdrop-blur-md sm:p-4",
+        "relative max-w-70 rounded-3xl border border-white/75 bg-white/70 p-3.5 shadow-[0_20px_50px_rgba(15,55,120,0.07)] backdrop-blur-md sm:p-4",
         rotateClass
       )}
       whileHover={
@@ -191,7 +191,7 @@ function FloatingParticles({ rootRef }: { rootRef: React.RefObject<HTMLElement |
         data-hero-float
         className="absolute left-[6%] top-[32%] flex size-9 items-center justify-center rounded-full bg-white/80 text-sky-500 shadow-md backdrop-blur-sm sm:left-[8%] sm:top-[28%] sm:size-10"
       >
-        <Heart className="size-4 fill-sky-400 stroke-sky-500 sm:size-[1.125rem]" aria-hidden />
+        <Heart className="size-4 fill-sky-400 stroke-sky-500 sm:size-4.5" aria-hidden />
       </span>
       <span
         data-hero-float
@@ -235,7 +235,7 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative isolate min-h-[100dvh] overflow-hidden bg-[#eef6ff]"
+      className="relative isolate min-h-dvh overflow-hidden bg-[#eef6ff]"
       aria-labelledby="hero-heading"
     >
       <div
@@ -249,11 +249,11 @@ export function HeroSection() {
       <SoftBlob className="-left-24 top-10 size-[min(85vw,28rem)] sm:-left-16" />
       <SoftBlob className="-right-20 top-32 size-[min(80vw,24rem)] opacity-80 sm:right-0" />
       <div
-        className="pointer-events-none absolute inset-x-0 top-[18%] h-px max-w-3xl bg-gradient-to-r from-transparent via-sky-300/40 to-transparent blur-sm"
+        className="pointer-events-none absolute inset-x-0 top-[18%] h-px max-w-3xl bg-linear-to-r from-transparent via-sky-300/40 to-transparent blur-sm"
         aria-hidden
       />
 
-      <div className="relative z-10 mx-auto flex min-h-[100dvh] max-w-[1200px] flex-col px-4 pb-0 pt-[5.25rem] sm:px-6 sm:pt-[5.75rem] lg:max-w-[1280px] lg:px-8 lg:pt-24">
+      <div className="relative z-10 mx-auto flex min-h-dvh max-w-[1200px] flex-col px-4 pb-0 pt-21 sm:px-6 sm:pt-23 lg:max-w-[1280px] lg:px-8 lg:pt-24">
         <motion.div
           className="mb-4 flex justify-center sm:mb-5"
           variants={containerVariants}
@@ -269,7 +269,7 @@ export function HeroSection() {
         </motion.div>
 
         <motion.div
-          className="mx-auto w-full max-w-[56rem] text-center"
+          className="mx-auto w-full max-w-4xl text-center"
           variants={containerVariants}
           initial="hidden"
           animate="show"
@@ -280,7 +280,7 @@ export function HeroSection() {
             className="font-[family-name:var(--font-hero-display),system-ui,sans-serif] text-[clamp(2.15rem,6.5vw,3.85rem)] font-extrabold leading-[1.05] tracking-[-0.035em] text-[#0a2540]"
           >
             <span className="block">{HERO.titleLine1}</span>
-            <span className="mt-1 block bg-gradient-to-r from-[#1e8ef7] via-[#3db0ff] to-[#6bc9ff] bg-clip-text text-transparent sm:mt-1.5">
+            <span className="mt-1 block bg-linear-to-r from-[#1e8ef7] via-[#3db0ff] to-[#6bc9ff] bg-clip-text text-transparent sm:mt-1.5">
               {HERO.titleLine2}
             </span>
           </motion.h1>
@@ -311,7 +311,7 @@ export function HeroSection() {
             >
               <div
                 ref={mascotZoneRef}
-                className="relative w-[min(92vw,22rem)] sm:w-[min(88vw,26rem)] lg:w-[min(100%,24.5rem)] xl:w-[27.5rem]"
+                className="relative w-[min(92vw,22rem)] sm:w-[min(88vw,26rem)] lg:w-[min(100%,24.5rem)] xl:w-110"
               >
                 <FloatingParticles rootRef={mascotZoneRef} />
                 <motion.div
@@ -339,7 +339,7 @@ export function HeroSection() {
               </FeatureCard>
               <motion.div
                 variants={fadeUp}
-                className="w-full max-w-[17.5rem] lg:ml-0.5"
+                className="w-full max-w-70 lg:ml-0.5"
                 whileHover={reduce ? undefined : { scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 400, damping: 24 }}
               >
@@ -347,7 +347,7 @@ export function HeroSection() {
                   href={HERO.primaryHref}
                   className={cn(
                     "relative flex h-[3.35rem] w-full items-center justify-center gap-2.5 overflow-hidden rounded-full",
-                    "bg-gradient-to-r from-[#38a7f0] via-[#1e8ef7] to-[#1570c7]",
+                    "bg-linear-to-r from-[#38a7f0] via-[#1e8ef7] to-[#1570c7]",
                     "text-[0.9375rem] font-bold text-white shadow-[0_14px_40px_-8px_rgba(30,120,220,0.55),0_0_0_1px_rgba(255,255,255,0.12)_inset]",
                     "transition-[filter,box-shadow] duration-300",
                     "hover:shadow-[0_18px_48px_-6px_rgba(30,120,220,0.65),0_0_32px_rgba(56,167,240,0.35)]",
@@ -355,7 +355,7 @@ export function HeroSection() {
                   )}
                 >
                   <span
-                    className="pointer-events-none absolute inset-0 bg-gradient-to-t from-white/10 to-transparent opacity-60"
+                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-white/10 to-transparent opacity-60"
                     aria-hidden
                   />
                   <Play className="relative size-4 shrink-0 fill-current" aria-hidden />
