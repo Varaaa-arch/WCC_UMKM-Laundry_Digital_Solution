@@ -7,12 +7,35 @@ import { Eye, EyeOff, ArrowRight, Loader2 } from 'lucide-react'
 import { FcGoogle } from "react-icons/fc"
 import { FaGithub, FaDiscord } from "react-icons/fa"
 
+function useBlink() {
+  const [isBlinking, setIsBlinking] = useState(false)
+
+  React.useEffect(() => {
+    const schedule = () => {
+      // random interval 2–5s between blinks
+      const delay = 2000 + Math.random() * 3000
+      return setTimeout(() => {
+        setIsBlinking(true)
+        setTimeout(() => {
+          setIsBlinking(false)
+          schedule()
+        }, 180) // eyes closed duration
+      }, delay)
+    }
+    const t = schedule()
+    return () => clearTimeout(t)
+  }, [])
+
+  return isBlinking
+}
+
 export default function LoginPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [rememberMe, setRememberMe] = useState(false)
+  const isBlinking = useBlink()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -44,14 +67,31 @@ export default function LoginPage() {
             transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut" }}
             className="relative z-10"
           >
-            <Image
-              src="/images/laundry-mascot.png"
-              alt="Laundry Mascot"
-              width={220}
-              height={220}
-              className="object-contain drop-shadow-2xl"
-              priority
-            />
+            <div className="relative w-[220px] h-[220px]">
+              {/* melek (eyes open) */}
+              <Image
+                src="/images/animation/mascot-melek.png"
+                alt="Laundry Mascot"
+                width={220}
+                height={220}
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+              {/* merem (eyes closed) — fades in on blink */}
+              <motion.div
+                className="absolute inset-0"
+                animate={{ opacity: isBlinking ? 1 : 0 }}
+                transition={{ duration: 0.06, ease: "easeInOut" }}
+              >
+                <Image
+                  src="/images/animation/mascot-merem.png"
+                  alt="Laundry Mascot Blink"
+                  width={220}
+                  height={220}
+                  className="object-contain drop-shadow-2xl"
+                />
+              </motion.div>
+            </div>
           </motion.div>
 
           {/* shadow under mascot */}
