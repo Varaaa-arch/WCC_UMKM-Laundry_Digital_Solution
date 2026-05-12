@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
 
 import { NAV } from "@/lib/constants"
@@ -18,6 +19,7 @@ import {
 
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false)
+  const pathname = usePathname()
 
   React.useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 4)
@@ -45,16 +47,25 @@ export function Navbar() {
         </Link>
 
         <ul className="absolute left-1/2 hidden -translate-x-1/2 gap-10 md:flex lg:gap-12">
-          {NAV.links.map((item) => (
-            <li key={item.label}>
-              <Link
-                href={item.href}
-                className="text-sm font-medium text-slate-600 transition-colors hover:text-blue-600"
-              >
-                {item.label}
-              </Link>
-            </li>
-          ))}
+          {NAV.links.map((item) => {
+            const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+            return (
+              <li key={item.label} className="relative flex flex-col items-center">
+                <Link
+                  href={item.href}
+                  className={cn(
+                    "text-sm font-medium transition-colors",
+                    isActive ? "text-blue-600" : "text-slate-600 hover:text-blue-600"
+                  )}
+                >
+                  {item.label}
+                </Link>
+                {isActive && (
+                  <span className="absolute -bottom-[22px] h-0.5 w-full rounded-full bg-blue-600" />
+                )}
+              </li>
+            )
+          })}
         </ul>
 
         <div className="hidden items-center gap-6 md:flex">
@@ -99,18 +110,24 @@ export function Navbar() {
               </SheetHeader>
               <div className="flex flex-col gap-6 px-2 pb-8 pt-2">
                 <ul className="flex flex-col gap-4">
-                  {NAV.links.map((item) => (
-                    <li key={`${item.label}-mobile`}>
-                      <SheetClose asChild>
-                        <Link
-                          href={item.href}
-                          className="block py-2 text-base font-medium text-slate-800"
-                        >
-                          {item.label}
-                        </Link>
-                      </SheetClose>
-                    </li>
-                  ))}
+                  {NAV.links.map((item) => {
+                    const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
+                    return (
+                      <li key={`${item.label}-mobile`}>
+                        <SheetClose asChild>
+                          <Link
+                            href={item.href}
+                            className={cn(
+                              "block py-2 text-base font-medium",
+                              isActive ? "text-blue-600" : "text-slate-800"
+                            )}
+                          >
+                            {item.label}
+                          </Link>
+                        </SheetClose>
+                      </li>
+                    )
+                  })}
                 </ul>
                 <SheetClose asChild>
                   <Link
