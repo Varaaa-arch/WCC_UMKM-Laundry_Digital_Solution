@@ -113,18 +113,17 @@ export function HeroSection() {
         </div>
       </div>
 
-      <div className="relative z-1 -mt-1 w-full leading-0" aria-hidden>
-        <svg
-          className="h-14 w-full text-white sm:h-16 md:h-20 lg:h-24"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            fill="currentColor"
-            d="M0,52L60,42C120,32,240,12,360,21.3C480,31,600,61,720,66.7C840,72,960,52,1080,45.3C1200,39,1320,47,1380,50.7L1440,54.7V120H0V52Z"
-          />
-        </svg>
+      <div
+        className="relative z-1 -mt-px h-20 w-full overflow-hidden leading-0 sm:h-24 md:h-28 lg:h-36"
+        aria-hidden
+      >
+        <Image
+          src="/images/awan-heroSection.png"
+          alt=""
+          fill
+          className="object-cover object-bottom"
+          sizes="100vw"
+        />
       </div>
     </section>
   )
