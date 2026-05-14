@@ -33,7 +33,7 @@ const SERVICES: ServiceCard[] = [
     description: "Paket lengkap cuci bersih dan setrika uap untuk hasil maksimal yang rapi.",
     price: 8000,
     priceUnit: "Kg",
-    image: "/images/layanan-image/cuci-setrika.png",
+    image: "/images/layanan-image/cuci-dan-setrika.png",
   },
 ];
 
@@ -86,6 +86,7 @@ export default function LayananPage() {
                     src={svc.image}
                     alt={svc.title}
                     fill
+                    sizes="(max-width: 640px) 100vw, 50vw"
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
                   />
                 </div>
