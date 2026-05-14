@@ -25,7 +25,7 @@ const SERVICES: ServiceCard[] = [
     description: "Layanan cuci bersih menggunakan deterjen premium tanpa proses setrika.",
     price: 5000,
     priceUnit: "Kg",
-    image: "/images/layanan-image/cuci-bersih.png",
+    image: "/images/layanan-image/cuci.png",
   },
   {
     id: "setrika-ekspres",
@@ -33,7 +33,7 @@ const SERVICES: ServiceCard[] = [
     description: "Paket lengkap cuci bersih dan setrika uap untuk hasil maksimal yang rapi.",
     price: 8000,
     priceUnit: "Kg",
-    image: "/images/layanan-image/cuci-dan-setrika.png",
+    image: "/images/layanan-image/cuci-setrika.png",
   },
 ];
 
@@ -83,8 +83,8 @@ export default function LayananPage() {
                 ].join(" ")}
               >
                 {/* Image */}
-                <div className="p-5 pb-0">
-                  <div className="relative w-full h-44 rounded-[20px] overflow-hidden">
+                <div className="px-6 pt-6 pb-2">
+                  <div className="relative w-full h-48">
                     <Image
                       src={svc.image}
                       alt={svc.title}
@@ -92,11 +92,11 @@ export default function LayananPage() {
                       sizes="(max-width: 640px) 100vw, 50vw"
                       loading="eager"
                       priority={svc.id === "cuci-kering-setrika"}
-                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                      className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     {/* Check badge — bottom right of image */}
                     {isSelected && (
-                      <span className="absolute bottom-3 right-3 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-300/50 animate-[pop_0.2s_ease-out]">
+                      <span className="absolute bottom-0 right-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-300/50 animate-[pop_0.2s_ease-out]">
                         <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                         </svg>
@@ -129,7 +129,7 @@ export default function LayananPage() {
           onClick={handleLanjutkan}
           disabled={selected === null}
           className={[
-            "w-full max-w-2xl py-4 rounded-full font-bold text-base text-white transition-all duration-300 border-0 outline-none",
+            "w-full max-w-xs py-4 rounded-full font-bold text-base text-white transition-all duration-300 border-0 outline-none",
             selected
               ? "bg-linear-to-r from-blue-400 to-blue-600 shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.45)] hover:scale-[1.02] active:scale-[0.98]"
               : "bg-linear-to-r from-blue-300 to-blue-400 opacity-60 cursor-not-allowed",
