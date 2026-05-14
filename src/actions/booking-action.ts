@@ -17,9 +17,15 @@ export type BookingResult =
 export async function confirmBooking(payload: BookingPayload): Promise<BookingResult> {
   const supabase = await createClient();
 
+  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  if (authError || !user) {
+    return { success: false, error: "Sesi login tidak ditemukan. Silakan login ulang." };
+  }
+
   const { data, error } = await supabase
     .from("orders")
     .insert({
+      user_id: user.id,
       servis: payload.service,
       estimasi_berat: payload.estimatedWeight,
       total_harga: payload.totalPrice,
@@ -29,8 +35,8 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     .single();
 
   if (error) {
-    console.error("Booking error:", error);
-    return { success: false, error: "Gagal membuat pesanan, coba lagi." };
+    console.error("Booking error:", error.message, error.details, error.hint);
+    return { success: false, error: `Gagal membuat pesanan: ${error.message}` };
   }
 
   revalidatePath("/layanan/booking");
