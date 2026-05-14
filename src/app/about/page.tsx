@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { MapPinIcon, MessageCircleIcon, MailIcon, InstagramIcon, SparklesIcon, CircleIcon } from "lucide-react";
+import { MapPinIcon, MessageCircleIcon, MailIcon, CameraIcon, SparklesIcon, CircleIcon } from "lucide-react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
@@ -212,7 +212,7 @@ export default function AboutPage() {
             {/* Instagram */}
             <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
               <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center">
-                <InstagramIcon className="w-5 h-5 text-pink-500" />
+                <CameraIcon className="w-5 h-5 text-pink-500" />
               </div>
               <div>
                 <p className="font-bold text-gray-900 text-sm">Instagram</p>
