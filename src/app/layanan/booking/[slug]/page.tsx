@@ -84,39 +84,40 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
             {/* Estimasi Berat */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <div className="flex items-center gap-2.5 mb-1">
-                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="object-contain" />
+              <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-dashed border-gray-100">
+                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
-              <p className="text-gray-400 text-xs mb-5">
-                Masukkan estimasi berat pakaian Anda. Berat akan diverifikasi saat penjemputan.
-              </p>
 
-              <div className="flex items-center justify-between">
-                <div className="flex flex-col gap-1">
-                  <div className="flex items-center gap-4">
+              <div className="flex items-center justify-between gap-4">
+                {/* Left: desc + stepper */}
+                <div className="flex flex-col gap-5">
+                  <p className="text-gray-400 text-sm leading-relaxed max-w-[180px]">
+                    Masukkan estimasi berat pakaian Anda. Berat akhir akan diverifikasi saat penjemputan.
+                  </p>
+                  <div className="flex items-center gap-3">
                     <button
                       onClick={() => setWeight(Math.max(1, estimatedWeight - 1))}
-                      className="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-400 hover:text-blue-500 transition-colors"
+                      className="w-9 h-9 rounded-lg bg-blue-500 text-white flex items-center justify-center hover:bg-blue-600 transition-colors"
                     >
                       <MinusIcon className="w-4 h-4" />
                     </button>
-                    <div className="text-center">
+                    <div className="text-center min-w-[48px]">
                       <span className="text-4xl font-bold text-gray-900">{estimatedWeight}</span>
-                      <p className="text-xs text-gray-400 font-medium tracking-widest uppercase mt-0.5">Kilogram</p>
+                      <p className="text-[10px] text-gray-400 font-semibold tracking-widest uppercase mt-0.5">Kilogram</p>
                     </div>
                     <button
                       onClick={() => setWeight(estimatedWeight + 1)}
-                      className="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-400 hover:text-blue-500 transition-colors"
+                      className="w-9 h-9 rounded-lg bg-blue-500 text-white flex items-center justify-center hover:bg-blue-600 transition-colors"
                     >
                       <PlusIcon className="w-4 h-4" />
                     </button>
                   </div>
                 </div>
 
-                {/* Laundry illustration */}
-                <div className="w-36 h-36 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <Image src="/images/layanan-image/booking-image/mesin-cuci.png" alt="laundry" width={80} height={80} className="object-contain" />
+                {/* Right: illustration */}
+                <div className="w-40 h-40 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                  <Image src="/images/layanan-image/booking-image/mesinCuci.png" alt="mesin cuci" width={130} height={130} style={{ width: 130, height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -124,7 +125,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Metode Pengambilan */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="object-contain" />
+                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
 
