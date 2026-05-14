@@ -29,7 +29,7 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
   // if (authError || !user) {
   //   return { success: false, error: "Sesi login tidak ditemukan. Silakan login ulang." };
   // }
-  const DUMMY_USER_ID = "00000000-0000-0000-0000-000000000001"; // dummy untuk testing
+  const DUMMY_USER_ID = "22222222-2222-2222-2222-222222222222"; // dummy untuk testing (Budi Santoso dari seed)
 
   // Mapping service slug → service_id dari tabel services (seed data)
   const SERVICE_ID_MAP: Record<string, string> = {
@@ -46,8 +46,8 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     .from("orders")
     .insert({
       user_id:       DUMMY_USER_ID,
-      customer_name: "Guest (Testing)",   // TODO: ambil dari profil user setelah login
-      phone:         "000000000000",       // TODO: ambil dari profil user setelah login
+      customer_name: "Budi Santoso",      // TODO: ambil dari profil user setelah login
+      phone:         "081200000002",        // TODO: ambil dari profil user setelah login
       service_id:    serviceId,
       weight:        payload.estimatedWeight,
       order_type:    "dropoff",            // TODO: sesuaikan dengan pilihan pickup method ('pickup' | 'dropoff')
