@@ -1,4 +1,3 @@
-import Image from "next/image"
 import { Star } from "lucide-react"
 
 import { TESTIMONIALS } from "@/lib/constants"
@@ -28,10 +27,6 @@ export function TestimonialsSection() {
 
         <div className="mx-auto mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-3 lg:gap-10">
           {items.map((item) => {
-            const avatarSrc = item.avatarAlt.startsWith("/")
-              ? item.avatarAlt
-              : "/placeholder.svg"
-
             return (
               <Card
                 key={item.name}
@@ -52,14 +47,10 @@ export function TestimonialsSection() {
                 <p className="text-sm leading-relaxed text-slate-700 italic">{item.text}</p>
               </CardContent>
                 <CardFooter className="gap-4 border-none bg-transparent px-7 pb-7 pt-4">
-                  <div className="relative size-12 shrink-0 overflow-hidden rounded-full bg-sky-100 ring-[3px] ring-white">
-                    <Image
-                      src={avatarSrc}
-                      alt={item.name}
-                      fill
-                      className="object-cover"
-                      sizes="48px"
-                    />
+                  <div className="relative size-12 shrink-0 overflow-hidden rounded-full bg-blue-100 ring-[3px] ring-white flex items-center justify-center">
+                    <span className="text-sm font-bold text-blue-600">
+                      {item.name.split(" ").map((n) => n[0]).join("").slice(0, 2)}
+                    </span>
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-bold text-slate-900">{item.name}</p>
