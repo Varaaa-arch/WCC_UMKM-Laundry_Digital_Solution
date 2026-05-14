@@ -114,9 +114,9 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                   </div>
                 </div>
 
-                {/* Laundry icon illustration */}
-                <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <span className="text-4xl">🫧</span>
+                {/* Laundry illustration */}
+                <div className="w-36 h-36 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                  <img src="/images/layanan-image/booking-image/mesin-cuci.png" alt="laundry" className="w-20 h-20 object-contain" />
                 </div>
               </div>
             </div>

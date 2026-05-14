@@ -286,7 +286,7 @@ export function HeroSection() {
                 animate={mascotFloat}
               >
                 <Image
-                  src="/images/laundry-mascot.png"
+                  src="/images/mascot/laundry-mascot.png"
                   alt={HERO.imageAlt}
                   fill
                   priority
