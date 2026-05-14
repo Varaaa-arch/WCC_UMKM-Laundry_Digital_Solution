@@ -6,7 +6,7 @@ import { use } from "react";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useOrderStore, type ServiceType, SERVICE_PRICE, SERVICE_LABEL, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
-import { MinusIcon, PlusIcon, HomeIcon, StoreIcon, ChevronRightIcon, Loader2Icon } from "lucide-react";
+import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, Loader2Icon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
 import { useState } from "react";
 import { confirmBooking } from "@/actions/booking-action";
 
@@ -84,9 +84,9 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
             {/* Estimasi Berat */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-lg">⚖️</span>
-                <h2 className="font-bold text-gray-900 text-base">Estimasi Berat</h2>
+              <div className="flex items-center gap-2.5 mb-1">
+                <img src="/images/layanan-image/booking-image/estimasi-image.png" alt="" className="w-5 h-5 object-contain" />
+                <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
               <p className="text-gray-400 text-xs mb-5">
                 Masukkan estimasi berat pakaian Anda. Berat akan diverifikasi saat penjemputan.
@@ -124,7 +124,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Metode Pengambilan */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-lg">🚗</span>
+                <img src="/images/layanan-image/booking-image/kurir-image.png" alt="" className="w-5 h-5 object-contain" />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
 
@@ -165,7 +165,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                   ].join(" ")}
                 >
                   <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <HomeIcon className="w-4 h-4 text-blue-600" />
+                    <MapPinIcon className="w-4 h-4 text-blue-600" />
                   </div>
                   <div>
                     <p className="font-semibold text-gray-900 text-sm">Diantar ke Rumah</p>
@@ -275,12 +275,12 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
               {/* Trust badges */}
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                 {[
-                  { icon: "🛡️", label: "Garansi Keamanan" },
-                  { icon: "⚡", label: "Cepat & Tepat" },
-                  { icon: "⭐", label: "Buat Amanr" },
+                  { icon: <ShieldCheckIcon className="w-5 h-5 text-blue-500" />, label: "Garansi Kebersihan" },
+                  { icon: <TimerIcon className="w-5 h-5 text-blue-500" />, label: "Cepat & Tepat" },
+                  { icon: <ShieldIcon className="w-5 h-5 text-blue-500" />, label: "Bayar Aman" },
                 ].map((b) => (
-                  <div key={b.label} className="flex flex-col items-center gap-1 p-2 bg-gray-50 rounded-xl">
-                    <span className="text-base">{b.icon}</span>
+                  <div key={b.label} className="flex flex-col items-center gap-1.5 p-2 bg-gray-50 rounded-xl">
+                    {b.icon}
                     <span className="text-gray-500 text-[10px] font-medium leading-tight">{b.label}</span>
                   </div>
                 ))}
