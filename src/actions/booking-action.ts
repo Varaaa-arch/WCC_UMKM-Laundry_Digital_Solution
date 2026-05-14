@@ -17,15 +17,17 @@ export type BookingResult =
 export async function confirmBooking(payload: BookingPayload): Promise<BookingResult> {
   const supabase = await createClient();
 
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
-  if (authError || !user) {
-    return { success: false, error: "Sesi login tidak ditemukan. Silakan login ulang." };
-  }
+  // TODO: Ganti dummy user_id dengan autentikasi asli setelah sistem login siap
+  // const { data: { user }, error: authError } = await supabase.auth.getUser();
+  // if (authError || !user) {
+  //   return { success: false, error: "Sesi login tidak ditemukan. Silakan login ulang." };
+  // }
+  const DUMMY_USER_ID = "00000000-0000-0000-0000-000000000001"; // dummy untuk testing
 
   const { data, error } = await supabase
     .from("orders")
     .insert({
-      user_id: user.id,
+      user_id: DUMMY_USER_ID,
       servis: payload.service,
       estimasi_berat: payload.estimatedWeight,
       total_harga: payload.totalPrice,
