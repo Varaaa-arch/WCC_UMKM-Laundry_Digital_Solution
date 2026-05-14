@@ -83,14 +83,14 @@ function HeroCloudStack({ floorColor }: { floorColor: string }) {
         style={{ height: "clamp(9.5rem, 18vw, 13rem)" }}
       >
         <svg
-          className="absolute inset-x-0 bottom-0 z-[1] h-full w-full"
+          className="absolute inset-x-0 bottom-0 z-1 h-full w-full"
           viewBox={vb}
           preserveAspectRatio="none"
         >
           <path fill={floorColor} d={blueScallop} />
         </svg>
         <svg
-          className="absolute inset-x-0 bottom-0 z-[2] h-[54%] w-full text-white sm:h-[52%]"
+          className="absolute inset-x-0 bottom-0 z-2 h-[54%] w-full text-white sm:h-[52%]"
           viewBox={vb}
           preserveAspectRatio="none"
         >
@@ -257,7 +257,7 @@ export function HeroSection() {
                 href={HERO.primaryHref}
                 className={cn(
                   "relative flex h-[3.35rem] w-full items-center justify-center gap-2.5 overflow-hidden rounded-full sm:max-w-none",
-                  "max-w-70 lg:min-w-[12.5rem] lg:max-w-70",
+                  "max-w-70 lg:min-w-50 lg:max-w-70",
                   "bg-linear-to-r from-[#38a7f0] via-[#1e8ef7] to-[#1570c7]",
                   "text-[0.9375rem] font-bold text-white shadow-[0_14px_40px_-8px_rgba(30,120,220,0.55),0_0_0_1px_rgba(255,255,255,0.12)_inset]",
                   "transition-[filter,box-shadow] duration-300",
