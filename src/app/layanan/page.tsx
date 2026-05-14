@@ -64,53 +64,58 @@ export default function LayananPage() {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-col sm:flex-row gap-5 w-full max-w-2xl mb-8">
+        <div className="flex flex-col sm:flex-row gap-6 w-full max-w-2xl mb-8">
           {SERVICES.map((svc) => {
             const isSelected = selected === svc.id;
             return (
               <button
                 key={svc.id}
                 onClick={() => setSelected(svc.id)}
+                style={{ borderRadius: "28px" }}
                 className={[
-                  "group relative flex-1 rounded-2xl bg-white text-left overflow-hidden",
-                  "transition-all duration-200 ease-out",
-                  "hover:-translate-y-1 hover:shadow-xl",
+                  "group relative flex-1 bg-white text-center",
+                  "transition-all duration-300 ease-out cursor-pointer",
+                  "hover:-translate-y-1.5",
                   isSelected
-                    ? "ring-2 ring-blue-500 shadow-xl -translate-y-1"
-                    : "shadow-md",
+                    ? "ring-2 ring-blue-400 shadow-[0_8px_40px_rgba(59,130,246,0.18)] -translate-y-1.5 bg-[#f5f9ff]"
+                    : "shadow-[0_4px_24px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.13)] hover:ring-1 hover:ring-blue-200",
                 ].join(" ")}
               >
                 {/* Image */}
-                <div className="relative w-full h-44 overflow-hidden">
-                  <Image
-                    src={svc.image}
-                    alt={svc.title}
-                    fill
-                    sizes="(max-width: 640px) 100vw, 50vw"
-                    className="object-cover transition-transform duration-300 group-hover:scale-105"
-                  />
+                <div className="p-5 pb-0">
+                  <div className="relative w-full h-44 rounded-[20px] overflow-hidden">
+                    <Image
+                      src={svc.image}
+                      alt={svc.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, 50vw"
+                      className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
+                    />
+                    {/* Check badge — bottom right of image */}
+                    {isSelected && (
+                      <span className="absolute bottom-3 right-3 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-300/50 animate-[pop_0.2s_ease-out]">
+                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Content */}
-                <div className="p-5">
-                  <h2 className="font-bold text-gray-900 text-base mb-2">{svc.title}</h2>
+                <div className="px-6 pt-5 pb-6">
+                  <h2 className="font-bold text-gray-900 text-xl mb-3 tracking-tight">{svc.title}</h2>
 
                   {/* Price badge */}
-                  <span className="inline-block bg-blue-100 text-blue-600 text-xs font-semibold px-3 py-1 rounded-full mb-3">
-                    Rp {svc.price.toLocaleString("id-ID")}/{svc.priceUnit}
-                  </span>
+                  <div className="flex items-baseline justify-center gap-0.5 mb-4">
+                    <span className="inline-flex items-baseline bg-blue-50 text-blue-600 text-sm font-semibold px-4 py-1.5 rounded-full border border-blue-100">
+                      Rp {svc.price.toLocaleString("id-ID")}
+                      <span className="font-normal text-blue-400 text-xs ml-0.5">/{svc.priceUnit}</span>
+                    </span>
+                  </div>
 
-                  <p className="text-gray-500 text-xs leading-relaxed">{svc.description}</p>
+                  <p className="text-gray-400 text-sm leading-relaxed">{svc.description}</p>
                 </div>
-
-                {/* Selected indicator */}
-                {isSelected && (
-                  <span className="absolute top-3 right-3 w-5 h-5 bg-blue-500 rounded-full flex items-center justify-center">
-                    <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
-                  </span>
-                )}
               </button>
             );
           })}
@@ -121,10 +126,10 @@ export default function LayananPage() {
           onClick={handleLanjutkan}
           disabled={!selected}
           className={[
-            "w-full max-w-2xl py-3.5 rounded-full font-semibold text-sm transition-all duration-200",
+            "w-full max-w-2xl py-4 rounded-full font-bold text-base text-white transition-all duration-300",
             selected
-              ? "bg-blue-600 text-white hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-200 active:scale-[0.98]"
-              : "bg-blue-300 text-white cursor-not-allowed",
+              ? "bg-gradient-to-r from-blue-400 to-blue-600 shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.45)] hover:scale-[1.02] active:scale-[0.98]"
+              : "bg-gradient-to-r from-blue-300 to-blue-400 opacity-60 cursor-not-allowed",
           ].join(" ")}
         >
           Lanjutkan
