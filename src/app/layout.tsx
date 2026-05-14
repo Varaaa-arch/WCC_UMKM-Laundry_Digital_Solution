@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Poppins } from "next/font/google";
 
 import { defaultSiteMetadata } from "@/config/site";
-import PageTransition from "@/components/common/PageTransition";
 
 import "./globals.css";
 
@@ -36,7 +35,7 @@ export default function RootLayout({
       className={`${poppins.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col font-sans">
-        <PageTransition>{children}</PageTransition>
+        {children}
       </body>
     </html>
   );
