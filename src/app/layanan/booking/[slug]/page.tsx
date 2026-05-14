@@ -85,7 +85,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Estimasi Berat */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-dashed border-gray-100">
-                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} style={{ height: "auto" }} />
+                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="w-5 h-auto" />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
 
@@ -125,7 +125,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Metode Pengambilan */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} style={{ height: "auto" }} />
+                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="w-5 h-auto" />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
 
