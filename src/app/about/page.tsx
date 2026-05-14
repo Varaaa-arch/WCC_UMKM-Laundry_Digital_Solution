@@ -100,7 +100,7 @@ export default function AboutPage() {
         </section>
 
         {/* Section 3 — Maps */}
-        <section className="max-w-5xl mx-auto px-6 py-16">
+        <section className="max-w-5xl mx-auto px-6 pt-16 pb-8">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Mampir ke Workshop Kami</h2>
             <p className="text-gray-400 text-sm mt-2">Kami menyambut Anda dengan senyum dan wangi yang segar</p>
@@ -168,64 +168,66 @@ export default function AboutPage() {
         </section>
 
         {/* Section 4 — Kontak */}
-        <section className="max-w-5xl mx-auto px-6 pb-20">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">
-            Butuh Bantuan? Sapa Kami!
-          </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
-            {/* WhatsApp */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
-              <div className="w-12 h-12 bg-green-50 rounded-2xl flex items-center justify-center">
-                <MessageCircleIcon className="w-5 h-5 text-green-500" />
+        <section className="bg-[#EEF4FB] py-16 px-6">
+          <div className="max-w-5xl mx-auto">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">
+              Butuh Bantuan? Sapa Kami!
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              {/* WhatsApp */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                  <MessageCircleIcon className="w-6 h-6 text-green-500" />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900 text-sm">WhatsApp</p>
+                  <p className="text-gray-400 text-xs mt-0.5">+62 812-3456-7890</p>
+                </div>
+                <a
+                  href="https://wa.me/6281234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-green-500 hover:text-green-600 transition-colors"
+                >
+                  Chat Sekarang
+                </a>
               </div>
-              <div>
-                <p className="font-bold text-gray-900 text-sm">WhatsApp</p>
-                <p className="text-gray-400 text-xs mt-0.5">+62 812-3456-7890</p>
-              </div>
-              <a
-                href="https://wa.me/6281234567890"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-semibold text-green-500 hover:text-green-600 transition-colors"
-              >
-                Chat Sekarang
-              </a>
-            </div>
 
-            {/* Email */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
-              <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center">
-                <MailIcon className="w-5 h-5 text-blue-500" />
+              {/* Email */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center">
+                  <MailIcon className="w-6 h-6 text-blue-500" />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900 text-sm">Email</p>
+                  <p className="text-gray-400 text-xs mt-0.5">halo@resiklaundry.com</p>
+                </div>
+                <a
+                  href="mailto:halo@resiklaundry.com"
+                  className="text-xs font-semibold text-blue-500 hover:text-blue-600 transition-colors"
+                >
+                  Kirim Email
+                </a>
               </div>
-              <div>
-                <p className="font-bold text-gray-900 text-sm">Email</p>
-                <p className="text-gray-400 text-xs mt-0.5">halo@resiklaundry.com</p>
-              </div>
-              <a
-                href="mailto:halo@resiklaundry.com"
-                className="text-xs font-semibold text-blue-500 hover:text-blue-600 transition-colors"
-              >
-                Kirim Email
-              </a>
-            </div>
 
-            {/* Instagram */}
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
-              <div className="w-12 h-12 bg-pink-50 rounded-2xl flex items-center justify-center">
-                <CameraIcon className="w-5 h-5 text-pink-500" />
+              {/* Instagram */}
+              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 flex flex-col items-center text-center gap-3">
+                <div className="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center">
+                  <CameraIcon className="w-6 h-6 text-purple-500" />
+                </div>
+                <div>
+                  <p className="font-bold text-gray-900 text-sm">Instagram</p>
+                  <p className="text-gray-400 text-xs mt-0.5">@resiklaundry</p>
+                </div>
+                <a
+                  href="https://instagram.com/resiklaundry"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold text-purple-500 hover:text-purple-600 transition-colors"
+                >
+                  Follow Kami
+                </a>
               </div>
-              <div>
-                <p className="font-bold text-gray-900 text-sm">Instagram</p>
-                <p className="text-gray-400 text-xs mt-0.5">@resiklaundry</p>
-              </div>
-              <a
-                href="https://instagram.com/resiklaundry"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-xs font-semibold text-pink-500 hover:text-pink-600 transition-colors"
-              >
-                Follow Kami
-              </a>
             </div>
           </div>
         </section>
