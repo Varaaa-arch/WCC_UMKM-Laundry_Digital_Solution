@@ -63,14 +63,20 @@ export default function BookingSuccessPage({
         {/* Buttons */}
         <div className="flex flex-col gap-2.5">
           <Link
-            href="/riwayat"
+            href="/dashboard"
             className="w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-sm py-3.5 rounded-xl transition-all duration-150 text-center block shadow-md shadow-blue-200"
+          >
+            Ke Dashboard
+          </Link>
+          <Link
+            href="/riwayat"
+            className="w-full bg-white hover:bg-gray-50 active:scale-[0.98] border-2 border-blue-100 text-blue-600 font-semibold text-sm py-3.5 rounded-xl transition-all duration-150 text-center block"
           >
             Lihat Riwayat Pesanan
           </Link>
           <Link
             href="/"
-            className="w-full bg-white hover:bg-gray-50 active:scale-[0.98] border-2 border-blue-100 text-blue-600 font-semibold text-sm py-3.5 rounded-xl transition-all duration-150 text-center block"
+            className="w-full text-gray-400 hover:text-gray-600 text-sm py-2 text-center block transition-colors"
           >
             Kembali ke Beranda
           </Link>
