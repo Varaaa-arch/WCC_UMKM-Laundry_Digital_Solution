@@ -1,0 +1,296 @@
+"use client";
+
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { use } from "react";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { useOrderStore, type ServiceType, SERVICE_PRICE, SERVICE_LABEL, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
+import { MinusIcon, PlusIcon, HomeIcon, StoreIcon, ChevronRightIcon, Loader2Icon } from "lucide-react";
+import { useState } from "react";
+import { confirmBooking } from "@/actions/booking-action";
+
+const SLUG_TO_SERVICE: Record<string, ServiceType> = {
+  "cuci-bersih": "cuci-kering-setrika",
+  "cuci-setrika": "setrika-ekspres",
+};
+
+const PICKUP_TIMES = [
+  "Sekarang (Kuri terdekat)",
+  "Hari ini 10:00 - 12:00",
+  "Hari ini 12:00 - 14:00",
+  "Hari ini 14:00 - 16:00",
+  "Hari ini 16:00 - 18:00",
+  "Besok 08:00 - 10:00",
+];
+
+export default function BookingSlugPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = use(params);
+  const router = useRouter();
+  const {
+    setService, setStep,
+    estimatedWeight, setWeight,
+    pickupMethod, setPickupMethod,
+    address, setAddress,
+    note, setNote,
+    pickupTime, setPickupTime,
+    selectedService,
+    totalPrice,
+  } = useOrderStore();
+
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const service = SLUG_TO_SERVICE[slug];
+    if (!service) { router.replace("/layanan"); return; }
+    setService(service);
+    setStep("dropoff");
+  }, [slug]);
+
+  const service = SLUG_TO_SERVICE[slug];
+  if (!service) return null;
+
+  const pricePerKg = SERVICE_PRICE[service];
+  const serviceLabel = SERVICE_LABEL[service];
+  const subtotal = pricePerKg * estimatedWeight;
+  const antarJemputFee = pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0;
+  const total = subtotal + antarJemputFee;
+
+  const handleConfirm = async () => {
+    if (!selectedService) return;
+    setLoading(true);
+    const result = await confirmBooking({
+      service: selectedService,
+      estimatedWeight,
+      totalPrice: total,
+      paymentMethod: "cod",
+    });
+    setLoading(false);
+    if (result.success) {
+      router.push(`/layanan/booking/success?orderId=${result.orderId}`);
+    } else {
+      alert(result.error);
+    }
+  };
+
+  return (
+    <>
+      <Navbar />
+      <main className="min-h-screen bg-[#EEF4FB] px-4 py-8">
+        <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
+
+          {/* LEFT — Form */}
+          <div className="lg:col-span-3 flex flex-col gap-5">
+
+            {/* Estimasi Berat */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-lg">⚖️</span>
+                <h2 className="font-bold text-gray-900 text-base">Estimasi Berat</h2>
+              </div>
+              <p className="text-gray-400 text-xs mb-5">
+                Masukkan estimasi berat pakaian Anda. Berat akan diverifikasi saat penjemputan.
+              </p>
+
+              <div className="flex items-center justify-between">
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-4">
+                    <button
+                      onClick={() => setWeight(Math.max(1, estimatedWeight - 1))}
+                      className="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-400 hover:text-blue-500 transition-colors"
+                    >
+                      <MinusIcon className="w-4 h-4" />
+                    </button>
+                    <div className="text-center">
+                      <span className="text-4xl font-bold text-gray-900">{estimatedWeight}</span>
+                      <p className="text-xs text-gray-400 font-medium tracking-widest uppercase mt-0.5">Kilogram</p>
+                    </div>
+                    <button
+                      onClick={() => setWeight(estimatedWeight + 1)}
+                      className="w-9 h-9 rounded-full border-2 border-gray-200 flex items-center justify-center hover:border-blue-400 hover:text-blue-500 transition-colors"
+                    >
+                      <PlusIcon className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Laundry icon illustration */}
+                <div className="w-24 h-24 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
+                  <span className="text-4xl">🫧</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Metode Pengambilan */}
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="text-lg">🚗</span>
+                <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3 mb-5">
+                {/* Ambil Sendiri */}
+                <button
+                  onClick={() => setPickupMethod("ambil-sendiri")}
+                  className={[
+                    "relative flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all duration-200",
+                    pickupMethod === "ambil-sendiri"
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-100 hover:border-gray-200",
+                  ].join(" ")}
+                >
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <StoreIcon className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Ambil Sendiri</p>
+                    <p className="text-gray-400 text-xs mt-0.5">Ke outlet kami. Gratis biaya layanan.</p>
+                  </div>
+                  <div className={[
+                    "absolute top-3 right-3 w-4 h-4 rounded-full border-2 flex items-center justify-center",
+                    pickupMethod === "ambil-sendiri" ? "border-blue-500" : "border-gray-300",
+                  ].join(" ")}>
+                    {pickupMethod === "ambil-sendiri" && <div className="w-2 h-2 rounded-full bg-blue-500" />}
+                  </div>
+                </button>
+
+                {/* Diantar ke Rumah */}
+                <button
+                  onClick={() => setPickupMethod("antar-jemput")}
+                  className={[
+                    "relative flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all duration-200",
+                    pickupMethod === "antar-jemput"
+                      ? "border-blue-500 bg-blue-50"
+                      : "border-gray-100 hover:border-gray-200",
+                  ].join(" ")}
+                >
+                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <HomeIcon className="w-4 h-4 text-blue-600" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-gray-900 text-sm">Diantar ke Rumah</p>
+                    <p className="text-gray-400 text-xs mt-0.5">Kurir kami jemput ke lokasi Anda. Tarif Rp 15.000.</p>
+                  </div>
+                  <div className={[
+                    "absolute top-3 right-3 w-4 h-4 rounded-full border-2 flex items-center justify-center",
+                    pickupMethod === "antar-jemput" ? "border-blue-500" : "border-gray-300",
+                  ].join(" ")}>
+                    {pickupMethod === "antar-jemput" && <div className="w-2 h-2 rounded-full bg-blue-500" />}
+                  </div>
+                </button>
+              </div>
+
+              {/* Alamat — only show when antar-jemput */}
+              {pickupMethod === "antar-jemput" && (
+                <div className="flex flex-col gap-3">
+                  <div>
+                    <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Alamat Lengkap</label>
+                    <input
+                      type="text"
+                      value={address}
+                      onChange={(e) => setAddress(e.target.value)}
+                      placeholder="Jl. Sudirman No. 123, Kebayoran Baru..."
+                      className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition"
+                    />
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Catatan (Opsional)</label>
+                      <input
+                        type="text"
+                        value={note}
+                        onChange={(e) => setNote(e.target.value)}
+                        placeholder="Pagar hitam, samping Indomaret"
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition"
+                      />
+                    </div>
+                    <div>
+                      <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Waktu Penjemputan</label>
+                      <select
+                        value={pickupTime}
+                        onChange={(e) => setPickupTime(e.target.value)}
+                        className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition bg-white"
+                      >
+                        {PICKUP_TIMES.map((t) => (
+                          <option key={t} value={t}>{t}</option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* RIGHT — Order Summary */}
+          <div className="lg:col-span-2">
+            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-4">
+              <h3 className="font-bold text-gray-900 text-base mb-4">Ringkasan Pesanan</h3>
+
+              <div className="flex flex-col gap-3 text-sm">
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">{serviceLabel}</span>
+                  <span className="font-semibold text-gray-900">Rp {pricePerKg.toLocaleString("id-ID")}</span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-gray-600">Estimasi Berat ({estimatedWeight} Kg)</span>
+                  <span className="font-semibold text-gray-900">× {estimatedWeight}</span>
+                </div>
+                {pickupMethod === "antar-jemput" && (
+                  <div className="flex justify-between items-center">
+                    <span className="text-gray-600">Layanan Antar-Jemput</span>
+                    <span className="font-semibold text-gray-900">Rp {ANTAR_JEMPUT_FEE.toLocaleString("id-ID")}</span>
+                  </div>
+                )}
+
+                <div className="border-t border-dashed border-gray-200 my-1" />
+
+                <div className="flex justify-between items-center">
+                  <span className="font-bold text-gray-900">Total Bayar</span>
+                  <span className="font-bold text-blue-600 text-lg">Rp {total.toLocaleString("id-ID")}</span>
+                </div>
+                <p className="text-gray-400 text-xs">*Total akhir akan disesuaikan sesuai timbangan fisik</p>
+              </div>
+
+              <button
+                onClick={handleConfirm}
+                disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
+                className="mt-5 w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+              >
+                {loading ? (
+                  <Loader2Icon className="w-4 h-4 animate-spin" />
+                ) : (
+                  <>Konfirmasi Pesanan <ChevronRightIcon className="w-4 h-4" /></>
+                )}
+              </button>
+
+              <button
+                onClick={() => router.push("/layanan")}
+                className="mt-2.5 w-full text-blue-500 font-semibold text-sm py-2.5 rounded-xl border border-blue-100 hover:bg-blue-50 transition-colors"
+              >
+                Kembali ke Pilih Layanan
+              </button>
+
+              {/* Trust badges */}
+              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                {[
+                  { icon: "🛡️", label: "Garansi Keamanan" },
+                  { icon: "⚡", label: "Cepat & Tepat" },
+                  { icon: "⭐", label: "Buat Amanr" },
+                ].map((b) => (
+                  <div key={b.label} className="flex flex-col items-center gap-1 p-2 bg-gray-50 rounded-xl">
+                    <span className="text-base">{b.icon}</span>
+                    <span className="text-gray-500 text-[10px] font-medium leading-tight">{b.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+      <Footer />
+    </>
+  );
+}

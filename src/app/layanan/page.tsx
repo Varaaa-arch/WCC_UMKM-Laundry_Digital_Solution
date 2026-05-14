@@ -46,7 +46,8 @@ export default function LayananPage() {
     if (!selected) return;
     setService(selected);
     setStep("dropoff");
-    router.push("/layanan/booking");
+    const slug = selected === "cuci-kering-setrika" ? "cuci-bersih" : "cuci-setrika";
+    router.push(`/layanan/booking/${slug}`);
   };
 
   return (
