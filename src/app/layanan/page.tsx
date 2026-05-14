@@ -124,7 +124,7 @@ export default function LayananPage() {
         {/* Lanjutkan Button */}
         <button
           onClick={handleLanjutkan}
-          disabled={!selected}
+          disabled={selected === null}
           className={[
             "w-full max-w-2xl py-4 rounded-full font-bold text-base text-white transition-all duration-300",
             selected
