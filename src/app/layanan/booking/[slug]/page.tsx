@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { use } from "react";
@@ -35,7 +36,6 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
     note, setNote,
     pickupTime, setPickupTime,
     selectedService,
-    totalPrice,
   } = useOrderStore();
 
   const [loading, setLoading] = useState(false);
@@ -45,7 +45,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
     if (!service) { router.replace("/layanan"); return; }
     setService(service);
     setStep("dropoff");
-  }, [slug]);
+  }, [slug, router, setService, setStep]);
 
   const service = SLUG_TO_SERVICE[slug];
   if (!service) return null;
@@ -85,7 +85,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Estimasi Berat */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2.5 mb-1">
-                <img src="/images/layanan-image/booking-image/estimasi-image.png" alt="" className="w-5 h-5 object-contain" />
+                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="object-contain" />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
               <p className="text-gray-400 text-xs mb-5">
@@ -116,7 +116,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
                 {/* Laundry illustration */}
                 <div className="w-36 h-36 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <img src="/images/layanan-image/booking-image/mesinCuci.png" alt="laundry" className="w-20 h-20 object-contain" />
+                  <Image src="/images/layanan-image/booking-image/mesin-cuci.png" alt="laundry" width={80} height={80} className="object-contain" />
                 </div>
               </div>
             </div>
@@ -124,7 +124,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Metode Pengambilan */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <img src="/images/layanan-image/booking-image/kurir-image.png" alt="" className="w-5 h-5 object-contain" />
+                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="object-contain" />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
 

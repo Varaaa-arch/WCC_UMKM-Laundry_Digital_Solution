@@ -28,18 +28,18 @@ export default function PageTransition({ children }: PropsWithChildren) {
   const reduced = useReducedMotion();
   const [transitioning, setTransitioning] = useState(false);
   const [displayChildren, setDisplayChildren] = useState(children);
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => { setMounted(true) }, [])
 
   useEffect(() => {
-    if (reduced) { setDisplayChildren(children); return; }
-    setTransitioning(true);
-    const t = setTimeout(() => {
+    if (reduced) {
+      const t = setTimeout(() => setDisplayChildren(children), 0);
+      return () => clearTimeout(t);
+    }
+    const t1 = setTimeout(() => setTransitioning(true), 0);
+    const t2 = setTimeout(() => {
       setDisplayChildren(children);
       setTransitioning(false);
-    }, 800)
-    return () => clearTimeout(t)
+    }, 800);
+    return () => { clearTimeout(t1); clearTimeout(t2); };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname])
 
@@ -75,7 +75,7 @@ export default function PageTransition({ children }: PropsWithChildren) {
 
   return (
     <>
-      {mounted && createPortal(curtain, document.body)}
+      {typeof document !== "undefined" && createPortal(curtain, document.body)}
       {displayChildren}
     </>
   );

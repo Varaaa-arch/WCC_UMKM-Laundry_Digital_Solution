@@ -16,7 +16,7 @@ export const defaultSiteMetadata = {
   metadataBase:
     typeof siteMeta.canonicalBase === "string" && siteMeta.canonicalBase.startsWith("http")
       ? new URL(siteMeta.canonicalBase)
-      : undefined,
+      : new URL("http://localhost:3000"),
   title: {
     default: SITE.name,
     template: `%s | ${SITE.name}`,
