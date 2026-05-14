@@ -4,7 +4,7 @@ import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Menu } from "lucide-react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { NAV } from "@/lib/constants"
 import { cn } from "@/lib/utils"
@@ -18,9 +18,65 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet"
 
+const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1]
+
+const headerVariants = {
+  initial: { opacity: 0, y: -10 },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.45, ease: easeOutExpo },
+  },
+}
+
+const navListVariants = {
+  hidden: {},
+  show: {
+    transition: {
+      staggerChildren: 0.06,
+      delayChildren: 0.08,
+    },
+  },
+}
+
+const navLinkItemVariants = {
+  hidden: { opacity: 0, y: -8 },
+  show: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring" as const, stiffness: 380, damping: 28 },
+  },
+}
+
+const ctaClusterVariants = {
+  hidden: { opacity: 0, x: 14 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.42, ease: easeOutExpo, delay: 0.12 },
+  },
+}
+
+const mobileNavListVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.05, delayChildren: 0.04 },
+  },
+}
+
+const mobileNavItemVariants = {
+  hidden: { opacity: 0, x: 12 },
+  show: {
+    opacity: 1,
+    x: 0,
+    transition: { type: "spring" as const, stiffness: 360, damping: 28 },
+  },
+}
+
 export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false)
   const pathname = usePathname()
+  const prefersReducedMotion = useReducedMotion()
 
   React.useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 4)
@@ -29,29 +85,56 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handler)
   }, [])
 
+  const instant = { duration: 0.01 }
+  const navSpring = { type: "spring" as const, stiffness: 400, damping: 28, mass: 0.42 }
+  const reduced = Boolean(prefersReducedMotion)
+
   return (
-    <header
+    <motion.header
       className={cn(
         "sticky top-0 z-50 w-full border-b border-transparent bg-white transition-shadow",
         scrolled && "shadow-sm"
       )}
+      variants={reduced ? undefined : headerVariants}
+      initial={reduced ? false : "initial"}
+      animate={reduced ? undefined : "animate"}
     >
       <nav
         className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:h-17 sm:px-6 lg:px-8"
         aria-label="Primary"
       >
-        <Link
-          href="/"
-          className="text-lg font-bold tracking-tight text-blue-600 sm:text-xl"
+        <motion.div
+          className="inline-block"
+          whileHover={reduced ? undefined : { scale: 1.02, y: -1 }}
+          whileTap={reduced ? undefined : { scale: 0.98 }}
+          transition={reduced ? instant : { type: "spring", stiffness: 400, damping: 22 }}
         >
-          {NAV.logo}
-        </Link>
+          <Link
+            href="/"
+            className="text-lg font-bold tracking-tight text-blue-600 sm:text-xl"
+          >
+            {NAV.logo}
+          </Link>
+        </motion.div>
 
-        <ul className="absolute left-1/2 hidden -translate-x-1/2 gap-10 md:flex lg:gap-12">
+        <motion.ul
+          className="absolute left-1/2 hidden -translate-x-1/2 gap-10 md:flex lg:gap-12"
+          variants={reduced ? undefined : navListVariants}
+          initial={reduced ? false : "hidden"}
+          animate={reduced ? undefined : "show"}
+        >
           {NAV.links.map((item) => {
             const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
             return (
-              <li key={item.label} className="relative flex flex-col items-center">
+              <motion.li
+                key={item.label}
+                className="relative"
+                variants={reduced ? undefined : navLinkItemVariants}
+                style={{ transformOrigin: "center bottom" }}
+                whileHover={reduced ? undefined : { y: -2 }}
+                whileTap={reduced ? undefined : { scale: 0.97 }}
+                transition={reduced ? instant : { type: "spring", stiffness: 450, damping: 26 }}
+              >
                 <Link
                   href={item.href}
                   className={cn(
@@ -64,16 +147,33 @@ export function Navbar() {
                 {isActive && (
                   <motion.span
                     layoutId="nav-indicator"
-                    className="absolute bottom-[22px] h-0.5 w-full rounded-full bg-blue-600"
-                    transition={{ type: "spring", stiffness: 500, damping: 35 }}
+                    layout="position"
+                    className="pointer-events-none absolute inset-x-0 top-full mt-1 h-0.5 rounded-full bg-blue-600"
+                    initial={reduced ? false : { opacity: 0, scaleX: 0.45 }}
+                    animate={{ opacity: 1, scaleX: 1 }}
+                    style={{ transformOrigin: "center center" }}
+                    transition={
+                      reduced
+                        ? instant
+                        : {
+                            layout: navSpring,
+                            opacity: { duration: 0.2, ease: easeOutExpo },
+                            scaleX: { type: "spring", stiffness: 520, damping: 24 },
+                          }
+                    }
                   />
                 )}
-              </li>
+              </motion.li>
             )
           })}
-        </ul>
+        </motion.ul>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <motion.div
+          className="hidden items-center gap-6 md:flex"
+          variants={reduced ? undefined : ctaClusterVariants}
+          initial={reduced ? false : "hidden"}
+          animate={reduced ? undefined : "show"}
+        >
           <Link
             href={NAV.loginHref}
             className="text-sm font-medium text-blue-600 transition-colors hover:text-blue-700"
@@ -87,7 +187,7 @@ export function Navbar() {
           >
             <Link href={NAV.ctaHref}>{NAV.cta}</Link>
           </Button>
-        </div>
+        </motion.div>
 
         <div className="flex items-center gap-2 md:hidden">
           <Button
@@ -114,11 +214,21 @@ export function Navbar() {
                 <SheetTitle className="sr-only">{NAV.mobileSheetTitle}</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col gap-6 px-2 pb-8 pt-2">
-                <ul className="flex flex-col gap-4">
+                <motion.ul
+                  className="flex flex-col gap-4"
+                  variants={reduced ? undefined : mobileNavListVariants}
+                  initial={reduced ? false : "hidden"}
+                  animate={reduced ? undefined : "show"}
+                >
                   {NAV.links.map((item) => {
                     const isActive = item.href === "/" ? pathname === "/" : pathname.startsWith(item.href)
                     return (
-                      <li key={`${item.label}-mobile`}>
+                      <motion.li
+                        key={`${item.label}-mobile`}
+                        variants={reduced ? undefined : mobileNavItemVariants}
+                        whileHover={reduced ? undefined : { x: -4 }}
+                        transition={{ type: "spring", stiffness: 400, damping: 28 }}
+                      >
                         <SheetClose asChild>
                           <Link
                             href={item.href}
@@ -130,10 +240,10 @@ export function Navbar() {
                             {item.label}
                           </Link>
                         </SheetClose>
-                      </li>
+                      </motion.li>
                     )
                   })}
-                </ul>
+                </motion.ul>
                 <SheetClose asChild>
                   <Link
                     href={NAV.loginHref}
@@ -155,6 +265,6 @@ export function Navbar() {
           </Sheet>
         </div>
       </nav>
-    </header>
+    </motion.header>
   )
 }
