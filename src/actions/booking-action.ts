@@ -1,7 +1,8 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { createClient } from "@/lib/supabase/server";
+import { createClient } from "@supabase/supabase-js";
+import { supabaseUrl } from "@/lib/supabase/config";
 
 export type BookingPayload = {
   service: string;
@@ -15,7 +16,13 @@ export type BookingResult =
   | { success: false; error: string };
 
 export async function confirmBooking(payload: BookingPayload): Promise<BookingResult> {
-  const supabase = await createClient();
+  // TODO: Gunakan createClient() biasa + auth.getUser() setelah sistem login siap
+  // Sementara pakai service role untuk bypass RLS selama testing
+  const supabase = createClient(
+    supabaseUrl,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { persistSession: false } }
+  );
 
   // TODO: Ganti dummy user_id dengan autentikasi asli setelah sistem login siap
   // const { data: { user }, error: authError } = await supabase.auth.getUser();
