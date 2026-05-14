@@ -2,6 +2,7 @@ import Link from "next/link"
 import { ArrowRight, Store, Truck } from "lucide-react"
 
 import { HOW_TO_ORDER } from "@/lib/constants"
+import { cn } from "@/lib/utils"
 import {
   Card,
   CardContent,
@@ -12,27 +13,39 @@ import {
 
 const CARD_ICONS = [Truck, Store] as const
 
-export function HowToOrderSection() {
+type HowToOrderSectionProps = {
+  /** When true, title/subtitle render in {@link HeroSection} instead; this section shows cards only. */
+  hideHeader?: boolean
+}
+
+export function HowToOrderSection({ hideHeader = false }: HowToOrderSectionProps) {
   return (
     <section
-      id="pilih-cara"
-      className="scroll-mt-24 border-t border-slate-50 bg-white py-16 sm:py-20 lg:py-24"
+      id={hideHeader ? undefined : "pilih-cara"}
+      className={cn(
+        "scroll-mt-24 bg-white",
+        hideHeader
+          ? "border-t-0 py-6 sm:py-8 lg:py-10"
+          : "border-t border-slate-50 py-16 sm:py-20 lg:py-24"
+      )}
       aria-labelledby="how-to-order-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2
-            id="how-to-order-heading"
-            className="text-3xl font-bold tracking-tight text-slate-900 sm:text-[2rem]"
-          >
-            {HOW_TO_ORDER.title}
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
-            {HOW_TO_ORDER.subtitle}
-          </p>
-        </div>
+        {!hideHeader ? (
+          <div className="mx-auto max-w-3xl text-center">
+            <h2
+              id="how-to-order-heading"
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-[2rem]"
+            >
+              {HOW_TO_ORDER.title}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+              {HOW_TO_ORDER.subtitle}
+            </p>
+          </div>
+        ) : null}
 
-        <div className="mt-12 grid gap-6 md:grid-cols-2 md:gap-8 lg:mt-14">
+        <div className={cn("grid gap-6 md:grid-cols-2 md:gap-8", hideHeader ? "mt-0" : "mt-12 lg:mt-14")}>
           {HOW_TO_ORDER.cards.map((card, index) => {
             const Icon = CARD_ICONS[index] ?? Truck
             return (

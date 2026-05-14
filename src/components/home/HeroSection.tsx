@@ -7,7 +7,7 @@ import { motion, useReducedMotion } from "framer-motion"
 import { Heart, Play, Sparkles } from "lucide-react"
 import anime from "animejs"
 
-import { HERO } from "@/lib/constants"
+import { HERO, HOW_TO_ORDER } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1]
@@ -53,110 +53,52 @@ function SoftBlob({ className }: { className?: string }) {
   )
 }
 
-function HeroCloudStack({
-  cloudWaveSrc,
-  floorColor,
-}: {
-  cloudWaveSrc: string
-  floorColor: string
-}) {
+/** Awan samar di bagian atas langit (studio / mockup). */
+function FaintSkyClouds() {
   return (
-    <div
-      className="pointer-events-none relative z-1 mt-18 w-full sm:mt-22 lg:mt-26"
-      aria-hidden
-    >
-      <div
-        className="relative h-[clamp(10rem,22vw,14rem)] w-full overflow-hidden sm:h-[clamp(11rem,24vw,15rem)]"
-        style={{ backgroundColor: floorColor }}
-      >
-        <svg
-          className="absolute -top-px left-0 w-full text-sky-200/90"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          style={{ height: "4.5rem" }}
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,80 C180,20 360,100 540,55 C720,10 900,90 1080,50 C1260,10 1380,70 1440,45 L1440,120 L0,120 Z"
-          />
-        </svg>
-        <svg
-          className="absolute left-0 top-6 w-full text-sky-300/85"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          style={{ height: "4.25rem" }}
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,95 C200,40 400,110 620,60 C840,10 1040,100 1240,55 C1340,35 1400,55 1440,40 L1440,120 L0,120 Z"
-          />
-        </svg>
-        <svg
-          className="absolute left-0 top-10 w-full text-[#7eb8ea]"
-          viewBox="0 0 1440 120"
-          preserveAspectRatio="none"
-          style={{ height: "4rem" }}
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,105 C240,55 480,115 720,70 C960,25 1200,95 1440,60 L1440,120 L0,120 Z"
-          />
-        </svg>
-        <div className="absolute inset-x-0 bottom-0 top-14 bg-linear-to-b from-transparent via-sky-300/20 to-sky-400/25" />
-        <Image
-          src={cloudWaveSrc}
-          alt=""
-          fill
-          className="object-cover object-top mix-blend-soft-light opacity-90"
-          sizes="100vw"
-        />
-      </div>
-      <div className="h-3 w-full bg-white sm:h-4" />
+    <div className="pointer-events-none absolute inset-x-0 top-0 h-[min(42%,20rem)] overflow-hidden" aria-hidden>
+      <div className="absolute -left-10 top-6 h-24 w-[min(55vw,22rem)] rounded-full bg-white/35 blur-2xl sm:top-10 sm:h-28" />
+      <div className="absolute left-[18%] top-2 h-16 w-[min(40vw,16rem)] rounded-full bg-white/25 blur-xl" />
+      <div className="absolute right-[5%] top-10 h-20 w-[min(48vw,18rem)] rounded-full bg-sky-100/40 blur-2xl sm:right-[8%]" />
+      <div className="absolute right-[22%] top-0 h-14 w-40 rounded-full bg-white/30 blur-xl" />
     </div>
   )
 }
 
-function FeatureCard({
-  iconSrc,
-  children,
-  rotateClass,
-}: {
-  iconSrc: string
-  children: React.ReactNode
-  rotateClass: string
-}) {
-  const reduce = useReducedMotion()
+/** Dua lapisan awan (biru + putih), scallop bulat ala kartun — tanpa gambar. */
+function HeroCloudStack({ floorColor }: { floorColor: string }) {
+  const vb = "0 0 1440 160"
+  const blueScallop =
+    "M0,160 L0,96 Q72,34 144,96 Q216,52 288,96 Q360,38 432,96 Q504,58 576,96 Q648,42 720,96 Q792,56 864,96 Q936,40 1008,96 Q1080,54 1152,96 Q1224,44 1296,96 Q1368,50 1440,92 L1440,160 L0,160 Z"
+  const whiteScallop =
+    "M0,160 L0,118 Q96,72 192,118 Q288,86 384,116 Q480,70 576,118 Q672,88 768,114 Q864,76 960,118 Q1056,90 1152,116 Q1248,74 1344,118 Q1392,96 1440,108 L1440,160 L0,160 Z"
 
   return (
-    <motion.div
-      variants={fadeUp}
-      className={cn(
-        "relative max-w-70 rounded-3xl border border-white/75 bg-white/70 p-3.5 shadow-[0_20px_50px_rgba(15,55,120,0.07)] backdrop-blur-md sm:p-4",
-        rotateClass
-      )}
-      whileHover={
-        reduce
-          ? undefined
-          : {
-              y: -4,
-              rotate: 0,
-              boxShadow: "0 28px 60px rgba(15, 55, 120, 0.12)",
-              transition: { type: "spring", stiffness: 320, damping: 22 },
-            }
-      }
+    <div
+      className="pointer-events-none relative z-1 mt-10 w-full sm:mt-14 lg:mt-18"
+      aria-hidden
     >
-      <div className="flex items-start gap-3 sm:gap-3.5">
-        <div className="relative size-12 shrink-0 sm:size-14">
-          <Image src={iconSrc} alt="" fill className="object-contain drop-shadow-sm" sizes="56px" />
-        </div>
-        <p className="text-[0.8125rem] leading-snug text-[#2a4a63] sm:text-sm sm:leading-relaxed">
-          {children}
-        </p>
+      <div
+        className="relative w-full overflow-hidden"
+        style={{ height: "clamp(9.5rem, 18vw, 13rem)" }}
+      >
+        <svg
+          className="absolute inset-x-0 bottom-0 z-[1] h-full w-full"
+          viewBox={vb}
+          preserveAspectRatio="none"
+        >
+          <path fill={floorColor} d={blueScallop} />
+        </svg>
+        <svg
+          className="absolute inset-x-0 bottom-0 z-[2] h-[54%] w-full text-white sm:h-[52%]"
+          viewBox={vb}
+          preserveAspectRatio="none"
+        >
+          <path fill="currentColor" d={whiteScallop} />
+        </svg>
       </div>
-    </motion.div>
+      <div className="h-3 w-full bg-white sm:h-4" />
+    </div>
   )
 }
 
@@ -218,7 +160,6 @@ function FloatingParticles({ rootRef }: { rootRef: React.RefObject<HTMLElement |
 }
 
 export function HeroSection() {
-  const assets = HERO.assets
   const reduce = useReducedMotion()
   const mascotZoneRef = React.useRef<HTMLDivElement>(null)
 
@@ -235,13 +176,17 @@ export function HeroSection() {
 
   return (
     <section
-      className="relative isolate min-h-dvh overflow-hidden bg-[#eef6ff]"
+      className={cn(
+        "relative isolate min-h-[90dvh] overflow-hidden lg:min-h-dvh",
+        "bg-linear-to-b from-[#f5fbff] via-[#e8f3fc] to-[#dceefe]"
+      )}
       aria-labelledby="hero-heading"
     >
+      <FaintSkyClouds />
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.45]"
+        className="pointer-events-none absolute inset-0 opacity-[0.38]"
         style={{
-          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 197 255 / 0.22) 1px, transparent 0)`,
+          backgroundImage: `radial-gradient(circle at 1px 1px, rgb(148 197 255 / 0.2) 1px, transparent 0)`,
           backgroundSize: "44px 44px",
         }}
         aria-hidden
@@ -286,87 +231,91 @@ export function HeroSection() {
           </motion.h1>
         </motion.div>
 
-        <motion.div className="relative mt-5 flex flex-1 flex-col lg:mt-6">
+        <motion.div
+          className="relative mt-5 flex flex-1 flex-col lg:mt-6"
+          variants={containerVariants}
+          initial="hidden"
+          animate="show"
+        >
           <motion.div
-            className="grid flex-1 grid-cols-1 items-end gap-y-5 pb-2 pt-2 lg:grid-cols-[minmax(0,1fr)_minmax(260px,420px)_minmax(0,1fr)] lg:gap-x-3 lg:gap-y-0 lg:pb-3 xl:gap-x-5"
-            variants={containerVariants}
-            initial="hidden"
-            animate="show"
+            variants={staggerIn}
+            className="grid grid-cols-1 gap-5 pb-1 pt-2 sm:gap-6 lg:grid-cols-3 lg:items-start lg:gap-6 lg:pb-2"
           >
-            <motion.div
-              variants={staggerIn}
-              className="order-2 flex flex-col items-center gap-3.5 lg:order-1 lg:items-end lg:justify-end lg:gap-3 lg:pb-6 xl:pb-10"
+            <motion.p
+              variants={fadeUp}
+              className="max-w-xl text-left text-sm leading-relaxed text-[#2a4a63] sm:text-[0.9375rem] lg:col-start-1 lg:row-start-1 lg:max-w-md lg:pt-1"
             >
-              <FeatureCard iconSrc={assets.iconClock} rotateClass="-rotate-[2.5deg] lg:mr-1">
-                {HERO.features.leftTop}
-              </FeatureCard>
-              <FeatureCard iconSrc={assets.iconShirt} rotateClass="rotate-[2deg] lg:mr-0">
-                {HERO.features.leftBottom}
-              </FeatureCard>
-            </motion.div>
-
+              {HERO.features.leftBottom}
+            </motion.p>
             <motion.div
               variants={fadeUp}
-              className="relative z-20 order-1 flex justify-center lg:order-2 lg:pb-0"
+              className="lg:col-start-3 lg:row-start-1 lg:flex lg:justify-end"
+              whileHover={reduce ? undefined : { scale: 1.02 }}
+              transition={{ type: "spring", stiffness: 400, damping: 24 }}
             >
-              <div
-                ref={mascotZoneRef}
-                className="relative w-[min(92vw,22rem)] sm:w-[min(88vw,26rem)] lg:w-[min(100%,24.5rem)] xl:w-110"
+              <Link
+                href={HERO.primaryHref}
+                className={cn(
+                  "relative flex h-[3.35rem] w-full items-center justify-center gap-2.5 overflow-hidden rounded-full sm:max-w-none",
+                  "max-w-70 lg:min-w-[12.5rem] lg:max-w-70",
+                  "bg-linear-to-r from-[#38a7f0] via-[#1e8ef7] to-[#1570c7]",
+                  "text-[0.9375rem] font-bold text-white shadow-[0_14px_40px_-8px_rgba(30,120,220,0.55),0_0_0_1px_rgba(255,255,255,0.12)_inset]",
+                  "transition-[filter,box-shadow] duration-300",
+                  "hover:shadow-[0_18px_48px_-6px_rgba(30,120,220,0.65),0_0_32px_rgba(56,167,240,0.35)]",
+                  "hover:brightness-[1.03] active:scale-[0.99]"
+                )}
               >
-                <FloatingParticles rootRef={mascotZoneRef} />
-                <motion.div
-                  className="relative mx-auto aspect-square w-[88%] sm:w-[90%]"
-                  animate={mascotFloat}
-                >
-                  <Image
-                    src="/images/laundry-mascot.png"
-                    alt={HERO.imageAlt}
-                    fill
-                    priority
-                    className="object-contain drop-shadow-[0_28px_60px_rgba(25,100,180,0.22)]"
-                    sizes="(max-width: 1024px) 92vw, 440px"
-                  />
-                </motion.div>
-              </div>
+                <span
+                  className="pointer-events-none absolute inset-0 bg-linear-to-t from-white/10 to-transparent opacity-60"
+                  aria-hidden
+                />
+                <Play className="relative size-4 shrink-0 fill-current" aria-hidden />
+                <span className="relative">{HERO.primaryBtn}</span>
+              </Link>
             </motion.div>
+          </motion.div>
 
-            <motion.div
-              variants={staggerIn}
-              className="order-3 flex flex-col items-center gap-3.5 lg:items-start lg:justify-end lg:gap-3 lg:pb-6 lg:pl-1 xl:pb-10"
-            >
-              <FeatureCard iconSrc={assets.iconThumbs} rotateClass="-rotate-[1.5deg] lg:ml-0">
-                {HERO.features.rightTop}
-              </FeatureCard>
+          <motion.div
+            variants={fadeUp}
+            className="relative z-20 mx-auto flex w-full max-w-[min(92vw,26rem)] justify-center sm:max-w-[min(88vw,28rem)] lg:max-w-none lg:w-[min(100%,24.5rem)] xl:w-110"
+          >
+            <div ref={mascotZoneRef} className="relative w-full">
+              <FloatingParticles rootRef={mascotZoneRef} />
               <motion.div
-                variants={fadeUp}
-                className="w-full max-w-70 lg:ml-0.5"
-                whileHover={reduce ? undefined : { scale: 1.02 }}
-                transition={{ type: "spring", stiffness: 400, damping: 24 }}
+                className="relative mx-auto aspect-square w-[88%] sm:w-[90%]"
+                animate={mascotFloat}
               >
-                <Link
-                  href={HERO.primaryHref}
-                  className={cn(
-                    "relative flex h-[3.35rem] w-full items-center justify-center gap-2.5 overflow-hidden rounded-full",
-                    "bg-linear-to-r from-[#38a7f0] via-[#1e8ef7] to-[#1570c7]",
-                    "text-[0.9375rem] font-bold text-white shadow-[0_14px_40px_-8px_rgba(30,120,220,0.55),0_0_0_1px_rgba(255,255,255,0.12)_inset]",
-                    "transition-[filter,box-shadow] duration-300",
-                    "hover:shadow-[0_18px_48px_-6px_rgba(30,120,220,0.65),0_0_32px_rgba(56,167,240,0.35)]",
-                    "hover:brightness-[1.03] active:scale-[0.99]"
-                  )}
-                >
-                  <span
-                    className="pointer-events-none absolute inset-0 bg-linear-to-t from-white/10 to-transparent opacity-60"
-                    aria-hidden
-                  />
-                  <Play className="relative size-4 shrink-0 fill-current" aria-hidden />
-                  <span className="relative">{HERO.primaryBtn}</span>
-                </Link>
+                <Image
+                  src="/images/laundry-mascot.png"
+                  alt={HERO.imageAlt}
+                  fill
+                  priority
+                  className="object-contain object-bottom drop-shadow-[0_28px_60px_rgba(25,100,180,0.22)]"
+                  sizes="(max-width: 1024px) 92vw, 440px"
+                />
               </motion.div>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
 
-        <HeroCloudStack cloudWaveSrc={assets.cloudWave} floorColor={HERO.cloudFloorColor} />
+        <HeroCloudStack floorColor={HERO.cloudFloorColor} />
+
+        <div
+          id="pilih-cara"
+          className="scroll-mt-24 bg-white px-4 pb-6 pt-10 sm:px-6 sm:pb-8 sm:pt-12 lg:px-8 lg:pb-10 lg:pt-14"
+        >
+          <div className="mx-auto max-w-3xl text-center">
+            <h2
+              id="how-to-order-heading"
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-[2rem]"
+            >
+              {HOW_TO_ORDER.title}
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-slate-600 sm:text-lg">
+              {HOW_TO_ORDER.subtitle}
+            </p>
+          </div>
+        </div>
       </div>
     </section>
   )

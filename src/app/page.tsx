@@ -13,7 +13,7 @@ export default function HomePage() {
 
       <main className="flex-1 bg-white">
         <HeroSection />
-        <HowToOrderSection />
+        <HowToOrderSection hideHeader />
         <AdvantagesSection />
         <HowItWorksSection />
         <TestimonialsSection />
