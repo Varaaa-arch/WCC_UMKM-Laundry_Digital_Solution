@@ -116,7 +116,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
                 {/* Laundry illustration */}
                 <div className="w-36 h-36 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <img src="/images/layanan-image/booking-image/mesin-cuci.png" alt="laundry" className="w-20 h-20 object-contain" />
+                  <img src="/images/layanan-image/booking-image/mesinCuci.png" alt="laundry" className="w-20 h-20 object-contain" />
                 </div>
               </div>
             </div>
@@ -256,7 +256,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
               <button
                 onClick={handleConfirm}
                 disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
-                className="mt-5 w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {loading ? (
                   <Loader2Icon className="w-4 h-4 animate-spin" />

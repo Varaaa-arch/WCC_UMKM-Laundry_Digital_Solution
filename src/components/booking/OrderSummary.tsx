@@ -60,7 +60,7 @@ export default function OrderSummary() {
         <button
           onClick={handleConfirm}
           disabled={loading}
-          className="w-full bg-gradient-to-r from-blue-400 to-blue-600 disabled:opacity-60 active:scale-[0.98] text-white font-semibold text-sm py-3 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 shadow-md shadow-blue-200"
+          className="w-full bg-linear-to-r from-blue-400 to-blue-600 disabled:opacity-60 active:scale-[0.98] text-white font-semibold text-sm py-3 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 shadow-md shadow-blue-200"
         >
           {loading ? <Loader2Icon className="w-4 h-4 animate-spin" /> : <><span>Konfirmasi Pesanan</span><ChevronRightIcon className="w-4 h-4" /></>}
         </button>
