@@ -90,6 +90,8 @@ export default function LayananPage() {
                       alt={svc.title}
                       fill
                       sizes="(max-width: 640px) 100vw, 50vw"
+                      loading="eager"
+                      priority={svc.id === "cuci-kering-setrika"}
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.04]"
                     />
                     {/* Check badge — bottom right of image */}
