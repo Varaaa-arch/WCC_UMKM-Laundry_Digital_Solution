@@ -82,6 +82,21 @@ export default function LayananPage() {
                     : "shadow-[0_4px_24px_rgba(0,0,0,0.07)] hover:shadow-[0_8px_32px_rgba(59,130,246,0.13)] hover:ring-1 hover:ring-blue-200",
                 ].join(" ")}
               >
+                {/* Check badge — top right of card */}
+                <span
+                  className={[
+                    "absolute -top-3 -right-3 z-10 w-10 h-10 rounded-full flex items-center justify-center",
+                    "transition-all duration-300 ease-out",
+                    isSelected
+                      ? "bg-blue-500 shadow-lg shadow-blue-300/60 scale-100 opacity-100"
+                      : "scale-75 opacity-0 pointer-events-none",
+                  ].join(" ")}
+                >
+                  <svg className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                  </svg>
+                </span>
+
                 {/* Image */}
                 <div className="px-6 pt-6 pb-2">
                   <div className="relative w-full h-48">
@@ -94,14 +109,6 @@ export default function LayananPage() {
                       priority={svc.id === "cuci-kering-setrika"}
                       className="object-contain transition-transform duration-500 group-hover:scale-[1.04]"
                     />
-                    {/* Check badge — bottom right of image */}
-                    {isSelected && (
-                      <span className="absolute bottom-0 right-0 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center shadow-lg shadow-blue-300/50 animate-[pop_0.2s_ease-out]">
-                        <svg className="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </span>
-                    )}
                   </div>
                 </div>
 
