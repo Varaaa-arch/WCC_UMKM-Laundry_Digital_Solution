@@ -10,6 +10,7 @@ import { useOrderStore, type ServiceType, SERVICE_PRICE, SERVICE_LABEL, ANTAR_JE
 import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, Loader2Icon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
 import { useState } from "react";
 import { confirmBooking } from "@/actions/booking-action";
+import { BubbleButton } from "@/components/ui/bubble-button";
 
 const SLUG_TO_SERVICE: Record<string, ServiceType> = {
   "cuci-bersih": "cuci-kering-setrika",
@@ -254,7 +255,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 <p className="text-gray-400 text-xs">*Total akhir akan disesuaikan sesuai timbangan fisik</p>
               </div>
 
-              <button
+              <BubbleButton
                 onClick={handleConfirm}
                 disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
                 className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
@@ -264,14 +265,14 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 ) : (
                   <>Konfirmasi Pesanan <ChevronRightIcon className="w-4 h-4" /></>
                 )}
-              </button>
+              </BubbleButton>
 
-              <button
+              <BubbleButton
                 onClick={() => router.push("/layanan")}
                 className="mt-2.5 w-full text-blue-500 font-semibold text-sm py-2.5 rounded-xl border border-blue-100 hover:bg-blue-50 transition-colors"
               >
                 Kembali ke Pilih Layanan
-              </button>
+              </BubbleButton>
 
               {/* Trust badges */}
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">

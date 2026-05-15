@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 
-import { Button } from "@/components/ui/button"
+import { BubbleButton } from "@/components/ui/bubble-button"
 
 export default function ErrorBoundary({
   error,
@@ -21,9 +21,9 @@ export default function ErrorBoundary({
         <h1 className="text-xl font-semibold">[ERROR_TITLE]</h1>
         <p className="text-sm leading-relaxed text-slate-600">[ERROR_DESCRIPTION]</p>
       </div>
-      <Button type="button" onClick={() => reset()}>
+      <BubbleButton type="button" onClick={() => reset()} className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl transition-colors">
         [ERROR_TRY_AGAIN]
-      </Button>
+      </BubbleButton>
     </main>
   )
 }

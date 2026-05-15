@@ -9,6 +9,7 @@ import anime from "animejs"
 
 import { HERO, HOW_TO_ORDER } from "@/lib/constants"
 import { cn } from "@/lib/utils"
+import { BubbleLink } from "@/components/ui/bubble-button"
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -253,7 +254,7 @@ export function HeroSection() {
               whileHover={reduce ? undefined : { scale: 1.02 }}
               transition={{ type: "spring", stiffness: 400, damping: 24 }}
             >
-              <Link
+              <BubbleLink
                 href={HERO.primaryHref}
                 className={cn(
                   "relative flex h-[3.35rem] w-full items-center justify-center gap-2.5 overflow-hidden rounded-full sm:max-w-none",
@@ -271,7 +272,7 @@ export function HeroSection() {
                 />
                 <Play className="relative size-4 shrink-0 fill-current" aria-hidden />
                 <span className="relative">{HERO.primaryBtn}</span>
-              </Link>
+              </BubbleLink>
             </motion.div>
           </motion.div>
 

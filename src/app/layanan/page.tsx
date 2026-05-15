@@ -8,6 +8,7 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useRouter } from "next/navigation";
 import { useOrderStore, type ServiceType } from "@/store/useOrderStore";
+import { BubbleButton } from "@/components/ui/bubble-button";
 
 type ServiceCard = {
   id: ServiceType;
@@ -132,7 +133,7 @@ export default function LayananPage() {
         </div>
 
         {/* Lanjutkan Button */}
-        <button
+        <BubbleButton
           onClick={handleLanjutkan}
           disabled={selected === null}
           className={[
@@ -143,7 +144,7 @@ export default function LayananPage() {
           ].join(" ")}
         >
           Lanjutkan
-        </button>
+        </BubbleButton>
 
         {/* Back link */}
         <Link

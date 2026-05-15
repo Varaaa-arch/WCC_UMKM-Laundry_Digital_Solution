@@ -5,6 +5,7 @@ import { useOrderStore, SERVICE_LABEL, SERVICE_PRICE, ANTAR_JEMPUT_FEE } from "@
 import { confirmBooking } from "@/actions/booking-action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { BubbleButton } from "@/components/ui/bubble-button";
 
 export default function OrderSummary() {
   const { selectedService, estimatedWeight, pickupMethod, paymentMethod, setStep } = useOrderStore();
@@ -57,19 +58,19 @@ export default function OrderSummary() {
       </div>
 
       <div className="flex flex-col gap-2.5 mt-5">
-        <button
+        <BubbleButton
           onClick={handleConfirm}
           disabled={loading}
           className="w-full bg-linear-to-r from-blue-400 to-blue-600 disabled:opacity-60 active:scale-[0.98] text-white font-semibold text-sm py-3 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 shadow-md shadow-blue-200"
         >
           {loading ? <Loader2Icon className="w-4 h-4 animate-spin" /> : <><span>Konfirmasi Pesanan</span><ChevronRightIcon className="w-4 h-4" /></>}
-        </button>
-        <button
+        </BubbleButton>
+        <BubbleButton
           onClick={() => { setStep("layanan"); router.push("/layanan"); }}
           className="w-full hover:bg-gray-50 active:scale-[0.98] text-blue-600 font-semibold text-sm py-3 rounded-xl border border-blue-100 transition-all duration-150"
         >
           Kembali ke Pilih Layanan
-        </button>
+        </BubbleButton>
       </div>
 
       <div className="mt-4 flex items-start gap-2 p-3 bg-gray-50 rounded-xl">

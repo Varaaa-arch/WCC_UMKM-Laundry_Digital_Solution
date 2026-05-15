@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useOrderStore, type ServiceType } from "@/store/useOrderStore";
+import { BubbleButton } from "@/components/ui/bubble-button";
 
 interface PesanButtonProps {
   service: ServiceType;
@@ -24,8 +25,8 @@ export default function PesanButton({ service, variant = "default" }: PesanButto
       : "w-full bg-blue-600 hover:bg-blue-700 active:scale-[0.98] text-white font-semibold text-sm py-3 rounded-xl transition-all duration-150";
 
   return (
-    <button onClick={handleClick} className={cls}>
+    <BubbleButton onClick={handleClick} className={cls}>
       Pesan Sekarang
-    </button>
+    </BubbleButton>
   );
 }

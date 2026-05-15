@@ -8,6 +8,7 @@ import {
 } from "lucide-react"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { BubbleButton } from "@/components/ui/bubble-button"
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", active: true },
@@ -64,10 +65,10 @@ export default function DashboardPage() {
 
         {/* User */}
         <div className="px-3 py-4 border-t border-gray-100 space-y-1">
-          <button className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <BubbleButton className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
             <LogOut className="w-4 h-4 shrink-0" />
             Keluar
-          </button>
+          </BubbleButton>
         </div>
       </aside>
 
@@ -81,10 +82,10 @@ export default function DashboardPage() {
             <p className="text-xs text-gray-400">Selasa, 12 Mei 2026</p>
           </div>
           <div className="flex items-center gap-3">
-            <button className="relative p-2 rounded-xl hover:bg-gray-50 transition-colors">
+            <BubbleButton className="relative p-2 rounded-xl hover:bg-gray-50 transition-colors">
               <Bell className="w-5 h-5 text-gray-500" />
               <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-blue-500 rounded-full" />
-            </button>
+            </BubbleButton>
             <Avatar className="w-8 h-8">
               <AvatarFallback className="bg-blue-100 text-blue-600 text-xs font-semibold">JD</AvatarFallback>
             </Avatar>
