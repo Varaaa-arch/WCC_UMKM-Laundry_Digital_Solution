@@ -1,12 +1,12 @@
 import { CheckCircleIcon, MapPinIcon, ClockIcon } from "lucide-react";
 import Link from "next/link";
 
-export default function BookingSuccessPage({
+export default async function BookingSuccessPage({
   searchParams,
 }: {
-  searchParams: { orderId?: string };
+  searchParams: Promise<{ orderId?: string }>;
 }) {
-  const orderId = searchParams.orderId ?? "-";
+  const { orderId = "-" } = await searchParams;
 
   return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-16">
