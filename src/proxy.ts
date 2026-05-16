@@ -1,9 +1,30 @@
+import { updateSession } from "@/lib/supabase/middleware"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
+import { createServerClient } from "@supabase/ssr"
+import { supabaseUrl, supabaseAnonKey } from "@/lib/supabase/config"
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export function proxy(_request: NextRequest) {
-  return NextResponse.next()
+const PROTECTED = ["/dashboard", "/layanan/booking", "/history", "/settings"]
+
+export async function proxy(request: NextRequest) {
+  const response = await updateSession(request)
+
+  const { pathname } = request.nextUrl
+  const isProtected = PROTECTED.some((p) => pathname.startsWith(p))
+  if (!isProtected) return response
+
+  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+    cookies: {
+      getAll: () => request.cookies.getAll(),
+      setAll: () => {},
+    },
+  })
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) {
+    return NextResponse.redirect(new URL("/login", request.url))
+  }
+
+  return response
 }
 
 export const config = {

@@ -3,6 +3,8 @@
 import { redirect } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 
+export type OAuthProvider = "google" | "discord"
+
 export async function signIn(formData: FormData) {
   const supabase = await createClient()
   const { error } = await supabase.auth.signInWithPassword({
