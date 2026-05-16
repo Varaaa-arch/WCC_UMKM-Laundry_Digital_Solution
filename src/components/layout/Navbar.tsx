@@ -3,12 +3,13 @@
 import * as React from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Menu } from "lucide-react"
+import { Menu, LogOut, LayoutDashboard } from "lucide-react"
 import { motion, useReducedMotion } from "framer-motion"
 
 import { NAV } from "@/lib/constants"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import {
   Sheet,
   SheetClose,
@@ -17,6 +18,8 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { useAuthStore } from "@/store/useAuthStore"
+import { signOut } from "@/actions/auth-action"
 
 const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
@@ -77,6 +80,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = React.useState(false)
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
+  const { user, loading, init } = useAuthStore()
 
   React.useEffect(() => {
     const handler = () => setScrolled(window.scrollY > 4)
@@ -84,6 +88,11 @@ export function Navbar() {
     window.addEventListener("scroll", handler, { passive: true })
     return () => window.removeEventListener("scroll", handler)
   }, [])
+
+  React.useEffect(() => {
+    const unsub = init()
+    return unsub
+  }, [init])
 
   const instant = { duration: 0.01 }
   const navSpring = { type: "spring" as const, stiffness: 400, damping: 28, mass: 0.42 }
@@ -173,19 +182,43 @@ export function Navbar() {
           initial={reduced ? false : "hidden"}
           animate={reduced ? undefined : "show"}
         >
-          <Link
-            href={NAV.loginHref}
-            className="text-sm font-medium text-blue-600 transition-colors hover:text-blue-700"
-          >
-            {NAV.loginLabel}
-          </Link>
-          <Button
-            asChild
-            size="sm"
-            className="rounded-md bg-blue-500 px-6 py-2 h-10 text-white shadow-none hover:bg-blue-600 focus-visible:ring-blue-600/40"
-          >
-            <Link href={NAV.ctaHref}>{NAV.cta}</Link>
-          </Button>
+          {loading ? (
+            <div className="w-20 h-8 bg-gray-100 rounded-lg animate-pulse" />
+          ) : user ? (
+            <div className="flex items-center gap-3">
+              <Link href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
+                <Avatar className="w-7 h-7">
+                  <AvatarFallback className="bg-blue-100 text-blue-600 text-xs font-semibold">
+                    {(user.user_metadata?.full_name as string)?.[0]?.toUpperCase() ?? user.email?.[0]?.toUpperCase() ?? "U"}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="hidden lg:block">{(user.user_metadata?.full_name as string) ?? user.email}</span>
+              </Link>
+              <button
+                onClick={() => signOut()}
+                className="flex items-center gap-1.5 text-sm font-medium text-slate-500 hover:text-red-500 transition-colors"
+              >
+                <LogOut className="w-4 h-4" />
+                <span className="hidden lg:block">Keluar</span>
+              </button>
+            </div>
+          ) : (
+            <>
+              <Link
+                href={NAV.loginHref}
+                className="text-sm font-medium text-blue-600 transition-colors hover:text-blue-700"
+              >
+                {NAV.loginLabel}
+              </Link>
+              <Button
+                asChild
+                size="sm"
+                className="rounded-md bg-blue-500 px-6 py-2 h-10 text-white shadow-none hover:bg-blue-600 focus-visible:ring-blue-600/40"
+              >
+                <Link href={NAV.ctaHref}>{NAV.cta}</Link>
+              </Button>
+            </>
+          )}
         </motion.div>
 
         <div className="flex items-center gap-2 md:hidden">
@@ -244,13 +277,28 @@ export function Navbar() {
                   })}
                 </motion.ul>
                 <SheetClose asChild>
-                  <Link
-                    href={NAV.loginHref}
-                    className="py-2 text-base font-semibold text-blue-600"
-                  >
-                    {NAV.loginLabel}
-                  </Link>
+                  {user ? (
+                    <div className="flex flex-col gap-3">
+                      <Link href="/dashboard" className="flex items-center gap-2 py-2 text-base font-semibold text-blue-600">
+                        <LayoutDashboard className="w-4 h-4" /> Dashboard
+                      </Link>
+                      <button
+                        onClick={() => signOut()}
+                        className="flex items-center gap-2 py-2 text-base font-semibold text-red-500"
+                      >
+                        <LogOut className="w-4 h-4" /> Keluar
+                      </button>
+                    </div>
+                  ) : (
+                    <Link
+                      href={NAV.loginHref}
+                      className="py-2 text-base font-semibold text-blue-600"
+                    >
+                      {NAV.loginLabel}
+                    </Link>
+                  )}
                 </SheetClose>
+                {!user && (
                 <SheetClose asChild>
                   <Button
                     asChild
@@ -259,6 +307,7 @@ export function Navbar() {
                     <Link href={NAV.ctaHref}>{NAV.cta}</Link>
                   </Button>
                 </SheetClose>
+                )}
               </div>
             </SheetContent>
           </Sheet>
