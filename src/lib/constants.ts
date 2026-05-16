@@ -11,7 +11,6 @@
       { label: "Beranda", href: "/" },
       { label: "Layanan", href: "/layanan" },
       { label: "Tentang Kami", href: "/about" },
-      { label: "Riwayat", href: "/history" },
       { label: "Kontak", href: "/contact" },
     ] as const,
     loginLabel: "Masuk",

@@ -1,14 +1,11 @@
 "use client";
-
 import { useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import * as THREE from "three";
 
 // ─── shared Three.js scene logic ────────────────────────────────────────────
-
 function createScene(canvas: HTMLCanvasElement) {
   const W = 400, H = 300;
-
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(W, H);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
@@ -19,35 +16,41 @@ function createScene(canvas: HTMLCanvasElement) {
   camera.position.z = 200;
 
   // Lights
-  scene.add(new THREE.AmbientLight(0xffffff, 0.2));
-  const hemi = new THREE.HemisphereLight(0xd8f0ff, 0x61dafb, 1.2);
+  scene.add(new THREE.AmbientLight(0xffffff, 1.2));
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x0044ff, 2.0);
   scene.add(hemi);
-  const spot = new THREE.SpotLight(0x61dafb, 1.5, 0);
-  spot.position.set(150, 150, 100);
-  scene.add(spot);
-  const spot2 = new THREE.SpotLight(0xffffff, 0.8, 0);
-  spot2.position.set(-100, -80, 120);
-  scene.add(spot2);
 
-  // Water bubble material — glass-like
+  const spotMain = new THREE.SpotLight(0xffffff, 20.0, 0);
+  spotMain.position.set(-50, 100, 100);
+  scene.add(spotMain);
+
+  const spotFill = new THREE.SpotLight(0x88ccff, 15.0, 0);
+  spotFill.position.set(100, -100, 100);
+  scene.add(spotFill);
+
+  // Water bubble material
   const mat = new THREE.MeshPhysicalMaterial({
-    color: 0xaaddff,
+    color: 0x33b5e5,
+    emissive: 0x0055aa,
+    emissiveIntensity: 0.3,
     roughness: 0.05,
-    metalness: 0.0,
-    transmission: 0.95,   // glass transmission
-    thickness: 0.5,
+    metalness: 0.1,
+    transmission: 0.9,
+    thickness: 1.5,
     transparent: true,
-    opacity: 0.55,
-    reflectivity: 0.9,
-    ior: 1.33,            // water IOR
-    envMapIntensity: 1.2,
+    opacity: 0,
+    reflectivity: 1.0,
+    ior: 1.45,
+    attenuationColor: new THREE.Color(0x0088ff),
+    attenuationDistance: 2.0,
+    clearcoat: 1.0,
+    clearcoatRoughness: 0.1,
   });
 
-  // 3 bubbles: big, medium, small — mirroring the codepen layout
   const bubbles = [
-    { geo: new THREE.SphereGeometry(22, 32, 32), pos: [-30, -35, 0] },
-    { geo: new THREE.SphereGeometry(16, 32, 32), pos: [32, 38, 10] },
-    { geo: new THREE.SphereGeometry(10, 32, 32), pos: [-52, 14, 5] },
+    { geo: new THREE.SphereGeometry(22, 64, 64), pos: [-30, -35, 0] },
+    { geo: new THREE.SphereGeometry(16, 64, 64), pos: [32, 38, 10] },
+    { geo: new THREE.SphereGeometry(10, 64, 64), pos: [-52, 14, 5] },
   ].map(({ geo, pos }) => {
     const mesh = new THREE.Mesh(geo, mat.clone());
     mesh.position.set(...(pos as [number, number, number]));
@@ -58,17 +61,15 @@ function createScene(canvas: HTMLCanvasElement) {
   });
 
   const mouse = new THREE.Vector2(0, 0);
-  let hovering = false;
   let raf = 0;
   let then = Date.now();
   const fpsInterval = 1000 / 120;
 
-  // Target positions (animated in/out)
   const targets = {
     in: [
-      new THREE.Vector3(-30, -40, 0),
-      new THREE.Vector3(38, 42, 10),
-      new THREE.Vector3(-60, 14, 5),
+      new THREE.Vector3(-35, -45, 0),
+      new THREE.Vector3(40, 45, 10),
+      new THREE.Vector3(-65, 15, 5),
     ],
     out: [
       new THREE.Vector3(-10, -10, 0),
@@ -80,18 +81,17 @@ function createScene(canvas: HTMLCanvasElement) {
   function animateIn() {
     bubbles.forEach((b, i) => {
       const m = b.material as THREE.MeshPhysicalMaterial;
-      // fade in
       const fadeIn = () => {
-        m.opacity = Math.min(m.opacity + 0.04, 0.6);
-        if (m.opacity < 0.6) requestAnimationFrame(fadeIn);
+        m.opacity = Math.min(m.opacity + 0.05, 0.95);
+        if (m.opacity < 0.95) requestAnimationFrame(fadeIn);
       };
       fadeIn();
-      // move to target
+      
       const t = targets.in[i];
       const moveIn = () => {
-        b.position.lerp(t, 0.08);
-        b.scale.lerp(new THREE.Vector3(1.2, 1.2, 1.2), 0.08);
-        if (b.position.distanceTo(t) > 0.5) requestAnimationFrame(moveIn);
+        b.position.lerp(t, 0.06);
+        b.scale.lerp(new THREE.Vector3(1.2, 1.2, 1.2), 0.06);
+        if (b.position.distanceTo(t) > 0.1) requestAnimationFrame(moveIn);
       };
       moveIn();
     });
@@ -101,15 +101,16 @@ function createScene(canvas: HTMLCanvasElement) {
     bubbles.forEach((b, i) => {
       const m = b.material as THREE.MeshPhysicalMaterial;
       const fadeOut = () => {
-        m.opacity = Math.max(m.opacity - 0.03, 0);
+        m.opacity = Math.max(m.opacity - 0.05, 0);
         if (m.opacity > 0) requestAnimationFrame(fadeOut);
       };
       fadeOut();
+
       const t = targets.out[i];
       const moveOut = () => {
-        b.position.lerp(t, 0.08);
-        b.scale.lerp(new THREE.Vector3(0.8, 0.8, 0.8), 0.08);
-        if (b.position.distanceTo(t) > 0.5) requestAnimationFrame(moveOut);
+        b.position.lerp(t, 0.06);
+        b.scale.lerp(new THREE.Vector3(0.5, 0.5, 0.5), 0.06);
+        if (b.position.distanceTo(t) > 0.1) requestAnimationFrame(moveOut);
       };
       moveOut();
     });
@@ -121,15 +122,15 @@ function createScene(canvas: HTMLCanvasElement) {
     if (now - then < fpsInterval) return;
     then = now;
 
-    // Camera follows mouse
-    camera.position.x += mouse.x * (W * 0.02) - camera.position.x * 0.03;
-    camera.position.y += -(mouse.y * (H * 0.02)) - camera.position.y * 0.03;
+    camera.position.x += mouse.x * (W * 0.02) - camera.position.x * 0.05;
+    camera.position.y += -(mouse.y * (H * 0.02)) - camera.position.y * 0.05;
     camera.lookAt(scene.position);
 
-    // Gentle rotation on bubbles
     bubbles.forEach((b, i) => {
+      const time = Date.now() * 0.001;
       b.rotation.y += 0.004 * (i + 1);
       b.rotation.x += 0.002 * (i + 1);
+      b.position.y += Math.sin(time * 2 + i) * 0.1; 
     });
 
     renderer.render(scene, camera);
@@ -139,10 +140,17 @@ function createScene(canvas: HTMLCanvasElement) {
 
   return {
     setHover: (h: boolean) => {
-      hovering = h;
-      h ? animateIn() : animateOut();
+      // Perbaikan di sini: Menggunakan if-else standar untuk menghindari warning expression
+      if (h) {
+        animateIn();
+      } else {
+        animateOut();
+      }
     },
-    setMouse: (x: number, y: number) => { mouse.x = x; mouse.y = y; },
+    setMouse: (x: number, y: number) => { 
+      mouse.x = x; 
+      mouse.y = y; 
+    },
     dispose: () => {
       cancelAnimationFrame(raf);
       renderer.dispose();
@@ -151,7 +159,6 @@ function createScene(canvas: HTMLCanvasElement) {
 }
 
 // ─── BubbleButton ────────────────────────────────────────────────────────────
-
 interface BubbleButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
 }
@@ -194,7 +201,6 @@ export function BubbleButton({ children, className = "", ...props }: BubbleButto
 }
 
 // ─── BubbleLink ──────────────────────────────────────────────────────────────
-
 interface BubbleLinkProps extends React.ComponentProps<typeof Link> {
   children: React.ReactNode;
 }

@@ -86,7 +86,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Estimasi Berat */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-dashed border-gray-100">
-                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="w-5 h-auto" />
+                <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
 
@@ -118,7 +118,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
                 {/* Right: illustration */}
                 <div className="w-40 h-40 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <Image src="/images/layanan-image/booking-image/mesinCuci.png" alt="mesin cuci" width={130} height={130} style={{ width: 130, height: "auto" }} />
+                  <Image src="/images/layanan-image/booking-image/mesinCuci.png" alt="mesin cuci" width={130} height={130} loading="eager" priority style={{ width: 130, height: "auto" }} />
                 </div>
               </div>
             </div>
@@ -126,7 +126,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
             {/* Metode Pengambilan */}
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
               <div className="flex items-center gap-2 mb-4">
-                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="w-5 h-auto" />
+                <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
 
@@ -258,7 +258,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
               <BubbleButton
                 onClick={handleConfirm}
                 disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
-                className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
+                className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 px-8 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
                 {loading ? (
                   <Loader2Icon className="w-4 h-4 animate-spin" />
@@ -269,7 +269,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
               <BubbleButton
                 onClick={() => router.push("/layanan")}
-                className="mt-2.5 w-full text-blue-500 font-semibold text-sm py-2.5 rounded-xl border border-blue-100 hover:bg-blue-50 transition-colors"
+                className="mt-2.5 w-full text-blue-500 font-semibold text-sm py-2.5 px-8 rounded-xl border border-blue-100 hover:bg-blue-50 transition-colors"
               >
                 Kembali ke Pilih Layanan
               </BubbleButton>

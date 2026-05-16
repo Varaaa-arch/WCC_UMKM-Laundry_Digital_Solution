@@ -137,7 +137,7 @@ export default function LayananPage() {
           onClick={handleLanjutkan}
           disabled={selected === null}
           className={[
-            "w-full max-w-xs py-4 rounded-full font-bold text-base text-white transition-all duration-300 border-0 outline-none",
+            "w-full max-w-xs py-4 px-10 rounded-full font-bold text-base text-white transition-all duration-300 border-0 outline-none",
             selected
               ? "bg-linear-to-r from-blue-400 to-blue-600 shadow-[0_8px_32px_rgba(59,130,246,0.35)] hover:shadow-[0_12px_40px_rgba(59,130,246,0.45)] hover:scale-[1.02] active:scale-[0.98]"
               : "bg-linear-to-r from-blue-300 to-blue-400 opacity-60 cursor-not-allowed",

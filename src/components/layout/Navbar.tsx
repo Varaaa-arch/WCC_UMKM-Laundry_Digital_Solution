@@ -131,7 +131,6 @@ export function Navbar() {
                 className="relative"
                 variants={reduced ? undefined : navLinkItemVariants}
                 style={{ transformOrigin: "center bottom" }}
-                whileHover={reduced ? undefined : { y: -2 }}
                 whileTap={reduced ? undefined : { scale: 0.97 }}
                 transition={reduced ? instant : { type: "spring", stiffness: 450, damping: 26 }}
               >
