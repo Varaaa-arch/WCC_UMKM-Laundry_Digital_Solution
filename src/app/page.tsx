@@ -8,10 +8,10 @@ import { Navbar } from "@/components/layout/Navbar"
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col bg-white text-slate-900 antialiased">
+    <div className="flex min-h-screen flex-col text-slate-900 antialiased">
       <Navbar />
 
-      <main className="flex-1 bg-white">
+      <main className="flex-1">
         <HeroSection />
         <HowToOrderSection hideHeader />
         <AdvantagesSection />

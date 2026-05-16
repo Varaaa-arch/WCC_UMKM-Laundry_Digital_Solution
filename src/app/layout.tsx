@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${poppins.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased bg-[#EEF4FB]`}
     >
-      <body className="min-h-full flex flex-col font-sans">
+      <body className="min-h-full flex flex-col font-sans pt-16">
         {children}
       </body>
     </html>

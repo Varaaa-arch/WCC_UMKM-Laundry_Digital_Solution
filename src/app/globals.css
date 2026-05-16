@@ -6,6 +6,10 @@
   a, button, [role="button"], label[for], select, summary {
     cursor: pointer;
   }
+  html, body {
+    margin: 0;
+    padding: 0;
+  }
 }
 
 
