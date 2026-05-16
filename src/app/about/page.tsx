@@ -1,12 +1,11 @@
 import Image from "next/image";
 import { MapPinIcon, MessageCircleIcon, MailIcon, CameraIcon, SparklesIcon, CircleIcon } from "lucide-react";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 
 export default function AboutPage() {
   return (
     <>
-      <Navbar />
+      
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Section 1 — Cerita Kami */}

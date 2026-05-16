@@ -4,7 +4,6 @@ import Image from "next/image";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { use } from "react";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useOrderStore, type ServiceType, SERVICE_PRICE, SERVICE_LABEL, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
 import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, Loader2Icon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
@@ -76,7 +75,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
-      <Navbar />
+      
       <main className="min-h-screen bg-[#EEF4FB] px-4 py-8">
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
 

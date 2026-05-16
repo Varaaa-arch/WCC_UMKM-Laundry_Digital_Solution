@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { MessageCircleIcon, MailIcon, PhoneIcon, MapPinIcon, SendIcon, CheckCircle2Icon, ArrowRightIcon } from "lucide-react"
 
@@ -57,7 +56,7 @@ export default function ContactPage() {
 
   return (
     <>
-      <Navbar />
+      
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Hero */}

@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ShieldCheckIcon, ArrowLeftIcon } from "lucide-react";
-import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { useRouter } from "next/navigation";
 import { useOrderStore, type ServiceType } from "@/store/useOrderStore";
@@ -53,7 +52,7 @@ export default function LayananPage() {
 
   return (
     <>
-      <Navbar />
+      
       <main className="min-h-screen bg-[#EEF4FB] flex flex-col items-center px-4 py-12">
         {/* Heading */}
         <div className="text-center mb-10">
