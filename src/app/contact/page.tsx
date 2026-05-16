@@ -60,7 +60,7 @@ export default function ContactPage() {
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Hero */}
-        <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 px-6 pt-48 pb-20 text-white text-center">
+        <section className="relative overflow-hidden bg-gradient-to-br from-blue-600 via-blue-500 to-cyan-400 px-6 pt-33 pb-20 text-white text-center">
           {/* decorative blobs */}
           <div className="pointer-events-none absolute -top-20 -left-20 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-16 -right-16 w-96 h-96 rounded-full bg-cyan-300/20 blur-3xl" />
