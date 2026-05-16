@@ -53,7 +53,7 @@ export default function LayananPage() {
   return (
     <>
       
-      <main className="min-h-screen bg-[#EEF4FB] flex flex-col items-center px-4 py-12">
+      <main className="min-h-screen bg-[#EEF4FB] flex flex-col items-center px-4 pt-24 pb-12">
         {/* Heading */}
         <div className="text-center mb-10">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">

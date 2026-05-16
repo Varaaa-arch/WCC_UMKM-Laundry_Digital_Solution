@@ -178,7 +178,7 @@ export function HeroSection() {
   return (
     <section
       className={cn(
-        "relative isolate -mt-16 min-h-[90dvh] overflow-hidden lg:min-h-dvh",
+        "relative isolate min-h-[90dvh] overflow-hidden lg:min-h-dvh",
         "bg-linear-to-b from-[#f5fbff] via-[#e8f3fc] to-[#dceefe]"
       )}
       aria-labelledby="hero-heading"
