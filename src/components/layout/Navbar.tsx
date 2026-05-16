@@ -34,7 +34,7 @@ export function Navbar() {
   }, [init])
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pt-3 pointer-events-none">
+    <div className="fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none">
       <motion.nav
         className="pointer-events-auto w-full max-w-4xl flex items-center justify-between bg-blue-500 rounded-full px-4 py-2.5 shadow-lg mt-3"
         initial={reduced ? false : { opacity: 0, y: -12 }}

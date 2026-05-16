@@ -34,9 +34,11 @@ export default function RootLayout({
       lang="en"
       className={`${poppins.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased bg-[#EEF4FB]`}
     >
-      <body className="min-h-full flex flex-col font-sans pt-16">
+      <body className="min-h-full flex flex-col font-sans bg-[#EEF4FB]">
         <Navbar />
-        {children}
+        <div className="pt-16 flex-1">
+          {children}
+        </div>
       </body>
     </html>
   );
