@@ -210,13 +210,12 @@ export function Navbar() {
               >
                 {NAV.loginLabel}
               </Link>
-              <Button
-                asChild
-                size="sm"
-                className="rounded-md bg-blue-500 px-6 py-2 h-10 text-white shadow-none hover:bg-blue-600 focus-visible:ring-blue-600/40"
+              <Link
+                href={NAV.ctaHref}
+                className="rounded-md bg-blue-500 px-6 py-2 h-10 text-sm font-medium text-white hover:bg-blue-400 transition-colors inline-flex items-center"
               >
-                <Link href={NAV.ctaHref}>{NAV.cta}</Link>
-              </Button>
+                {NAV.cta}
+              </Link>
             </>
           )}
         </motion.div>
