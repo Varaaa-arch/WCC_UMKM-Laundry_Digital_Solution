@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { defaultSiteMetadata } from "@/config/site";
+import PageTransition from "@/components/common/PageTransition";
+import { NavigationProvider } from "@/contexts/NavigationContext";
 
 import "./globals.css";
 
@@ -35,10 +37,12 @@ export default function RootLayout({
       className={`${poppins.variable} ${plusJakarta.variable} ${geistMono.variable} h-full antialiased bg-[#EEF4FB]`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#EEF4FB]">
-        <Navbar />
-        <div className="flex-1">
-          {children}
-        </div>
+        <NavigationProvider>
+          <Navbar />
+          <div className="flex-1">
+            <PageTransition>{children}</PageTransition>
+          </div>
+        </NavigationProvider>
       </body>
     </html>
   );

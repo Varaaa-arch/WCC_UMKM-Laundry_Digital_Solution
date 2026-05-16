@@ -9,6 +9,27 @@ import {
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { BubbleButton } from "@/components/ui/bubble-button"
+import { useNavigation } from "@/contexts/NavigationContext"
+
+// Custom link component that uses navigation context
+function NavLink({ href, children, className, onClick, ...props }: React.ComponentProps<typeof Link>) {
+  const { navigate } = useNavigation()
+
+  const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault()
+    if (onClick) onClick(e)
+    await navigate(href)
+  }
+
+  return (
+    <Link
+      href={href}
+      className={className}
+      onClick={handleClick}
+      {...props}
+    />
+  )
+}
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", href: "/dashboard", active: true },
@@ -37,6 +58,14 @@ const item = (i: number) => ({
 })
 
 export default function DashboardPage() {
+  const { navigate } = useNavigation()
+
+  const handleSignOut = async () => {
+    const { signOut } = await import("@/actions/auth-action")
+    await signOut()
+    await navigate("/")
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex">
 
@@ -50,8 +79,8 @@ export default function DashboardPage() {
         {/* Nav */}
         <nav className="flex-1 px-3 py-4 space-y-1">
           {NAV_ITEMS.map(({ icon: Icon, label, href, active }) => (
-            <Link key={label} href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
+            <NavLink key={label} href={href}
+              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors cursor-pointer ${
                 active
                   ? "bg-blue-600 text-white"
                   : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
@@ -59,13 +88,13 @@ export default function DashboardPage() {
             >
               <Icon className="w-4 h-4 shrink-0" />
               {label}
-            </Link>
+            </NavLink>
           ))}
         </nav>
 
         {/* User */}
         <div className="px-3 py-4 border-t border-gray-100 space-y-1">
-          <BubbleButton className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
+          <BubbleButton onClick={handleSignOut} className="w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-red-500 hover:bg-red-50 transition-colors">
             <LogOut className="w-4 h-4 shrink-0" />
             Keluar
           </BubbleButton>
@@ -104,11 +133,11 @@ export default function DashboardPage() {
               <h2 className="text-xl font-bold mt-0.5">John Doe</h2>
               <p className="text-blue-100 text-xs mt-1">Kamu punya 2 order aktif saat ini</p>
             </div>
-            <Link href="/layanan"
-              className="flex items-center gap-1.5 bg-white text-blue-600 text-sm font-semibold px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors shrink-0"
+            <NavLink href="/layanan"
+              className="flex items-center gap-1.5 bg-white text-blue-600 text-sm font-semibold px-4 py-2 rounded-xl hover:bg-blue-50 transition-colors shrink-0 cursor-pointer"
             >
               Pesan Sekarang <ChevronRight className="w-4 h-4" />
-            </Link>
+            </NavLink>
           </motion.div>
 
           {/* Stats */}
@@ -132,9 +161,9 @@ export default function DashboardPage() {
           >
             <div className="px-5 py-4 border-b border-gray-100 flex items-center justify-between">
               <h3 className="font-semibold text-gray-900 text-sm">Order Terbaru</h3>
-              <Link href="/history" className="text-xs text-blue-600 font-medium hover:underline">
+              <NavLink href="/history" className="text-xs text-blue-600 font-medium hover:underline cursor-pointer">
                 Lihat semua
-              </Link>
+              </NavLink>
             </div>
             <div className="divide-y divide-gray-50">
               {RECENT_ORDERS.map((order) => (
