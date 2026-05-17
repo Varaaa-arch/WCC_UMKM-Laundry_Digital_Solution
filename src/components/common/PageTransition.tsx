@@ -34,6 +34,11 @@ export default function PageTransition({ children }: PropsWithChildren) {
   const [displayChildren, setDisplayChildren] = useState(children);
   const [isVisible, setIsVisible] = useState(true);
   const exitPromiseRef = useRef<{ resolve: () => void } | null>(null);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // Listen for exit event from navigation context
@@ -140,8 +145,8 @@ export default function PageTransition({ children }: PropsWithChildren) {
 
   return (
     <>
-      {typeof document !== "undefined" && createPortal(exitCurtain, document.body)}
-      {typeof document !== "undefined" && createPortal(enterCurtain, document.body)}
+      {mounted && createPortal(exitCurtain, document.body)}
+      {mounted && createPortal(enterCurtain, document.body)}
       <motion.div
         key={pathname}
         initial={{ opacity: 0, y: 20, filter: "blur(5px)" }}

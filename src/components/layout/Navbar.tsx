@@ -25,24 +25,18 @@ const easeOutExpo: [number, number, number, number] = [0.16, 1, 0.3, 1]
 
 // Custom link component that uses navigation context
 function NavLink({ href, children, className, onClick, ...props }: React.ComponentProps<typeof Link>) {
-  const { navigate, isTransitioning } = useNavigation()
-  const pathname = usePathname()
+  const { navigate } = useNavigation()
 
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     if (onClick) onClick(e)
-    await navigate(href)
+    await navigate(href.toString())
   }
 
-  const isActive = href === "/" ? pathname === "/" : pathname.startsWith(href)
-
   return (
-    <Link
-      href={href}
-      className={className}
-      onClick={handleClick}
-      {...props}
-    />
+    <Link href={href} className={className} onClick={handleClick} {...props}>
+      {children}
+    </Link>
   )
 }
 
@@ -50,7 +44,7 @@ export function Navbar() {
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
   const { user, loading, init } = useAuthStore()
-  const { navigate, isTransitioning } = useNavigation()
+  const { navigate } = useNavigation()
   const reduced = Boolean(prefersReducedMotion)
 
   React.useEffect(() => {

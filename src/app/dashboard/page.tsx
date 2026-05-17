@@ -18,7 +18,7 @@ function NavLink({ href, children, className, onClick, ...props }: React.Compone
   const handleClick = async (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault()
     if (onClick) onClick(e)
-    await navigate(href)
+    await navigate(href.toString())
   }
 
   return (
