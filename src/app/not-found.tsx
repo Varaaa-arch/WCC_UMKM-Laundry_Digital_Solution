@@ -74,11 +74,10 @@ export default function NotFound() {
 
         {/* Right: Mascot */}
         <div className="relative flex flex-col items-center">
-          {/* Thought bubble */}
-          <div className="relative mb-2 mr-4 self-end">
+          {/* Thought bubble — nempel di atas kanan mascot */}
+          <div className="absolute top-[90px] right-[80px] z-10">
             <div className="relative rounded-2xl border border-blue-100 bg-blue-50 px-5 py-2 text-sm text-blue-400 shadow-sm">
               ...where am I?
-              {/* Bubble tail dots */}
               <span className="absolute -bottom-2 left-6 h-2 w-2 rounded-full bg-blue-100" />
               <span className="absolute -bottom-4 left-4 h-1.5 w-1.5 rounded-full bg-blue-100" />
             </div>
@@ -92,8 +91,8 @@ export default function NotFound() {
           <Image
             src="/images/error-page-img/mascot.png"
             alt="Lost washing machine mascot"
-            width={340}
-            height={340}
+            width={620}
+            height={520}
             className="drop-shadow-xl"
             priority
           />
