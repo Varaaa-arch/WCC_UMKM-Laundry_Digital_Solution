@@ -62,7 +62,7 @@ export default function LoginPage() {
           </motion.div>
           <motion.div animate={{ scaleX: [1, 0.8, 1], opacity: [0.3, 0.15, 0.3] }} transition={{ duration: 3.5, repeat: Infinity }} className="w-32 h-4 bg-black/20 rounded-full blur-md mt-2 relative z-10" />
           <div className="mt-8 text-center relative z-10">
-            <h2 className="text-white text-2xl font-bold">LaundryKini</h2>
+            <h2 className="text-white text-2xl font-bold">LummyBlue</h2>
             <p className="text-blue-100 text-sm mt-1">Laundry premium untuk kamu ✨</p>
           </div>
         </div>
@@ -79,7 +79,7 @@ export default function LoginPage() {
 
           <motion.div variants={item(1)} initial="hidden" animate="visible" className="text-center mb-8">
             <h1 className="text-3xl font-bold text-gray-900">Welcome back!</h1>
-            <p className="text-gray-500 mt-1 text-sm">Masuk ke akun LaundryKini kamu</p>
+            <p className="text-gray-500 mt-1 text-sm">Masuk ke akun LummyBlue kamu</p>
           </motion.div>
 
           <form onSubmit={handleLogin} className="space-y-5">

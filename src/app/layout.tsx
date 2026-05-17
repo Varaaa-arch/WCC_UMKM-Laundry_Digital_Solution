@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Geist_Mono, Plus_Jakarta_Sans, Poppins } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
+import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
 import { defaultSiteMetadata } from "@/config/site";
 import PageTransition from "@/components/common/PageTransition";
 import { NavigationProvider } from "@/contexts/NavigationContext";
@@ -38,7 +38,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-[#EEF4FB]">
         <NavigationProvider>
-          <Navbar />
+          <ConditionalNavbar />
           <div className="flex-1">
             <PageTransition>{children}</PageTransition>
           </div>

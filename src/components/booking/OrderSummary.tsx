@@ -82,7 +82,7 @@ export default function OrderSummary() {
       <div className="mt-4 flex items-start gap-2 p-3 bg-gray-50 rounded-xl">
         <ShieldCheckIcon className="w-4 h-4 text-blue-500 shrink-0 mt-0.5" />
         <p className="text-xs text-gray-500 leading-relaxed">
-          Keamanan barang Anda terjamin dengan asuransi perlindungan LaundryKini.
+          Keamanan barang Anda terjamin dengan asuransi perlindungan LummyBlue.
         </p>
       </div>
     </div>

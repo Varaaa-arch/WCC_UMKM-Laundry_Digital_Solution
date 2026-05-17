@@ -45,7 +45,7 @@ export default async function BookingSuccessPage({
               <MapPinIcon className="w-4 h-4 text-blue-600" />
             </div>
             <div>
-              <p className="text-xs font-semibold text-gray-800">LaundryKini – Sudirman</p>
+              <p className="text-xs font-semibold text-gray-800">LummyBlue – Sudirman</p>
               <p className="text-xs text-gray-400 mt-0.5">1.2 km dari lokasi kamu</p>
             </div>
           </div>
