@@ -55,12 +55,12 @@ export default function NotFound() {
 
           {/* Title */}
           <h2 className="text-xl font-bold uppercase tracking-widest text-slate-700 md:text-2xl">
-            OOPSY... PAGE NOT FOUND
+            ADUH... HALAMAN TIDAK DITEMUKAN
           </h2>
 
           {/* Description */}
           <p className="max-w-xs text-sm text-slate-500">
-            We suggest you go to homepage while we fixing the problem 🥺
+            Kayaknya halaman ini nyasar deh 🥺 Balik ke beranda dulu ya, nanti kita benerin!
           </p>
 
           {/* Button */}
@@ -68,16 +68,16 @@ export default function NotFound() {
             href="/"
             className="mt-2 rounded-full bg-blue-400 px-8 py-3 text-sm font-semibold text-white shadow-md transition hover:bg-blue-500 active:scale-95"
           >
-            Go to Homepage
+            Ke Beranda
           </Link>
         </div>
 
         {/* Right: Mascot */}
         <div className="relative flex flex-col items-center">
           {/* Thought bubble — nempel di atas kanan mascot */}
-          <div className="absolute top-[90px] right-[80px] z-10">
+          <div className="absolute top-[80px] right-[80px] z-10">
             <div className="relative rounded-2xl border border-blue-100 bg-blue-50 px-5 py-2 text-sm text-blue-400 shadow-sm">
-              ...where am I?
+              ...ini dimana ya?
               <span className="absolute -bottom-2 left-6 h-2 w-2 rounded-full bg-blue-100" />
               <span className="absolute -bottom-4 left-4 h-1.5 w-1.5 rounded-full bg-blue-100" />
             </div>
