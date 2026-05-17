@@ -1,26 +1,34 @@
 "use client";
 
 import { ShieldCheckIcon, ChevronRightIcon, Loader2Icon } from "lucide-react";
-import { useOrderStore, SERVICE_LABEL, SERVICE_PRICE, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
+import { useOrderStore, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
 import { confirmBooking } from "@/actions/booking-action";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BubbleButton } from "@/components/ui/bubble-button";
 
 export default function OrderSummary() {
-  const { selectedService, estimatedWeight, pickupMethod, paymentMethod, setStep } = useOrderStore();
+  const { selectedService, estimatedWeight, pickupMethod, paymentMethod, address, note, pickupTime, setStep } = useOrderStore();
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  const pricePerKg = selectedService ? SERVICE_PRICE[selectedService] : 0;
-  const subtotal = pricePerKg * estimatedWeight;
+  const subtotal = selectedService ? selectedService.price_per_kg * estimatedWeight : 0;
   const antarJemputFee = pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0;
   const total = subtotal + antarJemputFee;
 
   const handleConfirm = async () => {
     if (!selectedService) return;
     setLoading(true);
-    const result = await confirmBooking({ service: selectedService, estimatedWeight, totalPrice: total, paymentMethod });
+    const result = await confirmBooking({
+      serviceId: selectedService.id,
+      estimatedWeight,
+      totalPrice: total,
+      paymentMethod,
+      pickupMethod,
+      address,
+      note,
+      pickupTime,
+    });
     setLoading(false);
     if (result.success) {
       router.push(`/layanan/booking/success?orderId=${result.orderId}`);
@@ -35,8 +43,8 @@ export default function OrderSummary() {
 
       <div className="flex flex-col gap-3 text-sm">
         <div className="flex justify-between items-center">
-          <span className="text-gray-600">{selectedService ? SERVICE_LABEL[selectedService] : "-"}</span>
-          <span className="font-semibold text-gray-900">Rp {pricePerKg.toLocaleString("id-ID")}</span>
+          <span className="text-gray-600">{selectedService?.name ?? "-"}</span>
+          <span className="font-semibold text-gray-900">Rp {(selectedService?.price_per_kg ?? 0).toLocaleString("id-ID")}</span>
         </div>
         <div className="flex justify-between items-center text-gray-600">
           <span>Estimasi Berat ({estimatedWeight} Kg)</span>
@@ -48,9 +56,7 @@ export default function OrderSummary() {
             <span className="font-semibold text-gray-900">Rp {ANTAR_JEMPUT_FEE.toLocaleString("id-ID")}</span>
           </div>
         )}
-
         <div className="border-t border-dashed border-gray-200 my-1" />
-
         <div className="flex justify-between items-center">
           <span className="font-bold text-gray-800">Total Bayar</span>
           <span className="font-bold text-blue-600 text-base">Rp {total.toLocaleString("id-ID")}</span>

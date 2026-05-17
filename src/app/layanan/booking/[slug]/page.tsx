@@ -1,20 +1,15 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect } from "react";
+import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { use } from "react";
 import { Footer } from "@/components/layout/Footer";
-import { useOrderStore, type ServiceType, SERVICE_PRICE, SERVICE_LABEL, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
+import { useOrderStore, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
 import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, Loader2Icon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
-import { useState } from "react";
 import { confirmBooking } from "@/actions/booking-action";
+import { getServices } from "@/actions/service-action";
 import { BubbleButton } from "@/components/ui/bubble-button";
-
-const SLUG_TO_SERVICE: Record<string, ServiceType> = {
-  "cuci-bersih": "cuci-kering-setrika",
-  "cuci-setrika": "setrika-ekspres",
-};
+import type { Service } from "@/types/service";
 
 const PICKUP_TIMES = [
   "Sekarang (Kuri terdekat)",
@@ -29,41 +24,51 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
   const { slug } = use(params);
   const router = useRouter();
   const {
-    setService, setStep,
+    selectedService, setService, setStep,
     estimatedWeight, setWeight,
     pickupMethod, setPickupMethod,
     address, setAddress,
     note, setNote,
     pickupTime, setPickupTime,
-    selectedService,
   } = useOrderStore();
 
   const [loading, setLoading] = useState(false);
+  const [service, setServiceState] = useState<Service | null>(selectedService?.slug === slug ? selectedService : null);
 
   useEffect(() => {
-    const service = SLUG_TO_SERVICE[slug];
-    if (!service) { router.replace("/layanan"); return; }
-    setService(service);
-    setStep("dropoff");
-  }, [slug, router, setService, setStep]);
+    // Jika service sudah ada di store dan slug cocok, skip fetch
+    if (selectedService?.slug === slug) {
+      setServiceState(selectedService);
+      setStep("dropoff");
+      return;
+    }
+    // Fetch dari DB berdasarkan slug
+    getServices().then((services) => {
+      const found = services.find((s) => s.slug === slug);
+      if (!found) { router.replace("/layanan"); return; }
+      setServiceState(found);
+      setService(found);
+      setStep("dropoff");
+    });
+  }, [slug]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const service = SLUG_TO_SERVICE[slug];
   if (!service) return null;
 
-  const pricePerKg = SERVICE_PRICE[service];
-  const serviceLabel = SERVICE_LABEL[service];
-  const subtotal = pricePerKg * estimatedWeight;
+  const subtotal = service.price_per_kg * estimatedWeight;
   const antarJemputFee = pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0;
   const total = subtotal + antarJemputFee;
 
   const handleConfirm = async () => {
-    if (!selectedService) return;
     setLoading(true);
     const result = await confirmBooking({
-      service: selectedService,
+      serviceId: service.id,
       estimatedWeight,
       totalPrice: total,
       paymentMethod: "cod",
+      pickupMethod,
+      address,
+      note,
+      pickupTime,
     });
     setLoading(false);
     if (result.success) {
@@ -75,7 +80,6 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
-      
       <main className="min-h-screen bg-[#EEF4FB] px-4 py-8">
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
 
@@ -88,9 +92,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
               </div>
-
               <div className="flex items-center justify-between gap-4">
-                {/* Left: desc + stepper */}
                 <div className="flex flex-col gap-5">
                   <p className="text-gray-400 text-sm leading-relaxed max-w-[180px]">
                     Masukkan estimasi berat pakaian Anda. Berat akhir akan diverifikasi saat penjemputan.
@@ -114,10 +116,12 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                     </button>
                   </div>
                 </div>
-
-                {/* Right: illustration */}
                 <div className="w-40 h-40 rounded-full bg-blue-50 flex items-center justify-center shrink-0">
-                  <Image src="/images/layanan-image/booking-image/mesinCuci.png" alt="mesin cuci" width={130} height={130} loading="eager" priority style={{ width: 130, height: "auto" }} />
+                  {service.image_url ? (
+                    <Image src={service.image_url} alt={service.name} width={130} height={130} style={{ width: 130, height: "auto" }} />
+                  ) : (
+                    <Image src="/images/layanan-image/booking-image/mesinCuci.png" alt="mesin cuci" width={130} height={130} loading="eager" priority style={{ width: 130, height: "auto" }} />
+                  )}
                 </div>
               </div>
             </div>
@@ -128,60 +132,36 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
               </div>
-
               <div className="grid grid-cols-2 gap-3 mb-5">
-                {/* Ambil Sendiri */}
-                <button
-                  onClick={() => setPickupMethod("ambil-sendiri")}
-                  className={[
-                    "relative flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all duration-200",
-                    pickupMethod === "ambil-sendiri"
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-100 hover:border-gray-200",
-                  ].join(" ")}
-                >
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <StoreIcon className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">Ambil Sendiri</p>
-                    <p className="text-gray-400 text-xs mt-0.5">Ke outlet kami. Gratis biaya layanan.</p>
-                  </div>
-                  <div className={[
-                    "absolute top-3 right-3 w-4 h-4 rounded-full border-2 flex items-center justify-center",
-                    pickupMethod === "ambil-sendiri" ? "border-blue-500" : "border-gray-300",
-                  ].join(" ")}>
-                    {pickupMethod === "ambil-sendiri" && <div className="w-2 h-2 rounded-full bg-blue-500" />}
-                  </div>
-                </button>
-
-                {/* Diantar ke Rumah */}
-                <button
-                  onClick={() => setPickupMethod("antar-jemput")}
-                  className={[
-                    "relative flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all duration-200",
-                    pickupMethod === "antar-jemput"
-                      ? "border-blue-500 bg-blue-50"
-                      : "border-gray-100 hover:border-gray-200",
-                  ].join(" ")}
-                >
-                  <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <MapPinIcon className="w-4 h-4 text-blue-600" />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900 text-sm">Diantar ke Rumah</p>
-                    <p className="text-gray-400 text-xs mt-0.5">Kurir kami jemput ke lokasi Anda. Tarif Rp 15.000.</p>
-                  </div>
-                  <div className={[
-                    "absolute top-3 right-3 w-4 h-4 rounded-full border-2 flex items-center justify-center",
-                    pickupMethod === "antar-jemput" ? "border-blue-500" : "border-gray-300",
-                  ].join(" ")}>
-                    {pickupMethod === "antar-jemput" && <div className="w-2 h-2 rounded-full bg-blue-500" />}
-                  </div>
-                </button>
+                {(["ambil-sendiri", "antar-jemput"] as const).map((method) => (
+                  <button
+                    key={method}
+                    onClick={() => setPickupMethod(method)}
+                    className={[
+                      "relative flex flex-col items-start gap-2 p-4 rounded-xl border-2 text-left transition-all duration-200",
+                      pickupMethod === method ? "border-blue-500 bg-blue-50" : "border-gray-100 hover:border-gray-200",
+                    ].join(" ")}
+                  >
+                    <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                      {method === "ambil-sendiri"
+                        ? <StoreIcon className="w-4 h-4 text-blue-600" />
+                        : <MapPinIcon className="w-4 h-4 text-blue-600" />}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-gray-900 text-sm">
+                        {method === "ambil-sendiri" ? "Ambil Sendiri" : "Diantar ke Rumah"}
+                      </p>
+                      <p className="text-gray-400 text-xs mt-0.5">
+                        {method === "ambil-sendiri" ? "Ke outlet kami. Gratis biaya layanan." : "Kurir kami jemput ke lokasi Anda. Tarif Rp 15.000."}
+                      </p>
+                    </div>
+                    <div className={["absolute top-3 right-3 w-4 h-4 rounded-full border-2 flex items-center justify-center", pickupMethod === method ? "border-blue-500" : "border-gray-300"].join(" ")}>
+                      {pickupMethod === method && <div className="w-2 h-2 rounded-full bg-blue-500" />}
+                    </div>
+                  </button>
+                ))}
               </div>
 
-              {/* Alamat — only show when antar-jemput */}
               {pickupMethod === "antar-jemput" && (
                 <div className="flex flex-col gap-3">
                   <div>
@@ -194,7 +174,6 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition"
                     />
                   </div>
-
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Catatan (Opsional)</label>
@@ -213,9 +192,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                         onChange={(e) => setPickupTime(e.target.value)}
                         className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition bg-white"
                       >
-                        {PICKUP_TIMES.map((t) => (
-                          <option key={t} value={t}>{t}</option>
-                        ))}
+                        {PICKUP_TIMES.map((t) => <option key={t} value={t}>{t}</option>)}
                       </select>
                     </div>
                   </div>
@@ -228,11 +205,10 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
           <div className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-4">
               <h3 className="font-bold text-gray-900 text-base mb-4">Ringkasan Pesanan</h3>
-
               <div className="flex flex-col gap-3 text-sm">
                 <div className="flex justify-between items-center">
-                  <span className="text-gray-600">{serviceLabel}</span>
-                  <span className="font-semibold text-gray-900">Rp {pricePerKg.toLocaleString("id-ID")}</span>
+                  <span className="text-gray-600">{service.name}</span>
+                  <span className="font-semibold text-gray-900">Rp {service.price_per_kg.toLocaleString("id-ID")}</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <span className="text-gray-600">Estimasi Berat ({estimatedWeight} Kg)</span>
@@ -244,9 +220,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                     <span className="font-semibold text-gray-900">Rp {ANTAR_JEMPUT_FEE.toLocaleString("id-ID")}</span>
                   </div>
                 )}
-
                 <div className="border-t border-dashed border-gray-200 my-1" />
-
                 <div className="flex justify-between items-center">
                   <span className="font-bold text-gray-900">Total Bayar</span>
                   <span className="font-bold text-blue-600 text-lg">Rp {total.toLocaleString("id-ID")}</span>
@@ -259,11 +233,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
                 className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 px-8 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                {loading ? (
-                  <Loader2Icon className="w-4 h-4 animate-spin" />
-                ) : (
-                  <>Konfirmasi Pesanan <ChevronRightIcon className="w-4 h-4" /></>
-                )}
+                {loading ? <Loader2Icon className="w-4 h-4 animate-spin" /> : <>Konfirmasi Pesanan <ChevronRightIcon className="w-4 h-4" /></>}
               </BubbleButton>
 
               <BubbleButton
@@ -273,7 +243,6 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 Kembali ke Pilih Layanan
               </BubbleButton>
 
-              {/* Trust badges */}
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                 {[
                   { icon: <ShieldCheckIcon className="w-5 h-5 text-blue-500" />, label: "Garansi Kebersihan" },

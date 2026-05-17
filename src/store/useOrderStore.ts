@@ -1,21 +1,9 @@
 import { create } from "zustand";
+import type { Service } from "@/types/service";
 
-export type ServiceType = "cuci-kering-setrika" | "setrika-ekspres" | "cuci-satuan";
 export type Step = "layanan" | "dropoff" | "pembayaran";
 export type PaymentMethod = "cod" | "transfer";
 export type PickupMethod = "ambil-sendiri" | "antar-jemput";
-
-export const SERVICE_PRICE: Record<ServiceType, number> = {
-  "cuci-kering-setrika": 5000,
-  "setrika-ekspres": 8000,
-  "cuci-satuan": 15000,
-};
-
-export const SERVICE_LABEL: Record<ServiceType, string> = {
-  "cuci-kering-setrika": "Cuci Kering",
-  "setrika-ekspres": "Cuci + Setrika",
-  "cuci-satuan": "Cuci Satuan",
-};
 
 export const ANTAR_JEMPUT_FEE = 15000;
 
@@ -23,8 +11,8 @@ interface OrderState {
   currentStep: Step;
   setStep: (step: Step) => void;
 
-  selectedService: ServiceType | null;
-  setService: (service: ServiceType) => void;
+  selectedService: Service | null;
+  setService: (service: Service) => void;
 
   estimatedWeight: number;
   setWeight: (weight: number) => void;
@@ -50,7 +38,7 @@ interface OrderState {
 
 const initialState = {
   currentStep: "layanan" as Step,
-  selectedService: null as ServiceType | null,
+  selectedService: null as Service | null,
   estimatedWeight: 5,
   pickupMethod: "ambil-sendiri" as PickupMethod,
   address: "",
@@ -74,7 +62,7 @@ export const useOrderStore = create<OrderState>()((set, get) => ({
   totalPrice: () => {
     const { selectedService, estimatedWeight, pickupMethod } = get();
     if (!selectedService) return 0;
-    const base = SERVICE_PRICE[selectedService] * estimatedWeight;
+    const base = selectedService.price_per_kg * estimatedWeight;
     return base + (pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0);
   },
 
