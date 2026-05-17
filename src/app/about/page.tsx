@@ -84,7 +84,7 @@ export default function AboutPage() {
                 <div className="bg-white rounded-2xl p-6 shadow-sm">
                   <h2 className="text-2xl font-bold text-gray-900 mb-1">Ibu Ratih</h2>
                   <p className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-4">
-                    FOUNDER &amp; CEO RESIKLAUNDRY
+                    FOUNDER &amp; CEO LUMMYBLUE
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed mb-5">
                     Berawal dari kecintaan pada kebersihan dan detail, Ibu Ratih membangun LummyBlue dengan satu
@@ -209,10 +209,10 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="font-bold text-gray-900 text-sm">Email</p>
-                  <p className="text-gray-400 text-xs mt-0.5">halo@resiklaundry.com</p>
+                  <p className="text-gray-400 text-xs mt-0.5">halo@lummyblue.com</p>
                 </div>
                 <a
-                  href="mailto:halo@resiklaundry.com"
+                  href="mailto:halo@lummyblue.com"
                   className="text-xs font-semibold text-blue-500 hover:text-blue-600 transition-colors"
                 >
                   Kirim Email
@@ -226,10 +226,10 @@ export default function AboutPage() {
                 </div>
                 <div>
                   <p className="font-bold text-gray-900 text-sm">Instagram</p>
-                  <p className="text-gray-400 text-xs mt-0.5">@resiklaundry</p>
+                  <p className="text-gray-400 text-xs mt-0.5">@lummyblue</p>
                 </div>
                 <a
-                  href="https://instagram.com/resiklaundry"
+                  href="https://instagram.com/lummyblue"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-xs font-semibold text-purple-500 hover:text-purple-600 transition-colors"
