@@ -4,13 +4,10 @@ import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 import { motion } from "framer-motion"
-import {
-  LayoutDashboard, ShoppingBag, History, User,
-  Bell, HelpCircle, Trash2, Star, Gift, Wallet,
-  CheckCircle2, ArrowRight, Sparkles,
-} from "lucide-react"
+import { ShoppingBag, Star, Wallet, CheckCircle2, ArrowRight, Sparkles } from "lucide-react"
 import { useAuthStore } from "@/store/useAuthStore"
 import { useOrders } from "@/hooks/useOrder"
+import DashboardShell from "@/components/layout/DashboardShell"
 
 const stagger = (i: number) => ({
   hidden: { opacity: 0, y: 16 },
@@ -61,59 +58,9 @@ export default function DashboardPage() {
     ? TRACK_STEPS.findIndex((s) => s.key === trackOrder.status)
     : -1
 
-  const NAV_ITEMS = [
-    { label: "Dashboard",    href: "/dashboard", icon: LayoutDashboard, active: true },
-    { label: "Pesan Laundry", href: "/layanan",  icon: ShoppingBag },
-    { label: "Riwayat",      href: "/history",   icon: History },
-    { label: "Profil",       href: "/profile",   icon: User },
-  ]
-
   return (
-    <div className="flex min-h-screen bg-[#F0F4FA]">
-
-      {/* ── Sidebar ── */}
-      <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-100 shrink-0">
-        {/* Logo */}
-        <div className="px-5 py-6 border-b border-gray-100">
-          <p className="text-blue-600 font-bold text-lg leading-none">LummyBlue</p>
-          <p className="text-gray-400 text-[11px] mt-0.5">Laundry Management</p>
-        </div>
-
-        {/* Nav */}
-        <nav className="flex-1 px-3 py-4 space-y-0.5">
-          {NAV_ITEMS.map(({ label, href, icon: Icon, active }) => (
-            <Link key={label} href={href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${
-                active
-                  ? "bg-blue-600 text-white shadow-sm"
-                  : "text-gray-500 hover:bg-gray-50 hover:text-gray-800"
-              }`}
-            >
-              <Icon className="w-4 h-4 shrink-0" />
-              {label}
-            </Link>
-          ))}
-        </nav>
-      </aside>
-
-      {/* ── Main ── */}
-      <div className="flex-1 flex flex-col min-w-0">
-
-        {/* Top bar */}
-        <header className="bg-white border-b border-gray-100 px-6 py-3 flex items-center justify-end gap-3">
-          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-50 transition-colors">
-            <Bell className="w-4 h-4" />
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-50 transition-colors">
-            <HelpCircle className="w-4 h-4" />
-          </button>
-          <button className="w-8 h-8 flex items-center justify-center rounded-lg text-gray-400 hover:bg-gray-50 transition-colors">
-            <Trash2 className="w-4 h-4" />
-          </button>
-        </header>
-
-        {/* Content */}
-        <main className="flex-1 px-6 py-6 space-y-5 overflow-y-auto">
+    <DashboardShell>
+      <div className="px-6 py-6 space-y-5">
 
           {/* Greeting */}
           <motion.div variants={stagger(0)} initial="hidden" animate="visible">
@@ -246,7 +193,7 @@ export default function DashboardPage() {
 
             {!trackOrder && (
               <div className="mt-4 text-center">
-                <Link href="/layanan"
+                <Link href="/dashboard/pesan"
                   className="text-sm text-blue-600 font-medium hover:underline"
                 >
                   Buat order sekarang →
@@ -279,8 +226,7 @@ export default function DashboardPage() {
             </Link>
           </motion.div>
 
-        </main>
       </div>
-    </div>
+    </DashboardShell>
   )
 }
