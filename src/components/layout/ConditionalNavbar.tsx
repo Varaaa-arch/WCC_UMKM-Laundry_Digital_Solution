@@ -4,6 +4,6 @@ import { Navbar } from "@/components/layout/Navbar"
 
 export function ConditionalNavbar() {
   const pathname = usePathname()
-  if (pathname.startsWith("/dashboard")) return null
+  if (pathname.startsWith("/dashboard") || pathname.startsWith("/history")) return null
   return <Navbar />
 }
