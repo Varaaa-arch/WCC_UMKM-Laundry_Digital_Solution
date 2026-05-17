@@ -2,7 +2,7 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { LayoutDashboard, ShoppingBag, History, User, Bell, HelpCircle } from "lucide-react"
+import { LayoutDashboard, ShoppingBag, History, User, Bell, HelpCircle, Home } from "lucide-react"
 
 const NAV_ITEMS = [
   { label: "Dashboard",     href: "/dashboard",       icon: LayoutDashboard },
@@ -37,6 +37,14 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             )
           })}
         </nav>
+        <div className="px-3 py-4 border-t border-gray-100">
+          <Link href="/"
+            className="flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-800 transition-colors"
+          >
+            <Home className="w-4 h-4 shrink-0" />
+            Kembali ke Beranda
+          </Link>
+        </div>
       </aside>
 
       {/* Main */}
