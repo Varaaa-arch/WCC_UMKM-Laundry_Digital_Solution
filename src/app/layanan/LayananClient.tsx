@@ -44,7 +44,7 @@ export default function LayananClient({ services }: { services: Service[] }) {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full max-w-5xl mb-8">
+        <div className="flex flex-wrap justify-center gap-6 w-full max-w-3xl mb-8">
           {services.map((svc) => {
             const isSelected = selected?.id === svc.id;
             return (
@@ -53,7 +53,7 @@ export default function LayananClient({ services }: { services: Service[] }) {
                 onClick={() => setSelected(svc)}
                 style={{ borderRadius: "28px" }}
                 className={[
-                  "group relative w-full bg-white text-center",
+                  "group relative w-full sm:w-72 bg-white text-center",
                   "transition-all duration-300 ease-out cursor-pointer",
                   "hover:-translate-y-1.5",
                   isSelected

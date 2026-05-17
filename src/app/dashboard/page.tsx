@@ -73,7 +73,7 @@ export default function DashboardPage() {
       <aside className="hidden md:flex w-60 bg-white border-r border-gray-100 flex-col fixed h-full z-20">
         {/* Logo */}
         <div className="px-6 py-5 border-b border-gray-100">
-          <span className="text-lg font-bold text-blue-600">ResikLaundry</span>
+          <span className="text-lg font-bold text-blue-600">LaundryKini</span>
         </div>
 
         {/* Nav */}

@@ -1,12 +1,12 @@
   /** URL/href placeholders use paths or hashes — do not wrap in [...] or Next `<Link>` will error. Replace these string values when wiring real routes. */
 
   export const SITE = {
-    name: "Laundry",
+    name: "LaundryKini",
     tagline: "[SITE_TAGLINE]",
   } as const
 
   export const NAV = {
-    logo: "Laundry",
+    logo: "LaundryKini",
     links: [
       { label: "Beranda", href: "/" },
       { label: "Layanan", href: "/layanan" },
@@ -142,7 +142,7 @@
 
   export const FOOTER = {
     tagline: "Solusi laundry modern dan terpercaya di Indonesia. Kami memberikan layanan kebersihan terbaik untuk kenyamanan Anda.",
-    logo: "Laundry",
+    logo: "LaundryKini",
     columns: [
       {
         heading: "Layanan Kami",

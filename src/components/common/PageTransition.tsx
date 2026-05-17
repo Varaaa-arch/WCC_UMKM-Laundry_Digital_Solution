@@ -97,14 +97,14 @@ export default function PageTransition({ children }: PropsWithChildren) {
             transition={{ duration: 0.3, delay: 0.1, ease: EASE }}
           >
             <span className="relative text-3xl font-bold tracking-tight select-none overflow-hidden inline-block">
-              <span className="text-blue-300">ResikLaundry</span>
+              <span className="text-blue-300">LaundryKini</span>
               <motion.span
                 className="absolute inset-0 text-white"
                 initial={{ clipPath: "inset(0 100% 0 0)" }}
                 animate={{ clipPath: "inset(0 0% 0 0)" }}
                 transition={{ duration: 0.4, delay: 0.2, ease: EASE }}
               >
-                ResikLaundry
+                LaundryKini
               </motion.span>
             </span>
           </motion.div>
@@ -135,7 +135,7 @@ export default function PageTransition({ children }: PropsWithChildren) {
             transition={{ duration: 0.4, ease: EASE }}
           >
             <span className="relative text-3xl font-bold tracking-tight select-none overflow-hidden inline-block text-white">
-              ResikLaundry
+              LaundryKini
             </span>
           </motion.div>
         </motion.div>

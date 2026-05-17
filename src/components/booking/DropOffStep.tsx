@@ -76,7 +76,7 @@ export default function DropOffStep() {
               <span>1.2 km dari Anda</span>
             </div>
           </div>
-          <MapPlaceholder storeName="ResikLaundry – Sudirman" />
+          <MapPlaceholder storeName="LaundryKini – Sudirman" />
         </div>
 
         <div className="mt-3 flex items-center gap-2.5 p-3 border border-gray-100 rounded-xl">

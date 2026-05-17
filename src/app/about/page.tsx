@@ -20,7 +20,7 @@ export default function AboutPage() {
               <h1 className="text-4xl sm:text-5xl font-extrabold text-gray-900 mb-5 leading-tight">Cerita Kami</h1>
               <p className="text-gray-500 text-base leading-relaxed mb-8">
                 Berawal dari sebuah garasi kecil di tahun 2021,{" "}
-                <span className="text-blue-500 font-semibold">ResikLaundry</span>{" "}
+                <span className="text-blue-500 font-semibold">LaundryKini</span>{" "}
                 lahir dari kegelisahan akan sulitnya menemukan layanan cuci yang tidak hanya bersih, tapi
                 juga menghargai waktu pelanggan. Kami percaya bahwa setiap serat kain menceritakan sebuah kisah.
               </p>
@@ -44,7 +44,7 @@ export default function AboutPage() {
               <div className="relative w-[420px] h-[380px]">
                 <Image
                   src="/images/about-me-img/aboutMe-mascot.png"
-                  alt="Maskot ResikLaundry"
+                  alt="Maskot LaundryKini"
                   fill
                   className="object-contain object-right-bottom"
                   sizes="420px"
@@ -71,7 +71,7 @@ export default function AboutPage() {
                 <div className="relative w-80 h-96">
                   <Image
                     src="/images/about-me-img/aboutMe-ceo.png"
-                    alt="Ibu Ratih - Founder ResikLaundry"
+                    alt="Ibu Ratih - Founder LaundryKini"
                     fill
                     className="object-cover object-top"
                     sizes="320px"
@@ -87,7 +87,7 @@ export default function AboutPage() {
                     FOUNDER &amp; CEO RESIKLAUNDRY
                   </p>
                   <p className="text-gray-500 text-sm leading-relaxed mb-5">
-                    Berawal dari kecintaan pada kebersihan dan detail, Ibu Ratih membangun ResikLaundry dengan satu
+                    Berawal dari kecintaan pada kebersihan dan detail, Ibu Ratih membangun LaundryKini dengan satu
                     misi: menghadirkan kesegaran kelas dunia ke setiap rumah di Indonesia. Dengan pengalaman lebih
                     dari 15 tahun di industri tekstil, beliau memastikan setiap serat kain dirawat dengan teknologi
                     terbaik dan kasih sayang.
@@ -145,7 +145,7 @@ export default function AboutPage() {
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">Hadir di Berbagai Wilayah</h3>
                 <p className="text-gray-500 text-xs leading-relaxed">
-                  ResikLaundry memiliki 78 banyak cabang yang tersebar luas. Saat Anda memesan, sistem cerdas
+                  LaundryKini memiliki 78 banyak cabang yang tersebar luas. Saat Anda memesan, sistem cerdas
                   kami akan otomatis menghubungkan Anda dengan cabang terdekat untuk menjamin efisiensi dan
                   kecepatan layanan maksimal.
                 </p>
@@ -162,7 +162,7 @@ export default function AboutPage() {
                 allowFullScreen
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
-                title="Lokasi ResikLaundry"
+                title="Lokasi LaundryKini"
               />
               {/* Badge jam operasional */}
               <div className="absolute bottom-4 right-4 bg-white rounded-xl px-3 py-2 shadow-md flex items-center gap-2 text-xs">
