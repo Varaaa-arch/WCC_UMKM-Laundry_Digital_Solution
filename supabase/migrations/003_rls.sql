@@ -36,10 +36,11 @@ with check (id = auth.uid() or public.is_admin());
 -- SERVICES
 -- =========================
 drop policy if exists services_select_all_authenticated on public.services;
-create policy services_select_all_authenticated
+drop policy if exists services_select_public on public.services;
+create policy services_select_public
 on public.services
 for select
-using (auth.uid() is not null);
+using (true);
 
 drop policy if exists services_insert_admin_only on public.services;
 create policy services_insert_admin_only
