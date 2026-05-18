@@ -1,5 +1,6 @@
 "use client"
 
+import type { ReactNode } from "react"
 import { motion } from "framer-motion"
 import CountUp from "react-countup"
 import { cn } from "@/lib/utils"
@@ -18,6 +19,7 @@ type StatCardProps = {
   loading?: boolean
   index?: number
   formatValue?: (n: number) => string
+  footer?: ReactNode
 }
 
 const cardMotion = {
@@ -42,6 +44,7 @@ export function StatCard({
   loading,
   index = 0,
   formatValue,
+  footer,
 }: StatCardProps) {
   const display = formatValue
     ? formatValue(value)
@@ -103,6 +106,7 @@ export function StatCard({
               {change}% vs bulan lalu
             </span>
           )}
+          {footer && !loading && <div className="mt-2">{footer}</div>}
         </div>
         <span
           className={cn(

@@ -35,6 +35,9 @@ export default function HistoryPage() {
 
   if (authLoading || !user) return null
 
+  const displayName =
+    (user.user_metadata?.full_name as string) ?? user.email?.split("@")[0] ?? "User"
+
   const filtered = orders.filter((o) => {
     const matchSearch = search === "" ||
       o.id.toLowerCase().includes(search.toLowerCase()) ||
@@ -50,16 +53,14 @@ export default function HistoryPage() {
   const handleSearch = (val: string) => { setSearch(val); setPage(1) }
 
   return (
-    <DashboardShell>
-      <div className="px-6 py-6">
+    <DashboardShell
+      title="Riwayat Pesanan"
+      subtitle="Pantau dan kelola semua transaksi laundry kamu"
+      userName={displayName}
+    >
+      <div className="space-y-5 p-4 sm:p-6">
 
-        {/* Header */}
-        <div className="mb-5">
-          <h1 className="text-2xl font-bold text-gray-900">Riwayat Pesanan</h1>
-          <p className="text-gray-400 text-sm mt-1">Pantau dan kelola semua transaksi laundry kamu.</p>
-        </div>
-
-        {/* Filter + Search — di bawah judul */}
+        {/* Filter + Search */}
         <div className="flex flex-col sm:flex-row gap-3 mb-5">
           {/* Status filter */}
           <div className="flex gap-2 flex-wrap">

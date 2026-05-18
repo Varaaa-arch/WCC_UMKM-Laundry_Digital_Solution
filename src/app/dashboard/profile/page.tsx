@@ -13,8 +13,8 @@ export default function ProfilePage() {
   const { user, loading: authLoading, init } = useAuthStore()
   const { orders } = useOrders()
 
-  const [fullName, setFullName] = useState("")
-  const [phone, setPhone]       = useState("")
+  const [fullName, setFullName] = useState(() => (user?.user_metadata?.full_name as string) ?? "")
+  const [phone, setPhone]       = useState(() => (user?.user_metadata?.phone as string) ?? "")
   const [pushNotif, setPush]    = useState(true)
   const [emailPromo, setPromo]  = useState(false)
   const [saved, setSaved]       = useState(false)
@@ -29,14 +29,12 @@ export default function ProfilePage() {
   useEffect(() => { const u = init(); return u }, [init])
   useEffect(() => {
     if (!authLoading && !user) router.replace("/login")
-    if (user) {
-      setFullName((user.user_metadata?.full_name as string) ?? "")
-      setPhone((user.user_metadata?.phone as string) ?? "")
-    }
   }, [authLoading, user, router])
 
   if (authLoading || !user) return null
 
+  const displayName =
+    fullName || user.email?.split("@")[0] || "User"
   const initials   = fullName ? fullName.slice(0, 2).toUpperCase() : (user.email?.[0]?.toUpperCase() ?? "U")
   const doneOrders = orders.filter(o => ["delivered","finished"].includes(o.status))
   const loyaltyPts = doneOrders.length * 50
@@ -50,17 +48,15 @@ export default function ProfilePage() {
   }
 
   return (
-    <DashboardShell>
-      <div className="px-6 py-6 space-y-5">
-
-        {/* Header */}
-        <div>
-          <h1 className="text-2xl font-bold text-gray-900">Profil & Pengaturan</h1>
-          <p className="text-gray-400 text-sm mt-1">Kelola detail akun dan preferensi kamu.</p>
-        </div>
+    <DashboardShell
+      title="Profil & Pengaturan"
+      subtitle="Kelola detail akun dan preferensi kamu"
+      userName={displayName}
+    >
+      <div className="space-y-5 p-4 sm:p-6">
 
         {/* Top: Avatar banner */}
-        <div className="bg-gradient-to-r from-blue-600 to-blue-500 rounded-2xl p-6 flex items-center gap-5">
+        <div className="bg-linear-to-r from-blue-600 to-blue-500 rounded-2xl p-6 flex items-center gap-5">
           <div className="relative shrink-0">
             <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-2xl ring-4 ring-white/30">
               {initials}
