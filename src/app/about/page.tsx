@@ -9,8 +9,16 @@ export default function AboutPage() {
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Section 1 — Cerita Kami */}
-        <section className="bg-[#EEF4FB] pt-24">
-          <div className="max-w-5xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+        <section className="relative overflow-hidden pt-16 bg-[#EEF4FB]">          {/* Bubble decorations */}
+          <div className="absolute top-10 left-8 w-24 h-24 rounded-full bg-white/10 blur-sm" />
+          <div className="absolute top-32 left-24 w-12 h-12 rounded-full bg-white/15" />
+          <div className="absolute top-16 right-16 w-36 h-36 rounded-full bg-white/10 blur-md" />
+          <div className="absolute bottom-20 left-1/3 w-20 h-20 rounded-full bg-blue-300/20" />
+          <div className="absolute top-1/2 right-8 w-16 h-16 rounded-full bg-white/10" />
+          <div className="absolute bottom-10 right-1/4 w-10 h-10 rounded-full bg-white/20" />
+          <div className="absolute top-8 left-1/2 w-8 h-8 rounded-full bg-white/15" />
+
+          <div className="max-w-5xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
             {/* Kiri */}
             <div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full px-3 py-1 mb-6">
@@ -26,7 +34,7 @@ export default function AboutPage() {
               </p>
 
               {/* Badge */}
-              <div className="flex items-start gap-4 bg-white rounded-2xl p-5 shadow-sm border border-gray-100 max-w-sm">
+              <div className="flex items-start gap-4 bg-white rounded-2xl p-5 border border-gray-100 max-w-sm shadow-sm">
                 <div className="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
                   <Image src="/images/about-me-img/aboutMe-star.png" alt="" width={22} height={22} style={{ height: "auto" }} />
                 </div>
@@ -41,13 +49,13 @@ export default function AboutPage() {
 
             {/* Kanan — Mascot besar */}
             <div className="flex justify-center md:justify-end">
-              <div className="relative w-[420px] h-[380px]">
+              <div className="relative w-[620px] h-[560px]">
                 <Image
                   src="/images/about-me-img/aboutMe-mascot.png"
                   alt="Maskot LummyBlue"
                   fill
-                  className="object-contain object-right-bottom"
-                  sizes="420px"
+                  className="object-contain object-bottom-right drop-shadow-2xl"
+                  sizes="520px"
                   priority
                 />
               </div>
