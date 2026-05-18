@@ -5,19 +5,19 @@ import { usePathname } from "next/navigation"
 import { LayoutDashboard, ShoppingBag, History, User, Bell, HelpCircle, Home } from "lucide-react"
 
 const NAV_ITEMS = [
-  { label: "Dashboard",     href: "/dashboard",       icon: LayoutDashboard },
-  { label: "Pesan Laundry", href: "/dashboard/pesan", icon: ShoppingBag },
-  { label: "Riwayat",       href: "/history",         icon: History },
-  { label: "Profil",        href: "/profile",         icon: User },
+  { label: "Dashboard",     href: "/dashboard",         icon: LayoutDashboard },
+  { label: "Pesan Laundry", href: "/dashboard/pesan",   icon: ShoppingBag },
+  { label: "Riwayat",       href: "/dashboard/history", icon: History },
+  { label: "Profil",        href: "/dashboard/profile", icon: User },
 ]
 
 export default function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
 
   return (
-    <div className="flex min-h-screen bg-[#F0F4FA]">
+    <div className="flex h-screen overflow-hidden bg-[#F0F4FA]">
       {/* Sidebar */}
-      <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-100 shrink-0">
+      <aside className="hidden md:flex flex-col w-56 bg-white border-r border-gray-100 shrink-0 h-screen sticky top-0">
         <div className="px-5 py-6 border-b border-gray-100">
           <p className="text-blue-600 font-bold text-lg leading-none">LummyBlue</p>
           <p className="text-gray-400 text-[11px] mt-0.5">Laundry Management</p>
@@ -57,8 +57,7 @@ export default function DashboardShell({ children }: { children: React.ReactNode
             <HelpCircle className="w-4 h-4" />
           </button>
         </header>
-        <main className="flex-1 overflow-y-auto">
-          {children}
+        <main className="flex-1 overflow-y-auto">          {children}
         </main>
       </div>
     </div>
