@@ -4,7 +4,8 @@ import { NextResponse } from "next/server"
 import { createServerClient } from "@supabase/ssr"
 import { supabaseUrl, supabaseAnonKey } from "@/lib/supabase/config"
 
-const PROTECTED = ["/dashboard", "/layanan/booking", "/history", "/settings"]
+const PROTECTED = ["/dashboard", "/admin", "/layanan/booking", "/history", "/settings"]
+const ADMIN_ONLY = ["/admin"]
 
 export async function proxy(request: NextRequest) {
   const response = await updateSession(request)
@@ -22,6 +23,19 @@ export async function proxy(request: NextRequest) {
   const { data: { user } } = await supabase.auth.getUser()
   if (!user) {
     return NextResponse.redirect(new URL("/login", request.url))
+  }
+
+  const isAdminRoute = ADMIN_ONLY.some((p) => pathname.startsWith(p))
+  if (isAdminRoute) {
+    const { data: profile } = await supabase
+      .from("profiles")
+      .select("is_admin")
+      .eq("id", user.id)
+      .single()
+
+    if (!profile?.is_admin) {
+      return NextResponse.redirect(new URL("/dashboard", request.url))
+    }
   }
 
   return response
