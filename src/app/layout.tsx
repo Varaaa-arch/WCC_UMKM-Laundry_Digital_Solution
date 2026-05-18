@@ -39,7 +39,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col font-sans bg-[#EEF4FB]">
         <NavigationProvider>
           <ConditionalNavbar />
-          <div className="flex-1">
+          <div className="flex-1 pt-20">
             <PageTransition>{children}</PageTransition>
           </div>
         </NavigationProvider>
