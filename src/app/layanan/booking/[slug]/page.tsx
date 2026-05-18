@@ -80,7 +80,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
 
   return (
     <>
-      <main className="min-h-screen bg-[#EEF4FB] px-4 py-8">
+      <main className="min-h-screen bg-[#EEF4FB] px-4 py-8 pt-24">
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
 
           {/* LEFT — Form */}

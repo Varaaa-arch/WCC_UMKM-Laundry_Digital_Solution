@@ -32,10 +32,16 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     .eq("id", user.id)
     .single();
 
+  // Generate unique order number to avoid race condition on DB trigger
+  const year = new Date().getFullYear();
+  const unique = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`.toUpperCase().slice(0, 6);
+  const orderNumber = `LND-${year}-${unique}`;
+
   const { data, error } = await supabase
     .from("orders")
     .insert({
       user_id:       user.id,
+      order_number:  orderNumber,
       customer_name: profile?.name ?? user.email ?? "User",
       phone:         profile?.phone ?? "",
       service_id:    payload.serviceId,
