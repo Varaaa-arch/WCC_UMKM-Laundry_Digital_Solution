@@ -26,11 +26,21 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     return { success: false, error: "Sesi login tidak ditemukan. Silakan login ulang." };
   }
 
+  // Ensure profile row exists (handles users created before trigger was set up)
   const { data: profile } = await supabase
     .from("profiles")
     .select("name, phone")
     .eq("id", user.id)
     .single();
+
+  if (!profile) {
+    await supabase.from("profiles").upsert({
+      id: user.id,
+      name: user.user_metadata?.full_name ?? user.email ?? "User",
+      email: user.email ?? "",
+      phone: "",
+    }, { onConflict: "id" });
+  }
 
   // Generate unique order number to avoid race condition on DB trigger
   const year = new Date().getFullYear();
@@ -42,7 +52,7 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
     .insert({
       user_id:       user.id,
       order_number:  orderNumber,
-      customer_name: profile?.name ?? user.email ?? "User",
+      customer_name: profile?.name ?? user.user_metadata?.full_name ?? user.email ?? "User",
       phone:         profile?.phone ?? "",
       service_id:    payload.serviceId,
       weight:        payload.estimatedWeight,

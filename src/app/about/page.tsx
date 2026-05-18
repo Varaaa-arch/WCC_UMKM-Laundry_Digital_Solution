@@ -9,7 +9,7 @@ export default function AboutPage() {
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Section 1 — Cerita Kami */}
-        <section className="relative overflow-hidden pt-16 bg-[#EEF4FB]">          {/* Bubble decorations */}
+        <section className="relative overflow-hidden pt-[72px] bg-[#EEF4FB]">          {/* Bubble decorations */}
           <div className="absolute top-10 left-8 w-24 h-24 rounded-full bg-white/10 blur-sm" />
           <div className="absolute top-32 left-24 w-12 h-12 rounded-full bg-white/15" />
           <div className="absolute top-16 right-16 w-36 h-36 rounded-full bg-white/10 blur-md" />

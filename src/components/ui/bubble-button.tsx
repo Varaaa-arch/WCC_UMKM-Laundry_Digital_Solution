@@ -17,34 +17,34 @@ function createScene(canvas: HTMLCanvasElement) {
 
   // Lights
   scene.add(new THREE.AmbientLight(0xffffff, 1.2));
-  const hemi = new THREE.HemisphereLight(0xffffff, 0x0044ff, 2.0);
+  const hemi = new THREE.HemisphereLight(0xffffff, 0x99ccff, 1.5);
   scene.add(hemi);
 
-  const spotMain = new THREE.SpotLight(0xffffff, 20.0, 0);
+  const spotMain = new THREE.SpotLight(0xddeeff, 15.0, 0);
   spotMain.position.set(-50, 100, 100);
   scene.add(spotMain);
 
-  const spotFill = new THREE.SpotLight(0x88ccff, 15.0, 0);
+  const spotFill = new THREE.SpotLight(0xaaddff, 10.0, 0);
   spotFill.position.set(100, -100, 100);
   scene.add(spotFill);
 
   // Water bubble material
   const mat = new THREE.MeshPhysicalMaterial({
-    color: 0x33b5e5,
-    emissive: 0x0055aa,
-    emissiveIntensity: 0.3,
+    color: 0x90caf9,
+    emissive: 0x4fc3f7,
+    emissiveIntensity: 0.15,
     roughness: 0.05,
-    metalness: 0.1,
-    transmission: 0.9,
+    metalness: 0.05,
+    transmission: 0.92,
     thickness: 1.5,
     transparent: true,
     opacity: 0,
-    reflectivity: 1.0,
-    ior: 1.45,
-    attenuationColor: new THREE.Color(0x0088ff),
-    attenuationDistance: 2.0,
+    reflectivity: 0.8,
+    ior: 1.4,
+    attenuationColor: new THREE.Color(0xbbdefb),
+    attenuationDistance: 2.5,
     clearcoat: 1.0,
-    clearcoatRoughness: 0.1,
+    clearcoatRoughness: 0.08,
   });
 
   const bubbles = [
