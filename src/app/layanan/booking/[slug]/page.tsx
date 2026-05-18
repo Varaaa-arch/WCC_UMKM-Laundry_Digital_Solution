@@ -174,6 +174,28 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                       className="w-full border border-gray-200 rounded-xl px-4 py-3 text-sm text-gray-800 placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-transparent transition"
                     />
                   </div>
+
+                  {/* Fake nearby laundry detection */}
+                  {address.trim().length >= 10 && (
+                    <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 flex flex-col gap-3">
+                      <div className="flex items-center gap-2">
+                        <MapPinIcon className="w-4 h-4 text-blue-500 shrink-0" />
+                        <span className="text-xs font-bold text-blue-600 uppercase tracking-wide">Outlet Terdekat Ditemukan</span>
+                      </div>
+                      {[
+                        { name: "LummyBlue Cabang Pusat", dist: "0.8 km", eta: "~10 menit" },
+                        { name: "LummyBlue Cabang Selatan", dist: "1.4 km", eta: "~15 menit" },
+                      ].map((outlet) => (
+                        <div key={outlet.name} className="bg-white rounded-xl px-4 py-3 flex items-center justify-between shadow-sm">
+                          <div>
+                            <p className="text-sm font-semibold text-gray-900">{outlet.name}</p>
+                            <p className="text-xs text-gray-400 mt-0.5">Jarak {outlet.dist} · ETA kurir {outlet.eta}</p>
+                          </div>
+                          <span className="text-xs font-bold text-green-500 bg-green-50 rounded-full px-2.5 py-1">Tersedia</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   <div className="grid grid-cols-2 gap-3">
                     <div>
                       <label className="text-xs font-semibold text-gray-700 mb-1.5 block">Catatan (Opsional)</label>

@@ -60,7 +60,7 @@ export default function AboutPage() {
           <div className="max-w-5xl mx-auto px-6 pt-10 pb-0">
             {/* Label tengah atas */}
             <div className="flex justify-center mb-8">
-              <span className="text-xs font-bold text-blue-500 tracking-widest uppercase border border-blue-300 rounded-full px-5 py-1.5 bg-white/60">
+              <span className="text-sm font-bold text-blue-500 tracking-widest uppercase border border-blue-300 rounded-full px-6 py-2 bg-white/60">
                 VISI DARI SANG PENDIRI
               </span>
             </div>
@@ -68,25 +68,25 @@ export default function AboutPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-end">
               {/* Kiri — Foto CEO overflow ke bawah */}
               <div className="flex justify-center md:justify-start">
-                <div className="relative w-80 h-96">
+                <div className="relative w-96 h-[480px]">
                   <Image
                     src="/images/about-me-img/aboutMe-ceo.png"
                     alt="Ibu Ratih - Founder LummyBlue"
                     fill
                     className="object-cover object-top"
-                    sizes="320px"
+                    sizes="384px"
                   />
                 </div>
               </div>
 
               {/* Kanan — Info card */}
               <div className="pb-10">
-                <div className="bg-white rounded-2xl p-6 shadow-sm">
-                  <h2 className="text-2xl font-bold text-gray-900 mb-1">Ibu Ratih</h2>
-                  <p className="text-xs font-bold text-blue-500 tracking-widest uppercase mb-4">
+                <div className="bg-white rounded-2xl p-8 shadow-sm">
+                  <h2 className="text-3xl font-bold text-gray-900 mb-1">Ibu Ratih</h2>
+                  <p className="text-sm font-bold text-blue-500 tracking-widest uppercase mb-5">
                     FOUNDER &amp; CEO LUMMYBLUE
                   </p>
-                  <p className="text-gray-500 text-sm leading-relaxed mb-5">
+                  <p className="text-gray-500 text-base leading-relaxed mb-6">
                     Berawal dari kecintaan pada kebersihan dan detail, Ibu Ratih membangun LummyBlue dengan satu
                     misi: menghadirkan kesegaran kelas dunia ke setiap rumah di Indonesia. Dengan pengalaman lebih
                     dari 15 tahun di industri tekstil, beliau memastikan setiap serat kain dirawat dengan teknologi
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     {["#WomenInBusiness", "#LaundryExpert", "#CleanLiving"].map((tag) => (
                       <span
                         key={tag}
-                        className="text-xs font-semibold text-blue-500 bg-blue-50 border border-blue-100 rounded-full px-3 py-1"
+                        className="text-sm font-semibold text-blue-500 bg-blue-50 border border-blue-100 rounded-full px-4 py-1.5"
                       >
                         {tag}
                       </span>
