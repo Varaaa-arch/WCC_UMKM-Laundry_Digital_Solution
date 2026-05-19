@@ -1,15 +1,16 @@
 "use client"
 
+import { useId } from "react"
 import { motion } from "framer-motion"
 import {
   Area,
   AreaChart,
   CartesianGrid,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts"
+import { ChartContainer } from "@/components/admin/ChartContainer"
 import { Skeleton } from "@/components/ui/skeleton"
 import type { ChartPoint } from "@/lib/admin/types"
 import { formatCurrency } from "@/lib/admin/constants"
@@ -43,6 +44,8 @@ export function RevenueChart({
   data: ChartPoint[]
   loading?: boolean
 }) {
+  const gradientId = useId().replace(/:/g, "")
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 16 }}
@@ -75,11 +78,16 @@ export function RevenueChart({
           <p className="mt-1 text-xs text-slate-400">Data akan muncul setelah ada pesanan</p>
         </div>
       ) : (
-        <div className="h-[260px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <AreaChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+        <ChartContainer height={260}>
+          {({ width, height }) => (
+            <AreaChart
+              width={width}
+              height={height}
+              data={data}
+              margin={{ top: 8, right: 8, left: 0, bottom: 0 }}
+            >
               <defs>
-                <linearGradient id="revenueGrad" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id={gradientId} x1="0" y1="0" x2="0" y2="1">
                   <stop offset="0%" stopColor="#2563eb" stopOpacity={0.35} />
                   <stop offset="100%" stopColor="#2563eb" stopOpacity={0} />
                 </linearGradient>
@@ -107,11 +115,11 @@ export function RevenueChart({
                 dataKey="revenue"
                 stroke="#2563eb"
                 strokeWidth={2.5}
-                fill="url(#revenueGrad)"
+                fill={`url(#${gradientId})`}
               />
             </AreaChart>
-          </ResponsiveContainer>
-        </div>
+          )}
+        </ChartContainer>
       )}
     </motion.section>
   )

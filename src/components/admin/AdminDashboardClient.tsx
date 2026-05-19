@@ -134,7 +134,7 @@ export default function AdminDashboardClient() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 xl:grid-cols-3">
-          <div className="xl:col-span-2">
+          <div className="min-w-0 xl:col-span-2">
             <RevenueChart data={data?.chart ?? []} loading={isLoading} />
           </div>
           <ActivityFeed items={data?.activity ?? []} loading={isLoading} />

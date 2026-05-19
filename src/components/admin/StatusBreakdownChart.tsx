@@ -5,11 +5,11 @@ import {
   Bar,
   BarChart,
   CartesianGrid,
-  ResponsiveContainer,
   Tooltip,
   XAxis,
   YAxis,
 } from "recharts"
+import { ChartContainer } from "@/components/admin/ChartContainer"
 import { Skeleton } from "@/components/ui/skeleton"
 import type { StatusBreakdown } from "@/lib/admin/types"
 
@@ -42,9 +42,14 @@ export function StatusBreakdownChart({
           <p className="text-sm font-medium text-slate-600">Belum ada data</p>
         </motion.div>
       ) : (
-        <div className="h-[240px] w-full">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={data} margin={{ top: 8, right: 8, left: 0, bottom: 0 }}>
+        <ChartContainer height={240}>
+          {({ width, height }) => (
+            <BarChart
+              width={width}
+              height={height}
+              data={data}
+              margin={{ top: 8, right: 8, left: 0, bottom: 56 }}
+            >
               <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
               <XAxis
                 dataKey="label"
@@ -71,8 +76,8 @@ export function StatusBreakdownChart({
               />
               <Bar dataKey="count" fill="#2563eb" radius={[6, 6, 0, 0]} />
             </BarChart>
-          </ResponsiveContainer>
-        </div>
+          )}
+        </ChartContainer>
       )}
     </motion.section>
   )
