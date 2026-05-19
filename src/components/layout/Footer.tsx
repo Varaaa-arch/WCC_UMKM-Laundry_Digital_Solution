@@ -6,7 +6,7 @@ import { Separator } from "@/components/ui/separator"
 
 export function Footer() {
   return (
-    <footer className="border-t border-slate-100 bg-white">
+    <footer className="bg-white shadow-[0_-4px_24px_-4px_rgba(15,23,42,0.12)]">
       <div className="mx-auto max-w-7xl px-4 pt-16 pb-5 sm:px-6 lg:px-8 lg:pt-20 lg:pb-8">
         <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4 lg:gap-10">
           <div className="sm:col-span-2 lg:col-span-1">

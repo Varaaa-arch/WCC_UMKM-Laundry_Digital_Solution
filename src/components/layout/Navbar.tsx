@@ -94,12 +94,12 @@ export function Navbar() {
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-3">
           {loading ? (
-            <div className="w-16 h-8 bg-gray-700 rounded-full animate-pulse" />
+            <div className="w-16 h-8 bg-white/10 rounded-full animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
-              <NavLink href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-gray-300 hover:text-white transition-colors cursor-pointer">
+              <NavLink href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors cursor-pointer">
                 <Avatar className="w-7 h-7">
-                  <AvatarFallback className="bg-blue-500 text-white text-xs font-semibold">
+                  <AvatarFallback className="bg-[#5B7CFA] text-white text-xs font-semibold">
                     {(user.user_metadata?.full_name as string)?.[0]?.toUpperCase() ?? user.email?.[0]?.toUpperCase() ?? "U"}
                   </AvatarFallback>
                 </Avatar>
@@ -107,7 +107,7 @@ export function Navbar() {
               </NavLink>
               <button
                 onClick={handleSignOut}
-                className="flex items-center gap-1.5 text-sm text-gray-400 hover:text-red-400 transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 text-sm text-white/40 hover:text-red-400 transition-colors cursor-pointer"
               >
                 <LogOut className="w-4 h-4" />
               </button>

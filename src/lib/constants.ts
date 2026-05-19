@@ -123,19 +123,19 @@
         text: "Sangat puas dengan layanannya! Wanginya enak banget dan rapi sekali setrikanya. Menghemat waktu saya banget.",
         name: "Siska Pratama",
         role: "Mahasiswi",
-        avatarAlt: "/images/siska-pratama.png",
+        portraitSrc: "/images/testimonials/siska-pratama.png",
       },
       {
         text: "Fitur pickup & delivery-nya juara. Kurirnya ramah dan selalu tepat waktu sesuai jadwal yang saya pilih di app.",
         name: "Andi Wijaya",
         role: "Freelancer",
-        avatarAlt: "/images/andi-wijaya.png",
+        portraitSrc: "/images/testimonials/andi-wijaya.png",
       },
       {
         text: "Harganya sangat masuk akal dibanding kompetitor. Hasil cuci keringnya tidak merusak bahan pakaian mahal saya.",
         name: "Budi Hartono",
         role: "Pengusaha",
-        avatarAlt: "/images/budi-hartono.png",
+        portraitSrc: "/images/testimonials/budi-hartono.png",
       },
     ] as const,
   } as const
