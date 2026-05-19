@@ -2,7 +2,7 @@ import { create } from "zustand";
 import type { Service } from "@/types/service";
 
 export type Step = "layanan" | "dropoff" | "pembayaran";
-export type PaymentMethod = "cod" | "transfer";
+export type PaymentMethod = "cod" | "qris";
 export type PickupMethod = "ambil-sendiri" | "antar-jemput";
 
 export const ANTAR_JEMPUT_FEE = 15000;

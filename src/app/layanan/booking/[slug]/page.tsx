@@ -5,8 +5,7 @@ import { use, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Footer } from "@/components/layout/Footer";
 import { useOrderStore, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
-import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, Loader2Icon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
-import { confirmBooking } from "@/actions/booking-action";
+import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
 import { getServices } from "@/actions/service-action";
 import { BubbleButton } from "@/components/ui/bubble-button";
 import type { Service } from "@/types/service";
@@ -32,7 +31,6 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
     pickupTime, setPickupTime,
   } = useOrderStore();
 
-  const [loading, setLoading] = useState(false);
   const [service, setServiceState] = useState<Service | null>(selectedService?.slug === slug ? selectedService : null);
 
   useEffect(() => {
@@ -58,24 +56,9 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
   const antarJemputFee = pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0;
   const total = subtotal + antarJemputFee;
 
-  const handleConfirm = async () => {
-    setLoading(true);
-    const result = await confirmBooking({
-      serviceId: service.id,
-      estimatedWeight,
-      totalPrice: total,
-      paymentMethod: "cod",
-      pickupMethod,
-      address,
-      note,
-      pickupTime,
-    });
-    setLoading(false);
-    if (result.success) {
-      router.push(`/layanan/booking/success?orderId=${result.orderId}`);
-    } else {
-      alert(result.error);
-    }
+  const handleContinueToPayment = () => {
+    if (pickupMethod === "antar-jemput" && !address.trim()) return;
+    router.push(`/layanan/booking/${slug}/payment`);
   };
 
   return (
@@ -251,11 +234,11 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
               </div>
 
               <BubbleButton
-                onClick={handleConfirm}
-                disabled={loading || (pickupMethod === "antar-jemput" && !address.trim())}
+                onClick={handleContinueToPayment}
+                disabled={pickupMethod === "antar-jemput" && !address.trim()}
                 className="mt-5 w-full bg-linear-to-r from-blue-400 to-blue-600 text-white font-bold text-sm py-3.5 px-8 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-300 hover:scale-[1.01] active:scale-[0.98] disabled:opacity-60 disabled:cursor-not-allowed disabled:hover:scale-100"
               >
-                {loading ? <Loader2Icon className="w-4 h-4 animate-spin" /> : <>Konfirmasi Pesanan <ChevronRightIcon className="w-4 h-4" /></>}
+                Lanjut ke Pembayaran <ChevronRightIcon className="w-4 h-4" />
               </BubbleButton>
 
               <BubbleButton

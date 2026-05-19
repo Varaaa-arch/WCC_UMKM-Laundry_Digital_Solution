@@ -10,9 +10,9 @@ const PAYMENT_OPTIONS = [
     desc: "Pembayaran saat drop-off atau mengambil",
   },
   {
-    id: "transfer" as const,
-    label: "Transfer Bank & E-Wallet",
-    desc: "QRIS, BCA, Mandiri, BNI, BRI, DANA, GoPay, ShopeePay",
+    id: "qris" as const,
+    label: "QRIS",
+    desc: "Scan QR & upload bukti pembayaran",
   },
 ];
 

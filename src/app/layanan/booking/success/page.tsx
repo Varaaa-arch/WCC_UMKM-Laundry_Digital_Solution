@@ -70,7 +70,7 @@ export default async function BookingSuccessPage({
             Ke Dashboard
           </BubbleLink>
           <BubbleLink
-            href="/riwayat"
+            href="/dashboard/history"
             className="w-full bg-white hover:bg-gray-50 active:scale-[0.98] border-2 border-blue-100 text-blue-600 font-semibold text-sm py-3.5 rounded-xl transition-all duration-150 text-center block"
           >
             Lihat Riwayat Pesanan

@@ -47,20 +47,26 @@ export async function confirmBooking(payload: BookingPayload): Promise<BookingRe
   const unique = `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 5)}`.toUpperCase().slice(0, 6);
   const orderNumber = `LND-${year}-${unique}`;
 
+  const paymentStatus =
+    payload.paymentMethod === "qris" ? "processing" : "pending";
+
   const { data, error } = await supabase
     .from("orders")
     .insert({
-      user_id:       user.id,
-      order_number:  orderNumber,
-      customer_name: profile?.name ?? user.user_metadata?.full_name ?? user.email ?? "User",
-      phone:         profile?.phone ?? "",
-      service_id:    payload.serviceId,
-      weight:        payload.estimatedWeight,
-      order_type:    payload.pickupMethod === "antar-jemput" ? "pickup" : "dropoff",
-      total_price:   payload.totalPrice,
-      address:       payload.address ?? null,
-      note:          payload.note ?? null,
-      pickup_time:   payload.pickupTime ?? null,
+      user_id:         user.id,
+      order_number:    orderNumber,
+      customer_name:   profile?.name ?? user.user_metadata?.full_name ?? user.email ?? "User",
+      phone:           profile?.phone ?? "",
+      service_id:      payload.serviceId,
+      weight:          payload.estimatedWeight,
+      order_type:      payload.pickupMethod === "antar-jemput" ? "pickup" : "dropoff",
+      total_price:     payload.totalPrice,
+      address:         payload.address ?? null,
+      note:            payload.note ?? null,
+      pickup_time:     payload.pickupTime ?? null,
+      payment_method:  payload.paymentMethod,
+      payment_status:  paymentStatus,
+      is_paid:         false,
     })
     .select("id")
     .single();

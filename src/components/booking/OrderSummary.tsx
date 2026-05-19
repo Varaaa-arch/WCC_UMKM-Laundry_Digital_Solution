@@ -2,39 +2,20 @@
 
 import { ShieldCheckIcon, ChevronRightIcon, Loader2Icon } from "lucide-react";
 import { useOrderStore, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
-import { confirmBooking } from "@/actions/booking-action";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { BubbleButton } from "@/components/ui/bubble-button";
 
 export default function OrderSummary() {
-  const { selectedService, estimatedWeight, pickupMethod, paymentMethod, address, note, pickupTime, setStep } = useOrderStore();
-  const [loading, setLoading] = useState(false);
+  const { selectedService, estimatedWeight, pickupMethod, setStep } = useOrderStore();
   const router = useRouter();
 
   const subtotal = selectedService ? selectedService.price_per_kg * estimatedWeight : 0;
   const antarJemputFee = pickupMethod === "antar-jemput" ? ANTAR_JEMPUT_FEE : 0;
   const total = subtotal + antarJemputFee;
 
-  const handleConfirm = async () => {
-    if (!selectedService) return;
-    setLoading(true);
-    const result = await confirmBooking({
-      serviceId: selectedService.id,
-      estimatedWeight,
-      totalPrice: total,
-      paymentMethod,
-      pickupMethod,
-      address,
-      note,
-      pickupTime,
-    });
-    setLoading(false);
-    if (result.success) {
-      router.push(`/layanan/booking/success?orderId=${result.orderId}`);
-    } else {
-      alert(result.error);
-    }
+  const handleContinue = () => {
+    if (!selectedService?.slug) return;
+    router.push(`/layanan/booking/${selectedService.slug}/payment`);
   };
 
   return (
@@ -65,11 +46,11 @@ export default function OrderSummary() {
 
       <div className="flex flex-col gap-2.5 mt-5">
         <BubbleButton
-          onClick={handleConfirm}
-          disabled={loading}
+          onClick={handleContinue}
           className="w-full bg-linear-to-r from-blue-400 to-blue-600 disabled:opacity-60 active:scale-[0.98] text-white font-semibold text-sm py-3 rounded-xl transition-all duration-150 flex items-center justify-center gap-2 shadow-md shadow-blue-200"
         >
-          {loading ? <Loader2Icon className="w-4 h-4 animate-spin" /> : <><span>Konfirmasi Pesanan</span><ChevronRightIcon className="w-4 h-4" /></>}
+          <span>Lanjut ke Pembayaran</span>
+          <ChevronRightIcon className="w-4 h-4" />
         </BubbleButton>
         <BubbleButton
           onClick={() => { setStep("layanan"); router.push("/layanan"); }}
