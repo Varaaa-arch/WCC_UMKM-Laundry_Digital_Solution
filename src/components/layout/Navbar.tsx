@@ -17,6 +17,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { getAppHomePath } from "@/lib/auth/home-path"
 import { useAuthStore } from "@/store/useAuthStore"
 import { signOut } from "@/actions/auth-action"
 import { useNavigation } from "@/contexts/NavigationContext"
@@ -43,9 +44,10 @@ function NavLink({ href, children, className, onClick, ...props }: React.Compone
 export function Navbar() {
   const pathname = usePathname()
   const prefersReducedMotion = useReducedMotion()
-  const { user, loading, init } = useAuthStore()
+  const { user, loading, isAdmin, roleLoaded, init } = useAuthStore()
   const { navigate } = useNavigation()
   const reduced = Boolean(prefersReducedMotion)
+  const appHomeHref = roleLoaded ? getAppHomePath(isAdmin) : "/dashboard"
 
   React.useEffect(() => {
     const unsub = init()
@@ -97,7 +99,7 @@ export function Navbar() {
             <div className="w-16 h-8 bg-white/10 rounded-full animate-pulse" />
           ) : user ? (
             <div className="flex items-center gap-3">
-              <NavLink href="/dashboard" className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors cursor-pointer">
+              <NavLink href={appHomeHref} className="flex items-center gap-2 text-sm font-medium text-white/70 hover:text-white transition-colors cursor-pointer">
                 <Avatar className="w-7 h-7">
                   <AvatarFallback className="bg-[#5B7CFA] text-white text-xs font-semibold">
                     {(user.user_metadata?.full_name as string)?.[0]?.toUpperCase() ?? user.email?.[0]?.toUpperCase() ?? "U"}
@@ -166,8 +168,8 @@ export function Navbar() {
                 <SheetClose asChild>
                   {user ? (
                     <div className="flex flex-col gap-3">
-                      <NavLink href="/dashboard" className="flex items-center gap-2 py-2 text-base font-semibold text-blue-600 cursor-pointer">
-                        <LayoutDashboard className="w-4 h-4" /> Dashboard
+                      <NavLink href={appHomeHref} className="flex items-center gap-2 py-2 text-base font-semibold text-blue-600 cursor-pointer">
+                        <LayoutDashboard className="w-4 h-4" /> {isAdmin ? "Admin Dashboard" : "Dashboard"}
                       </NavLink>
                       <button
                         onClick={handleSignOut}

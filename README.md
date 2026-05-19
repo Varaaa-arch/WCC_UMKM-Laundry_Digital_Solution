@@ -1,36 +1,101 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# LummyBlue
 
-## Getting Started
+Aplikasi web layanan laundry modern berbasis Next.js. Pengguna dapat memesan cuci, melacak status pesanan, dan mengelola profil. Admin mengelola pesanan, pelanggan, analitik, dan layanan melalui panel terpisah.
 
-First, run the development server:
+## Fitur utama
+
+- Landing page marketing dengan animasi khusus (beranda tidak memakai sistem animasi global)
+- Pemesanan layanan (kiloan, setrika, dry clean, dan lainnya)
+- Alur booking: pilih layanan, estimasi berat, metode pengambilan, pembayaran
+- Dashboard pengguna: ringkasan pesanan, riwayat, profil, alamat tersimpan
+- Dashboard admin: overview, orders, customers, analytics, settings
+- Autentikasi Supabase (email/password dan OAuth)
+- Role admin (`profiles.is_admin`) dengan redirect otomatis ke `/admin`
+
+## Tech stack
+
+Next.js 16, React 19, TypeScript, Tailwind CSS 4, Supabase, TanStack Query, Zustand, Framer Motion, Lenis.
+
+Detail lengkap: [docs/tech-stack.md](docs/tech-stack.md)
+
+## Persyaratan
+
+- Node.js 20 atau lebih baru
+- npm (atau pnpm/yarn)
+- Proyek Supabase (URL, anon key, service role key)
+
+## Instalasi cepat
+
+```bash
+git clone <repository-url>
+cd laundry
+npm install
+cp .env.example .env.local
+```
+
+Isi variabel di `.env.local`, lalu jalankan migrasi Supabase (lihat [docs/setup.md](docs/setup.md)).
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Buka [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Perintah
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Perintah        | Keterangan                    |
+|-----------------|-------------------------------|
+| `npm run dev`   | Server development            |
+| `npm run build` | Build production              |
+| `npm run start` | Jalankan build production     |
+| `npm run lint`  | ESLint                        |
 
-## Learn More
+## Struktur dokumentasi
 
-To learn more about Next.js, take a look at the following resources:
+| Dokumen | Isi |
+|---------|-----|
+| [docs/overview.md](docs/overview.md) | Gambaran arsitektur dan route |
+| [docs/setup.md](docs/setup.md) | Setup lokal dan Supabase |
+| [docs/tech-stack.md](docs/tech-stack.md) | Library dan konvensi |
+| [docs/features.md](docs/features.md) | Fitur per modul |
+| [docs/flow.md](docs/flow.md) | Alur bisnis pengguna dan admin |
+| [docs/database.md](docs/database.md) | Skema database dan RLS |
+| [docs/api.md](docs/api.md) | API routes |
+| [docs/deployment.md](docs/deployment.md) | Deploy production |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Struktur folder (ringkas)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+src/
+  app/              # App Router (halaman & API)
+  components/       # UI, dashboard, admin, motion
+  actions/          # Server Actions
+  hooks/            # React hooks
+  lib/              # Utilitas, Supabase, admin, motion
+  store/            # Zustand stores
+supabase/
+  migrations/       # SQL migrasi
+  seed.sql          # Data awal (opsional)
+docs/               # Dokumentasi proyek
+```
 
-## Deploy on Vercel
+## Environment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Salin `.env.example` ke `.env.local`:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```env
+NEXT_PUBLIC_SUPABASE_URL=
+NEXT_PUBLIC_SUPABASE_ANON_KEY=
+SUPABASE_SERVICE_ROLE_KEY=
+NEXT_PUBLIC_APP_URL=http://localhost:3000
+NEXT_PUBLIC_AUTH_REDIRECT_URL=http://localhost:3000/auth/callback
+```
+
+## Hak akses
+
+- **User biasa**: `/dashboard`, booking, riwayat
+- **Admin** (`is_admin = true`): `/admin` dan API admin; navbar dan login mengarah ke panel admin
+
+## Lisensi
+
+Lihat file [LICENSE](LICENSE) di root repositori.

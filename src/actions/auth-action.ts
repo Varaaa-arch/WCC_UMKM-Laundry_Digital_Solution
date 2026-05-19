@@ -1,6 +1,7 @@
 "use server"
 
 import { redirect } from "next/navigation"
+import { resolveAppHomePath } from "@/lib/auth/resolve-home-path"
 import { createClient } from "@/lib/supabase/server"
 
 export type OAuthProvider = "google" | "discord"
@@ -12,7 +13,7 @@ export async function signIn(formData: FormData) {
     password: formData.get("password") as string,
   })
   if (error) return { error: error.message }
-  redirect("/dashboard")
+  redirect(await resolveAppHomePath())
 }
 
 export async function signUp(formData: FormData) {
@@ -25,7 +26,7 @@ export async function signUp(formData: FormData) {
     },
   })
   if (error) return { error: error.message }
-  redirect("/dashboard")
+  redirect(await resolveAppHomePath())
 }
 
 export async function signOut() {
