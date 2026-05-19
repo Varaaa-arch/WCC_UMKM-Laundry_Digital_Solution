@@ -13,11 +13,11 @@ async function fetchStats() {
   }>
 }
 
-async function fetchOrders(params: { q: string; status: string }) {
+async function fetchOrders(params: { q: string; status: string; limit: number }) {
   const sp = new URLSearchParams()
   if (params.q) sp.set("q", params.q)
   if (params.status !== "all") sp.set("status", params.status)
-  sp.set("limit", "15")
+  sp.set("limit", String(params.limit))
 
   const res = await fetch(`/api/admin/orders?${sp}`)
   if (!res.ok) throw new Error("Gagal memuat pesanan")
@@ -31,10 +31,10 @@ export function useAdminStats() {
   })
 }
 
-export function useAdminOrders(q: string, status: string) {
+export function useAdminOrders(q: string, status: string, limit = 15) {
   return useQuery({
-    queryKey: ["admin", "orders", q, status],
-    queryFn: () => fetchOrders({ q, status }),
+    queryKey: ["admin", "orders", q, status, limit],
+    queryFn: () => fetchOrders({ q, status, limit }),
   })
 }
 

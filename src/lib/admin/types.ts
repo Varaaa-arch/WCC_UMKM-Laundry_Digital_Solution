@@ -42,3 +42,37 @@ export type AdminDashboardData = {
   orders: AdminOrder[]
   activity: ActivityItem[]
 }
+
+export type AdminCustomer = {
+  id: string
+  name: string
+  email: string | null
+  phone: string
+  is_admin: boolean
+  created_at: string
+  order_count: number
+}
+
+export type AdminService = {
+  id: string
+  name: string
+  price_per_kg: number
+  description: string | null
+  duration: string | null
+  slug?: string | null
+}
+
+export type StatusBreakdown = {
+  status: string
+  label: string
+  count: number
+}
+
+export type AdminAnalyticsData = {
+  stats: AdminStats
+  chart: ChartPoint[]
+  activity: ActivityItem[]
+  statusBreakdown: StatusBreakdown[]
+  paidRate: number
+  avgOrderValue: number
+}

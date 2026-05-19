@@ -56,7 +56,10 @@ export function AppSidebar({
 
       <nav className="flex-1 space-y-1 px-3 py-4">
         {nav.map(({ label, href, icon: Icon, disabled }) => {
-          const active = pathname === href
+          const active =
+            href === "/admin"
+              ? pathname === "/admin"
+              : pathname === href || pathname.startsWith(`${href}/`)
           return (
             <Link
               key={label}

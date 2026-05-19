@@ -43,11 +43,23 @@ import type { AdminOrder } from "@/lib/admin/types"
 import { toast } from "sonner"
 import type { OrderStatus } from "@/lib/admin/constants"
 
-export function RecentOrdersTable() {
+type OrdersTableProps = {
+  title?: string
+  subtitle?: string
+  limit?: number
+  showPhone?: boolean
+}
+
+export function RecentOrdersTable({
+  title = "Pesanan Terbaru",
+  subtitle = "Kelola dan filter pesanan masuk",
+  limit = 15,
+  showPhone = false,
+}: OrdersTableProps = {}) {
   const [search, setSearch] = useState("")
   const [status, setStatus] = useState("all")
   const debouncedSearch = useDebounce(search, 300)
-  const { data, isLoading, isFetching } = useAdminOrders(debouncedSearch, status)
+  const { data, isLoading, isFetching } = useAdminOrders(debouncedSearch, status, limit)
   const updateStatus = useUpdateOrderStatus()
 
   const orders = data?.orders ?? []
@@ -73,6 +85,17 @@ export function RecentOrdersTable() {
           </span>
         ),
       },
+      ...(showPhone
+        ? [
+            {
+              accessorKey: "phone",
+              header: "Telepon",
+              cell: ({ row }: { row: { original: AdminOrder } }) => (
+                <span className="text-sm text-slate-600">{row.original.phone}</span>
+              ),
+            } as ColumnDef<AdminOrder>,
+          ]
+        : []),
       {
         accessorKey: "total_price",
         header: "Total",
@@ -129,7 +152,7 @@ export function RecentOrdersTable() {
         ),
       },
     ],
-    [updateStatus]
+    [updateStatus, showPhone]
   )
 
   const table = useReactTable({
@@ -147,9 +170,9 @@ export function RecentOrdersTable() {
     >
       <div className="flex flex-col gap-4 border-b border-slate-100 p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h3 className="text-base font-semibold text-slate-900">Pesanan Terbaru</h3>
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
           <p className="text-xs text-slate-500">
-            {isFetching && !isLoading ? "Memperbarui…" : "Kelola dan filter pesanan masuk"}
+            {isFetching && !isLoading ? "Memperbarui…" : subtitle}
           </p>
         </div>
         <div className="flex flex-col gap-2 sm:flex-row">

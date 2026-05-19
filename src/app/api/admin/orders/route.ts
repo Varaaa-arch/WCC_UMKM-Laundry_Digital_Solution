@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const { searchParams } = request.nextUrl
   const q = searchParams.get("q")?.trim() ?? ""
   const status = searchParams.get("status") ?? "all"
-  const limit = Math.min(Number(searchParams.get("limit") ?? 20), 50)
+  const limit = Math.min(Number(searchParams.get("limit") ?? 20), 100)
 
   let query = ctx.supabase
     .from("orders")

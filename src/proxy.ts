@@ -2,7 +2,7 @@ import { updateSession } from "@/lib/supabase/middleware"
 import type { NextRequest } from "next/server"
 import { NextResponse } from "next/server"
 import { createServerClient } from "@supabase/ssr"
-import { supabaseUrl, supabaseAnonKey } from "@/lib/supabase/config"
+import { getSupabaseEnv } from "@/lib/supabase/config"
 
 const PROTECTED = ["/dashboard", "/admin", "/layanan/booking", "/history", "/settings"]
 const ADMIN_ONLY = ["/admin"]
@@ -14,7 +14,10 @@ export async function proxy(request: NextRequest) {
   const isProtected = PROTECTED.some((p) => pathname.startsWith(p))
   if (!isProtected) return response
 
-  const supabase = createServerClient(supabaseUrl, supabaseAnonKey, {
+  const { url, anonKey } = getSupabaseEnv()
+  if (!url || !anonKey) return response
+
+  const supabase = createServerClient(url, anonKey, {
     cookies: {
       getAll: () => request.cookies.getAll(),
       setAll: () => {},

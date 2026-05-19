@@ -19,8 +19,8 @@ export const USER_NAV: ShellNavItem[] = [
 
 export const ADMIN_NAV: ShellNavItem[] = [
   { label: "Overview", href: "/admin", icon: LayoutDashboard },
-  { label: "Orders", href: "/admin/orders", icon: Package, disabled: true },
-  { label: "Customers", href: "/admin/customers", icon: Users, disabled: true },
-  { label: "Analytics", href: "/admin/analytics", icon: BarChart3, disabled: true },
-  { label: "Settings", href: "/admin/settings", icon: Settings, disabled: true },
+  { label: "Orders", href: "/admin/order", icon: Package },
+  { label: "Customers", href: "/admin/cust", icon: Users },
+  { label: "Analytics", href: "/admin/analytics", icon: BarChart3 },
+  { label: "Settings", href: "/admin/settings", icon: Settings },
 ]

@@ -1,41 +1,44 @@
 "use client"
 
+import { useRouter } from "next/navigation"
 import { motion } from "framer-motion"
 import { PackagePlus, RefreshCw, Settings, Users } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { toast } from "sonner"
 
-const actions = [
-  {
-    label: "Order Baru",
-    icon: PackagePlus,
-    description: "Buat pesanan manual",
-    onClick: () => toast.info("Fitur order manual segera hadir"),
-  },
-  {
-    label: "Refresh Data",
-    icon: RefreshCw,
-    description: "Sinkronkan dashboard",
-    onClick: () => {
-      window.dispatchEvent(new Event("admin-refresh"))
-      toast.success("Data diperbarui")
-    },
-  },
-  {
-    label: "Kelola User",
-    icon: Users,
-    description: "Lihat semua pengguna",
-    onClick: () => toast.info("Manajemen user segera hadir"),
-  },
-  {
-    label: "Pengaturan",
-    icon: Settings,
-    description: "Konfigurasi sistem",
-    onClick: () => toast.info("Pengaturan admin segera hadir"),
-  },
-]
-
 export function QuickActions() {
+  const router = useRouter()
+
+  const actions = [
+    {
+      label: "Order Baru",
+      icon: PackagePlus,
+      description: "Buat pesanan manual",
+      onClick: () => router.push("/admin/order"),
+    },
+    {
+      label: "Refresh Data",
+      icon: RefreshCw,
+      description: "Sinkronkan dashboard",
+      onClick: () => {
+        window.dispatchEvent(new Event("admin-refresh"))
+        toast.success("Data diperbarui")
+      },
+    },
+    {
+      label: "Kelola User",
+      icon: Users,
+      description: "Lihat semua pengguna",
+      onClick: () => router.push("/admin/cust"),
+    },
+    {
+      label: "Pengaturan",
+      icon: Settings,
+      description: "Konfigurasi sistem",
+      onClick: () => router.push("/admin/settings"),
+    },
+  ]
+
   return (
     <motion.section
       initial={{ opacity: 0, y: 12 }}
