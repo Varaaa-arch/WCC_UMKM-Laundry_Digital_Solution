@@ -78,7 +78,7 @@ export function DashboardHome({ firstName, orders, loading }: DashboardHomeProps
               Halo, {firstName}! 👋
             </h1>
             <p className="mt-2 max-w-md text-sm text-slate-300">
-              Yuk, pantau laundry kamu hari ini — status order, poin loyalitas, dan promo spesial.
+              Yuk, pantau laundry kamu hari ini.. status order, poin loyalitas, dan promo spesial.
             </p>
           </div>
           <p className="shrink-0 text-xs font-medium text-blue-200/70">{today}</p>

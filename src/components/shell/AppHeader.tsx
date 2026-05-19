@@ -2,8 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Bell, Menu, Search, Package, CheckCircle2, Clock, X } from "lucide-react"
-import { Input } from "@/components/ui/input"
+import { Bell, Menu, Package, CheckCircle2, Clock, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import type { ShellUiStore } from "@/components/shell/types"
@@ -126,11 +125,6 @@ export function AppHeader({ title, subtitle, userName = "User", useUiStore }: Ap
         </div>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <div className="relative hidden lg:block">
-            <Search className="pointer-events-none absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-slate-400" />
-            <Input placeholder="Cari di dashboard…" className="h-9 w-56 border-slate-200/80 bg-white/80 pl-8" />
-          </div>
-
           {/* Bell with popup */}
           <div ref={notifRef} className="relative">
             <Button

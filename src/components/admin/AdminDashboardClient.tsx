@@ -84,7 +84,7 @@ export default function AdminDashboardClient() {
               Halo, {profileName.split(" ")[0]} 👋
             </h2>
             <p className="mt-2 max-w-lg text-sm text-slate-300">
-              Pantau performa bisnis laundry Anda secara real-time — pesanan, revenue, dan aktivitas pelanggan.
+              Pantau performa bisnis laundry Anda secara real-time.
             </p>
           </div>
         </motion.div>
