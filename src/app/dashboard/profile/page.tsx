@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import { User, MapPin, Settings2, LogOut, Pencil, Plus, MoreVertical, ShieldCheck, Star } from "lucide-react"
+import { User, MapPin, Settings2, LogOut, Plus, MoreVertical, ShieldCheck, Star } from "lucide-react"
 import DashboardShell from "@/components/layout/DashboardShell"
 import { useAuthStore } from "@/store/useAuthStore"
 import { signOut } from "@/actions/auth-action"
@@ -61,9 +61,6 @@ export default function ProfilePage() {
             <div className="w-16 h-16 rounded-full bg-white/20 flex items-center justify-center text-white font-bold text-2xl ring-4 ring-white/30">
               {initials}
             </div>
-            <button className="absolute -bottom-1 -right-1 w-6 h-6 bg-white rounded-full flex items-center justify-center shadow-md">
-              <Pencil className="w-3 h-3 text-blue-600" />
-            </button>
           </div>
           <div className="flex-1 min-w-0">
             <p className="text-white font-bold text-lg leading-tight truncate">{fullName || "Pengguna"}</p>
