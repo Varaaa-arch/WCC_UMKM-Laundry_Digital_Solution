@@ -1,5 +1,6 @@
 "use client"
 
+import { memo } from "react"
 import { Sheet, SheetContent } from "@/components/ui/sheet"
 import { AppSidebar } from "@/components/shell/AppSidebar"
 import { AppHeader } from "@/components/shell/AppHeader"
@@ -16,7 +17,7 @@ type AppShellProps = {
   useUiStore: () => ShellUiStore
 }
 
-export function AppShell({
+function AppShellInner({
   children,
   title = "Dashboard",
   subtitle,
@@ -74,3 +75,5 @@ export function AppShell({
     </div>
   )
 }
+
+export const AppShell = memo(AppShellInner)

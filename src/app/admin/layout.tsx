@@ -1,10 +1,11 @@
 import { QueryProvider } from "@/providers/QueryProvider"
+import { AdminLayoutClient } from "@/components/admin/AdminLayoutClient"
 import { Toaster } from "sonner"
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
     <QueryProvider>
-      {children}
+      <AdminLayoutClient>{children}</AdminLayoutClient>
       <Toaster
         position="top-right"
         richColors

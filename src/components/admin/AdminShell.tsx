@@ -2,6 +2,7 @@
 
 import { AppShell } from "@/components/shell/AppShell"
 import { ADMIN_NAV } from "@/components/shell/nav-config"
+import { useShellPageMeta } from "@/components/shell/ShellMetaContext"
 import { useAdminUiStore } from "@/store/useAdminUiStore"
 
 type AdminShellProps = {
@@ -11,7 +12,8 @@ type AdminShellProps = {
   userName?: string
 }
 
-export function AdminShell({
+/** Persistent admin shell — used by admin layout only. */
+export function AdminAppShell({
   children,
   title = "Dashboard",
   subtitle = "Ringkasan operasional laundry",
@@ -30,4 +32,20 @@ export function AdminShell({
       {children}
     </AppShell>
   )
+}
+
+/** Sets shell header meta only — sidebar stays mounted in admin layout. */
+export function AdminShell({
+  children,
+  title,
+  subtitle,
+  userName,
+}: AdminShellProps) {
+  useShellPageMeta({
+    ...(title !== undefined && { title }),
+    ...(subtitle !== undefined && { subtitle }),
+    ...(userName !== undefined && { userName }),
+  })
+
+  return <>{children}</>
 }

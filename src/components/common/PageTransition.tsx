@@ -23,12 +23,14 @@ import { motion, useReducedMotion, AnimatePresence } from "framer-motion";
 import { usePathname } from "next/navigation";
 import { useEffect, useState, type PropsWithChildren, useRef } from "react";
 import { createPortal } from "react-dom";
+import { isShellRoute } from "@/lib/shell/routes";
 
 const EASE = [0.76, 0, 0.24, 1] as const;
 const TRANSITION_DURATION = 0.5; // 500ms
 
 export default function PageTransition({ children }: PropsWithChildren) {
   const pathname = usePathname();
+  const shellRoute = isShellRoute(pathname);
   const reduced = useReducedMotion();
   const [isExiting, setIsExiting] = useState(false);
   const [displayChildren, setDisplayChildren] = useState(children);
@@ -142,6 +144,10 @@ export default function PageTransition({ children }: PropsWithChildren) {
       )}
     </AnimatePresence>
   );
+
+  if (shellRoute) {
+    return <>{children}</>;
+  }
 
   return (
     <>
