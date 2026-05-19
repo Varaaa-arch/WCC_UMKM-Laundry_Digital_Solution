@@ -81,7 +81,7 @@ export default function AdminDashboardClient() {
               {getGreeting()}
             </p>
             <h2 className="mt-1 text-xl font-bold text-white sm:text-2xl">
-              Halo, {profileName.split(" ")[0]} 👋
+              Halo, {profileName.split(" ")[0]} 
             </h2>
             <p className="mt-2 max-w-lg text-sm text-slate-300">
               Pantau performa bisnis laundry Anda secara real-time.

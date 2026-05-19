@@ -1,45 +1,53 @@
-"use client"
+﻿"use client"
 
 import { useState } from "react"
 import { Footer } from "@/components/layout/Footer"
-import { MessageCircleIcon, MailIcon, PhoneIcon, MapPinIcon, SendIcon, CheckCircle2Icon, ArrowRightIcon } from "lucide-react"
+import { ContactCard } from "@/components/contact/ContactCard"
+import {
+  MessageCircleIcon,
+  MailIcon,
+  PhoneIcon,
+  MapPinIcon,
+  SendIcon,
+  CheckCircle2Icon,
+} from "lucide-react"
 
 const CONTACTS = [
   {
     icon: MessageCircleIcon,
     label: "WhatsApp",
     value: "+62 812-3456-7890",
-    sub: "Balas dalam < 5 menit",
     href: "https://wa.me/6281234567890",
-    color: "bg-green-500",
-    light: "bg-green-50 text-green-600",
+    gradient: "bg-emerald-500",
+    iconBg: "bg-gradient-to-br from-emerald-500 to-teal-600 shadow-emerald-500/25",
+    hoverShadow: "hover:shadow-[0_4px_24px_-6px_rgba(16,185,129,0.25)]",
   },
   {
     icon: MailIcon,
     label: "Email",
     value: "halo@lummyblue.com",
-    sub: "Balas dalam 1×24 jam",
     href: "mailto:halo@lummyblue.com",
-    color: "bg-blue-500",
-    light: "bg-blue-50 text-blue-600",
+    gradient: "bg-blue-500",
+    iconBg: "bg-gradient-to-br from-blue-500 to-blue-600 shadow-blue-500/25",
+    hoverShadow: "hover:shadow-[0_4px_24px_-6px_rgba(37,99,235,0.2)]",
   },
   {
     icon: PhoneIcon,
     label: "Telepon",
     value: "(021) 1234-5678",
-    sub: "Senin–Sabtu, 08.00–20.00",
     href: "tel:02112345678",
-    color: "bg-purple-500",
-    light: "bg-purple-50 text-purple-600",
+    gradient: "bg-violet-500",
+    iconBg: "bg-gradient-to-br from-violet-500 to-purple-600 shadow-violet-500/25",
+    hoverShadow: "hover:shadow-[0_4px_24px_-6px_rgba(139,92,246,0.22)]",
   },
   {
     icon: MapPinIcon,
     label: "Alamat",
     value: "Jl. Melati Indah No. 27",
-    sub: "Jakarta Pusat, 10110",
     href: "https://maps.google.com/?q=Jakarta+Pusat",
-    color: "bg-orange-500",
-    light: "bg-orange-50 text-orange-600",
+    gradient: "bg-amber-500",
+    iconBg: "bg-gradient-to-br from-amber-500 to-orange-500 shadow-amber-500/25",
+    hoverShadow: "hover:shadow-[0_4px_24px_-6px_rgba(245,158,11,0.22)]",
   },
 ]
 
@@ -80,28 +88,10 @@ export default function ContactPage() {
         </section>
 
         {/* Contact cards */}
-        <section className="max-w-5xl mx-auto px-6 -mt-8 relative z-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {CONTACTS.map(({ icon: Icon, label, value, sub, href, color, light }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group bg-white rounded-2xl p-5 shadow-sm border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col gap-3"
-              >
-                <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${light}`}>
-                  <Icon className="w-5 h-5" />
-                </div>
-                <div>
-                  <p className="text-[11px] font-bold text-gray-400 uppercase tracking-widest">{label}</p>
-                  <p className="font-semibold text-gray-900 text-sm mt-0.5 leading-snug">{value}</p>
-                  <p className="text-[11px] text-gray-400 mt-0.5">{sub}</p>
-                </div>
-                <div className="flex items-center gap-1 text-xs font-semibold text-blue-500 opacity-0 group-hover:opacity-100 transition-opacity">
-                  Hubungi <ArrowRightIcon className="w-3 h-3" />
-                </div>
-              </a>
+        <section className="max-w-5xl mx-auto px-6 -mt-10 relative z-10">
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {CONTACTS.map((contact, index) => (
+              <ContactCard key={contact.label} {...contact} index={index} />
             ))}
           </div>
         </section>
@@ -109,7 +99,7 @@ export default function ContactPage() {
         {/* Form + Info */}
         <section className="max-w-5xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-5 gap-8">
 
-          {/* Left — form */}
+          {/* Left â€” form */}
           <div className="md:col-span-3">
             <div className="bg-white rounded-3xl p-8 shadow-sm border border-gray-100">
               <h2 className="text-2xl font-extrabold text-gray-900 mb-1">Kirim Pesan</h2>
@@ -181,7 +171,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right — info */}
+          {/* Right â€” info */}
           <div className="md:col-span-2 flex flex-col gap-4">
             {/* Jam operasional */}
             <div className="bg-white rounded-3xl p-6 shadow-sm border border-gray-100">
@@ -190,9 +180,9 @@ export default function ContactPage() {
                 <span className="text-xs font-bold text-gray-400 uppercase tracking-widest">Jam Operasional</span>
               </div>
               {[
-                { day: "Senin – Jumat", time: "08.00 – 20.00" },
-                { day: "Sabtu", time: "08.00 – 18.00" },
-                { day: "Minggu", time: "09.00 – 15.00" },
+                { day: "Senin â€“ Jumat", time: "08.00 â€“ 20.00" },
+                { day: "Sabtu", time: "08.00 â€“ 18.00" },
+                { day: "Minggu", time: "09.00 â€“ 15.00" },
               ].map(({ day, time }) => (
                 <div key={day} className="flex justify-between items-center py-2.5 border-b border-gray-50 last:border-0">
                   <span className="text-sm text-gray-600">{day}</span>

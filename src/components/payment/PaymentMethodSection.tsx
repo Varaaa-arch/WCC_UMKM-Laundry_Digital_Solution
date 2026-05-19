@@ -257,7 +257,7 @@ export function PaymentMethodSection({
             >
               <Banknote className="mt-0.5 size-5 shrink-0 text-blue-600" />
               <p className="text-sm leading-relaxed text-slate-600">
-                Bayar langsung saat layanan selesai. Tidak perlu transfer di muka —
+                Bayar langsung saat layanan selesai. Tidak perlu transfer di muka!
                 tim kami akan menginformasikan total akhir setelah penimbangan.
               </p>
             </motion.div>

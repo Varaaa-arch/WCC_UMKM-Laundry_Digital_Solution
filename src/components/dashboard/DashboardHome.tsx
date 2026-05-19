@@ -75,7 +75,7 @@ export function DashboardHome({ firstName, orders, loading }: DashboardHomeProps
               {getGreeting()}
             </p>
             <h1 className="mt-1 text-xl font-bold text-white sm:text-2xl">
-              Halo, {firstName}! 👋
+              Halo, {firstName}! 
             </h1>
             <p className="mt-2 max-w-md text-sm text-slate-300">
               Yuk, pantau laundry kamu hari ini.. status order, poin loyalitas, dan promo spesial.

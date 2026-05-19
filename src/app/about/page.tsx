@@ -9,7 +9,8 @@ export default function AboutPage() {
       <main className="min-h-screen bg-[#EEF4FB]">
 
         {/* Section 1 — Cerita Kami */}
-        <section className="relative overflow-hidden pt-[72px] bg-[#EEF4FB]">          {/* Bubble decorations */}
+        <section className="relative overflow-hidden pt-14 sm:pt-16 bg-[#EEF4FB]">
+          {/* Bubble decorations */}
           <div className="absolute top-10 left-8 w-24 h-24 rounded-full bg-white/10 blur-sm" />
           <div className="absolute top-32 left-24 w-12 h-12 rounded-full bg-white/15" />
           <div className="absolute top-16 right-16 w-36 h-36 rounded-full bg-white/10 blur-md" />
@@ -18,7 +19,7 @@ export default function AboutPage() {
           <div className="absolute bottom-10 right-1/4 w-10 h-10 rounded-full bg-white/20" />
           <div className="absolute top-8 left-1/2 w-8 h-8 rounded-full bg-white/15" />
 
-          <div className="max-w-5xl mx-auto px-6 py-4 grid grid-cols-1 md:grid-cols-2 gap-10 items-center relative z-10">
+          <div className="max-w-5xl mx-auto px-6 pt-2 pb-6 sm:pb-8 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center relative z-10">
             {/* Kiri */}
             <div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full px-3 py-1 mb-6">
