@@ -148,8 +148,7 @@
         heading: "Layanan Kami",
         links: [
           { label: "Cuci Kering" },
-          { label: "Setrika Premium" },
-          { label: "Laundry Sepatu" },
+          { label: "Cuci Kering + Setrika" },
           { label: "Express Service" },
         ],
       },
@@ -168,7 +167,7 @@
         links: [
           { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
           { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
-          { label: "FAQ", href: "#footer-col4-link-placeholder-3" },
+          { label: "FAQ", href: "/faq" },
         ],
       },
     ] as const,
