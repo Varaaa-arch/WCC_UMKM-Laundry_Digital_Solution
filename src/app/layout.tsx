@@ -3,6 +3,7 @@ import { Geist_Mono, Plus_Jakarta_Sans, Poppins } from "next/font/google";
 import { ConditionalNavbar } from "@/components/layout/ConditionalNavbar";
 import { defaultSiteMetadata } from "@/config/site";
 import PageTransition from "@/components/common/PageTransition";
+import { MotionProvider } from "@/components/motion/MotionProvider";
 import { NavigationProvider } from "@/contexts/NavigationContext";
 
 import "./globals.css";
@@ -38,10 +39,12 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-[#EEF4FB]">
         <NavigationProvider>
-          <ConditionalNavbar />
-          <div className="flex-1">
-            <PageTransition>{children}</PageTransition>
-          </div>
+          <MotionProvider>
+            <ConditionalNavbar />
+            <div className="flex-1">
+              <PageTransition>{children}</PageTransition>
+            </div>
+          </MotionProvider>
         </NavigationProvider>
       </body>
     </html>

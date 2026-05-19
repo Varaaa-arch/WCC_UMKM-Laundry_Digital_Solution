@@ -8,6 +8,8 @@ import { useOrderStore, ANTAR_JEMPUT_FEE } from "@/store/useOrderStore";
 import { MinusIcon, PlusIcon, MapPinIcon, StoreIcon, ChevronRightIcon, ShieldCheckIcon, TimerIcon, ShieldIcon } from "lucide-react";
 import { getServices } from "@/actions/service-action";
 import { BubbleButton } from "@/components/ui/bubble-button";
+import { Reveal } from "@/components/motion/Reveal";
+import { StaggerFadeItem, StaggerRoot } from "@/components/motion/Stagger";
 import type { Service } from "@/types/service";
 
 const PICKUP_TIMES = [
@@ -67,10 +69,10 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
         <div className="max-w-4xl mx-auto grid grid-cols-1 lg:grid-cols-5 gap-6">
 
           {/* LEFT — Form */}
-          <div className="lg:col-span-3 flex flex-col gap-5">
+          <StaggerRoot className="lg:col-span-3 flex flex-col gap-5">
 
             {/* Estimasi Berat */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <StaggerFadeItem className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2.5 mb-4 pb-3 border-b border-dashed border-gray-100">
                 <Image src="/images/layanan-image/booking-image/estimasi-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-lg">Estimasi Berat</h2>
@@ -107,10 +109,10 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                   )}
                 </div>
               </div>
-            </div>
+            </StaggerFadeItem>
 
             {/* Metode Pengambilan */}
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
+            <StaggerFadeItem className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
               <div className="flex items-center gap-2 mb-4">
                 <Image src="/images/layanan-image/booking-image/kurir-image.png" alt="" width={20} height={20} className="w-5 h-auto" style={{ height: "auto" }} />
                 <h2 className="font-bold text-gray-900 text-base">Metode Pengambilan</h2>
@@ -203,11 +205,11 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                   </div>
                 </div>
               )}
-            </div>
-          </div>
+            </StaggerFadeItem>
+          </StaggerRoot>
 
           {/* RIGHT — Order Summary */}
-          <div className="lg:col-span-2">
+          <Reveal from="right" className="lg:col-span-2">
             <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sticky top-4">
               <h3 className="font-bold text-gray-900 text-base mb-4">Ringkasan Pesanan</h3>
               <div className="flex flex-col gap-3 text-sm">
@@ -261,7 +263,7 @@ export default function BookingSlugPage({ params }: { params: Promise<{ slug: st
                 ))}
               </div>
             </div>
-          </div>
+          </Reveal>
 
         </div>
       </main>

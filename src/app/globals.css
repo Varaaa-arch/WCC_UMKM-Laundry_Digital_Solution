@@ -139,3 +139,72 @@
     @apply font-sans;
   }
 }
+
+/* Lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+@layer utilities {
+  .motion-gpu {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+
+  .lb-shimmer {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(90deg, #f1f5f9 0%, #e8eef5 40%, #f8fafc 60%, #f1f5f9 100%);
+    background-size: 200% 100%;
+    animation: lb-shimmer 1.6s ease-in-out infinite;
+  }
+
+  @keyframes lb-shimmer {
+    0% {
+      background-position: 100% 0;
+    }
+    100% {
+      background-position: -100% 0;
+    }
+  }
+
+  .lb-card-interactive {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    transition:
+      box-shadow 0.3s ease,
+      transform 0.3s ease,
+      border-color 0.3s ease;
+  }
+  .lb-card-interactive:hover {
+    box-shadow: 0 12px 40px -12px rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lb-shimmer {
+    animation: none;
+  }
+  .lb-card-interactive:hover {
+    transform: none;
+  }
+}
+
+/* Premium dialog motion (radix data attributes) */
+[data-slot="dialog-overlay"] {
+  animation-duration: 0.5s !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+[data-slot="dialog-content"] {
+  animation-duration: 0.55s !important;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1) !important;
+}

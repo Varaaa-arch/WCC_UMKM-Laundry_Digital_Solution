@@ -34,7 +34,7 @@ export function NavigationProvider({
       window.dispatchEvent(new CustomEvent("page-transition-exit"));
 
       // Wait for exit animation to complete (matches the 500ms duration in PageTransition)
-      await new Promise((resolve) => setTimeout(resolve, 500));
+      await new Promise((resolve) => setTimeout(resolve, 600));
 
       // Perform route change
       router.push(href);

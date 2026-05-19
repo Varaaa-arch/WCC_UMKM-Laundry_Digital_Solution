@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { MapPinIcon, MessageCircleIcon, MailIcon, CameraIcon, SparklesIcon, CircleIcon } from "lucide-react";
 import { Footer } from "@/components/layout/Footer";
+import { Reveal } from "@/components/motion/Reveal";
 
 export default function AboutPage() {
   return (
@@ -19,7 +20,7 @@ export default function AboutPage() {
           <div className="absolute bottom-10 right-1/4 w-10 h-10 rounded-full bg-white/20" />
           <div className="absolute top-8 left-1/2 w-8 h-8 rounded-full bg-white/15" />
 
-          <div className="max-w-5xl mx-auto px-6 pt-2 pb-6 sm:pb-8 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center relative z-10">
+          <Reveal className="max-w-5xl mx-auto px-6 pt-2 pb-6 sm:pb-8 grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center relative z-10">
             {/* Kiri */}
             <div>
               <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-100 rounded-full px-3 py-1 mb-6">
@@ -61,12 +62,12 @@ export default function AboutPage() {
                 />
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Section 2 — Founder */}
         <section className="bg-[#deeaf7] overflow-hidden">
-          <div className="max-w-5xl mx-auto px-6 pt-10 pb-0">
+          <Reveal delay={0.06} className="max-w-5xl mx-auto px-6 pt-10 pb-0">
             {/* Label tengah atas */}
             <div className="flex justify-center mb-8">
               <span className="text-sm font-bold text-blue-500 tracking-widest uppercase border border-blue-300 rounded-full px-6 py-2 bg-white/60">
@@ -114,11 +115,11 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
         {/* Section 3 — Maps */}
-        <section className="max-w-5xl mx-auto px-6 pt-16 pb-8">
+        <Reveal delay={0.08} className="max-w-5xl mx-auto px-6 pt-16 pb-8 block">
           <div className="text-center mb-10">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Mampir ke Workshop Kami</h2>
             <p className="text-gray-400 text-sm mt-2">Kami menyambut Anda dengan senyum dan wangi yang segar</p>
@@ -183,11 +184,11 @@ export default function AboutPage() {
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
         {/* Section 4 — Kontak */}
         <section className="bg-[#EEF4FB] py-16 px-6">
-          <div className="max-w-5xl mx-auto">
+          <Reveal delay={0.1} from="up" className="max-w-5xl mx-auto">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">
               Butuh Bantuan? Sapa Kami!
             </h2>
@@ -247,7 +248,7 @@ export default function AboutPage() {
                 </a>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
       </main>

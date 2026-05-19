@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Footer } from "@/components/layout/Footer"
 import { ContactCard } from "@/components/contact/ContactCard"
+import { Reveal } from "@/components/motion/Reveal"
 import {
   MessageCircleIcon,
   MailIcon,
@@ -73,7 +74,7 @@ export default function ContactPage() {
           <div className="pointer-events-none absolute -top-20 -left-20 w-72 h-72 rounded-full bg-white/10 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-16 -right-16 w-96 h-96 rounded-full bg-cyan-300/20 blur-3xl" />
 
-          <div className="relative max-w-2xl mx-auto">
+          <Reveal className="relative mx-auto max-w-2xl">
             <span className="inline-flex items-center gap-1.5 text-xs font-bold tracking-widest uppercase bg-white/20 backdrop-blur-sm border border-white/30 rounded-full px-4 py-1.5 mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
               Kami Siap Membantu
@@ -84,7 +85,7 @@ export default function ContactPage() {
             <p className="text-blue-100 text-base max-w-md mx-auto leading-relaxed">
               Ada pertanyaan, saran, atau ingin tahu lebih lanjut? Tim kami selalu siap menyambut Anda.
             </p>
-          </div>
+          </Reveal>
         </section>
 
         {/* Contact cards */}
@@ -97,7 +98,7 @@ export default function ContactPage() {
         </section>
 
         {/* Form + Info */}
-        <section className="max-w-5xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-5 gap-8">
+        <Reveal delay={0.08} className="mx-auto grid max-w-5xl grid-cols-1 gap-8 px-6 py-14 md:grid-cols-5">
 
           {/* Left â€” form */}
           <div className="md:col-span-3">
@@ -208,7 +209,7 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-        </section>
+        </Reveal>
 
       </main>
       <Footer />

@@ -8,6 +8,8 @@ import { Footer } from "@/components/layout/Footer";
 import { useRouter } from "next/navigation";
 import { useOrderStore } from "@/store/useOrderStore";
 import { BubbleButton } from "@/components/ui/bubble-button";
+import { Reveal } from "@/components/motion/Reveal";
+import { StaggerItem, StaggerRoot } from "@/components/motion/Stagger";
 import type { Service } from "@/types/service";
 
 const SLUG_IMAGE: Record<string, string> = {
@@ -35,21 +37,21 @@ export default function LayananClient({ services }: { services: Service[] }) {
   return (
     <>
       <main className="min-h-screen bg-[#EEF4FB] flex flex-col items-center px-4 pt-24 pb-12">
-        <div className="text-center mb-10">
+        <Reveal className="mb-10 text-center">
           <h1 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-3">
             Pilih Layanan Anda
           </h1>
           <p className="text-gray-500 text-sm max-w-sm mx-auto leading-relaxed">
             Kami siap mengurus pakaian Anda dengan sentuhan profesional dan penuh kasih sayang.
           </p>
-        </div>
+        </Reveal>
 
-        <div className="flex flex-wrap justify-center gap-6 w-full max-w-3xl mb-8">
+        <StaggerRoot className="mb-8 flex w-full max-w-3xl flex-wrap justify-center gap-6">
           {services.map((svc) => {
             const isSelected = selected?.id === svc.id;
             return (
+              <StaggerItem key={svc.id} className="w-full sm:w-72">
               <button
-                key={svc.id}
                 onClick={() => setSelected(svc)}
                 style={{ borderRadius: "28px" }}
                 className={[
@@ -98,10 +100,12 @@ export default function LayananClient({ services }: { services: Service[] }) {
                   <p className="text-gray-400 text-sm leading-relaxed">{svc.description}</p>
                 </div>
               </button>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerRoot>
 
+        <Reveal delay={0.12}>
         <BubbleButton
           onClick={handleLanjutkan}
           disabled={selected === null}
@@ -114,6 +118,7 @@ export default function LayananClient({ services }: { services: Service[] }) {
         >
           Lanjutkan
         </BubbleButton>
+        </Reveal>
 
         <Link
           href="/"
