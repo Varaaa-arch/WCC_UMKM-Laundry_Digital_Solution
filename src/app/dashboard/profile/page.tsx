@@ -16,7 +16,6 @@ export default function ProfilePage() {
   const [fullName, setFullName] = useState(() => (user?.user_metadata?.full_name as string) ?? "")
   const [phone, setPhone]       = useState(() => (user?.user_metadata?.phone as string) ?? "")
   const [pushNotif, setPush]    = useState(true)
-  const [emailPromo, setPromo]  = useState(false)
   const [saved, setSaved]       = useState(false)
   const [showModal, setModal]   = useState(false)
   const [addresses, setAddresses] = useState([
@@ -163,7 +162,6 @@ export default function ProfilePage() {
             <div className="space-y-4">
               {[
                 { label: "Notifikasi Push", desc: "Update status laundry real-time.", val: pushNotif, set: setPush },
-                { label: "Promo Email",     desc: "Info diskon & penawaran spesial.", val: emailPromo, set: setPromo },
               ].map(({ label, desc, val, set }) => (
                 <div key={label} className="flex items-center justify-between gap-3">
                   <div>

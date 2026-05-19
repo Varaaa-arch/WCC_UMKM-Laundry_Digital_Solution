@@ -7,7 +7,6 @@ import {
   Star,
   Wallet,
   CheckCircle2,
-  Sparkles,
   ArrowRight,
   Package,
   Clock,
@@ -298,41 +297,6 @@ export function DashboardHome({ firstName, orders, loading }: DashboardHomeProps
           )}
         </motion.section>
       </div>
-
-      {/* Promo */}
-      <motion.section
-        initial={{ opacity: 0, y: 16 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.35, duration: 0.45 }}
-        whileHover={{ scale: 1.005 }}
-        className="relative overflow-hidden rounded-2xl bg-linear-to-r from-blue-600 via-blue-500 to-indigo-500 p-5 sm:p-6"
-      >
-        <span
-          aria-hidden
-          className="pointer-events-none absolute -right-16 -top-16 size-56 rounded-full bg-white/10 blur-2xl"
-        />
-        <div className="relative flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-          <div>
-            <span className="inline-flex rounded-full bg-white/20 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-widest text-white">
-              Penawaran Spesial
-            </span>
-            <h3 className="mt-2 text-lg font-bold leading-snug text-white sm:text-xl">
-              Coba Premium Wash &amp; Fold
-            </h3>
-            <p className="mt-1.5 max-w-md text-sm leading-relaxed text-blue-100">
-              Pakaian kesayangan kamu dirawat dengan deterjen premium ramah lingkungan.
-              Diskon 20% untuk order premium pertamamu!
-            </p>
-          </div>
-          <Link
-            href="/layanan"
-            className="inline-flex shrink-0 items-center gap-2 rounded-xl bg-white px-5 py-2.5 text-sm font-semibold text-blue-600 shadow-lg shadow-blue-900/20 transition-all hover:bg-blue-50 hover:shadow-xl"
-          >
-            <Sparkles className="size-4" />
-            Ambil Promo
-          </Link>
-        </div>
-      </motion.section>
     </div>
   )
 }
