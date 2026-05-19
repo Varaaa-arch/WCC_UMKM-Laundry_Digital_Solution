@@ -167,7 +167,7 @@
         heading: "Bantuan",
         links: [
           { label: "Syarat & Ketentuan", href: "/syarat-ketentuan" },
-          { label: "Kebijakan Privasi", href: "#footer-col4-link-placeholder-2" },
+          { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },
           { label: "FAQ", href: "#footer-col4-link-placeholder-3" },
         ],
       },
