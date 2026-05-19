@@ -41,9 +41,29 @@ export default function ProfilePage() {
 
   const handleSave = () => { setSaved(true); setTimeout(() => setSaved(false), 2000) }
   const handleLogout = async () => { await signOut(); router.replace("/") }
+
+  const handleSelectAddress = (id: number) => {
+    setAddresses(prev => prev.map(a => ({ ...a, isDefault: a.id === id })))
+  }
+
+  const handleDeleteAddress = (id: number) => {
+    setAddresses(prev => {
+      const next = prev.filter(a => a.id !== id)
+      if (next.length === 0) return next
+      if (!next.some(a => a.isDefault)) {
+        return next.map((a, i) => ({ ...a, isDefault: i === 0 }))
+      }
+      return next
+    })
+  }
+
   const handleAddAddress = () => {
     if (!newLabel.trim() || !newAddr.trim()) return
-    setAddresses(prev => [...prev, { id: Date.now(), name: newLabel.trim(), addr: newAddr.trim(), isDefault: false }])
+    const id = Date.now()
+    setAddresses(prev => [
+      ...prev.map(a => ({ ...a, isDefault: false })),
+      { id, name: newLabel.trim(), addr: newAddr.trim(), isDefault: true },
+    ])
     setNewLabel(""); setNewAddr(""); setModal(false)
   }
 
@@ -183,22 +203,45 @@ export default function ProfilePage() {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
               {addresses.map(({ id, name, addr, isDefault }) => (
-                <div key={id} className={`flex items-start justify-between p-4 rounded-xl border transition-colors ${isDefault ? "border-blue-200 bg-blue-50/40" : "border-gray-100 bg-gray-50/40"}`}>
+                <div
+                  key={id}
+                  role="button"
+                  tabIndex={0}
+                  onClick={() => handleSelectAddress(id)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault()
+                      handleSelectAddress(id)
+                    }
+                  }}
+                  className={`flex cursor-pointer items-start justify-between rounded-xl border p-4 text-left transition-colors outline-none focus-visible:ring-2 focus-visible:ring-blue-300 ${
+                    isDefault
+                      ? "border-blue-200 bg-blue-50/40 ring-1 ring-blue-100"
+                      : "border-gray-100 bg-gray-50/40 hover:border-gray-200 hover:bg-gray-50"
+                  }`}
+                >
                   <div className="flex items-start gap-3">
                     <div className={`w-9 h-9 rounded-xl flex items-center justify-center shrink-0 mt-0.5 ${isDefault ? "bg-blue-100" : "bg-gray-100"}`}>
                       <MapPin className={`w-4 h-4 ${isDefault ? "text-blue-500" : "text-gray-400"}`} />
                     </div>
-                    <div>
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
                         <p className="text-sm font-semibold text-gray-900">{name}</p>
                         {isDefault && <span className="text-[10px] bg-blue-100 text-blue-600 font-bold px-1.5 py-0.5 rounded-full">Default</span>}
                       </div>
                       <p className="text-xs text-gray-400 mt-0.5 leading-relaxed">{addr}</p>
                     </div>
                   </div>
-                  <button onClick={() => setAddresses(prev => prev.filter(a => a.id !== id))}
-                    className="text-gray-300 hover:text-red-400 shrink-0 ml-2 transition-colors">
-                    <MoreVertical className="w-4 h-4" />
+                  <button
+                    type="button"
+                    aria-label={`Hapus alamat ${name}`}
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      handleDeleteAddress(id)
+                    }}
+                    className="ml-2 shrink-0 text-gray-300 transition-colors hover:text-red-400"
+                  >
+                    <MoreVertical className="h-4 w-4" />
                   </button>
                 </div>
               ))}
