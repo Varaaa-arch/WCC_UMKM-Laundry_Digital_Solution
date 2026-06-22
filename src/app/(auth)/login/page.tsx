@@ -45,13 +45,13 @@ export default function LoginPage() {
         <div className="flex justify-center mb-8">
           <div className="flex gap-1 bg-gray-100 rounded-lg p-1">
             <span className="px-5 py-1.5 rounded-md bg-white text-sm font-semibold text-gray-900 shadow-sm">
-              Login
+              Masuk
             </span>
             <button
               onClick={() => router.push('/register')}
               className="px-5 py-1.5 rounded-md text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors"
             >
-              Sign Up
+              Daftar
             </button>
           </div>
         </div>
@@ -63,30 +63,30 @@ export default function LoginPage() {
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
           >
             <GoogleIcon />
-            Continue with Google
+            Lanjut pakai Google
           </button>
           <button
             onClick={() => signInWithOAuth("discord")}
             className="w-full flex items-center justify-center gap-3 px-4 py-3 border border-gray-200 rounded-xl hover:bg-gray-50 transition-colors text-sm font-medium text-gray-700"
           >
             <DiscordIcon />
-            Continue with Discord
+            Lanjut pakai Discord
           </button>
         </div>
 
         {/* Divider */}
         <div className="flex items-center gap-3 mb-6">
           <div className="flex-1 border-t border-gray-200" />
-          <span className="text-xs text-gray-400 uppercase tracking-wide">or</span>
+          <span className="text-xs text-gray-400 uppercase tracking-wide">atau</span>
           <div className="flex-1 border-t border-gray-200" />
         </div>
 
         {/* Email/password form */}
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1.5">Email address</label>
+            <label className="block text-sm font-medium text-gray-700 mb-1.5">Alamat email</label>
             <input
-              name="email" type="email" required placeholder="Enter your email address"
+              name="email" type="email" required placeholder="Masukkan alamat emailmu"
               className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
             />
           </div>
@@ -94,11 +94,11 @@ export default function LoginPage() {
           <div>
             <div className="flex items-center justify-between mb-1.5">
               <label className="text-sm font-medium text-gray-700">Password</label>
-              <a href="/forgot-password" className="text-sm text-blue-500 hover:underline">Forgot password?</a>
+              <a href="/forgot-password" className="text-sm text-blue-500 hover:underline">Lupa password?</a>
             </div>
             <div className="relative">
               <input
-                name="password" type={showPassword ? "text" : "password"} required placeholder="Enter your password"
+                name="password" type={showPassword ? "text" : "password"} required placeholder="Masukkan passwordmu"
                 className="w-full px-4 py-3 pr-11 border border-gray-200 rounded-xl text-sm outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
               />
               <button type="button" onClick={() => setShowPassword(!showPassword)}
@@ -112,15 +112,15 @@ export default function LoginPage() {
 
           <button
             type="submit" disabled={isPending}
-            className="w-full bg-gray-900 hover:bg-gray-800 text-white py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-60 transition-colors mt-2"
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold text-sm flex items-center justify-center gap-2 disabled:opacity-60 transition-colors mt-2"
           >
-            {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Log In"}
+            {isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : "Masuk"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-6">
-          Don&apos;t have an account yet?{' '}
-          <a href="/register" className="text-blue-500 font-semibold hover:underline">Sign up</a>
+          Belum punya akun?{' '}
+          <a href="/register" className="text-blue-500 font-semibold hover:underline">Daftar yuk</a>
         </p>
       </div>
     </div>
